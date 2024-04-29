@@ -1,0 +1,16 @@
+{
+  "$schema": "https://deno.land/x/deno/cli/schemas/config-file.v1.json",
+  "compilerOptions": {
+    "strict": true,
+    "useUnknownInCatchVariables": true,
+    "noImplicitOverride": true
+  },
+  "lock": false,
+  "fmt": {
+    "singleQuote": true,
+    "semiColons": false
+  },
+  "tasks": {
+    "check": "deno fmt --check && deno lint && deno check **/*.ts"
+  }
+}
