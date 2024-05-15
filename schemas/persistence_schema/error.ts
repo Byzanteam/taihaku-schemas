@@ -1,0 +1,17 @@
+import { AbsoluteJSONPointer } from '../types.ts'
+
+export interface JSONSchemaError {
+  absoluteKeywordLocation: AbsoluteJSONPointer
+  instanceLocation: AbsoluteJSONPointer
+}
+
+export interface ValidationError {
+  absoluteValidationLocation: AbsoluteJSONPointer
+  instanceLocation: AbsoluteJSONPointer
+  dependencies: Array<AbsoluteJSONPointer>
+}
+
+export interface RuntimeError {
+  location: AbsoluteJSONPointer
+  message: string
+}
