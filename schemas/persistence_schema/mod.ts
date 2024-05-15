@@ -68,5 +68,5 @@ export interface MultiAction {
 }
 
 export interface Result {
-  errors: Array<JSONSchemaError | ValidationError | InternalError>
+  errors: Array<InternalError> | Array<JSONSchemaError | ValidationError>
 }
