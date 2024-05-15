@@ -11,7 +11,7 @@ export interface ValidationError {
   dependencies: Array<AbsoluteJSONPointer>
 }
 
-export interface RuntimeError {
-  location: AbsoluteJSONPointer
+export interface InternalError {
+  location?: AbsoluteJSONPointer
   message: string
 }

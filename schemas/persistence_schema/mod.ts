@@ -1,6 +1,6 @@
 import { JSONSchema7 } from '../types.ts'
 import { Changeset } from './changeset.ts'
-import { JSONSchemaError, ValidationError, RuntimeError } from "./error.ts"
+import { JSONSchemaError, ValidationError, InternalError } from "./error.ts"
 import { Filter } from './filter.ts'
 import { ObjectReturnings } from './returning.ts'
 import { ColumnType } from './types.ts'
@@ -68,5 +68,5 @@ export interface MultiAction {
 }
 
 export interface Result {
-  errors: Array<JSONSchemaError | ValidationError | RuntimeError>
+  errors: Array<JSONSchemaError | ValidationError | InternalError>
 }
