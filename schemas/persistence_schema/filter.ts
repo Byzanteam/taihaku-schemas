@@ -7,9 +7,14 @@ export interface EQFilter {
   operands: [Operand, Operand]
 }
 
+export interface LTFilter {
+  operator: 'LT',
+  operands: [Operand, Operand]
+}
+
 export interface IsNullFilter {
   operator: 'IS_NULL'
   operands: [Operand]
 }
 
-export type Filter = EQFilter | IsNullFilter
+export type Filter = EQFilter | LTFilter | IsNullFilter

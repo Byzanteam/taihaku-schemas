@@ -69,6 +69,13 @@ export interface BulkUpdateAction {
   filter: Array<Filter>
 }
 
+export interface BulkDeleteAction {
+  schema: Schema
+  paramsSchema: JSONSchema7
+  filter: Array<Filter>
+  returningSchema: ObjectReturnings
+}
+
 // TODO: to be implemented
 export interface MultiAction {
   actions: Array<{
