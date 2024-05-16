@@ -64,7 +64,6 @@ export interface BulkUpdateAction {
   schema: Schema
   paramsSchema: JSONSchema7
   changeset: Changeset
-  returningSchema: ObjectReturnings
   filter: Array<Filter>
 }
 
