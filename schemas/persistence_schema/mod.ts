@@ -58,7 +58,6 @@ export interface BulkInsertAction {
   schema: Schema
   paramsSchema: JSONSchema7
   changeset: Changeset
-  returningSchema: ObjectReturnings
 }
 
 export interface BulkUpdateAction {
