@@ -71,7 +71,6 @@ export interface BulkDeleteAction {
   schema: Schema
   paramsSchema: JSONSchema7
   filter: Array<Filter>
-  returningSchema: ObjectReturnings
 }
 
 export interface ListAction {
