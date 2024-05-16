@@ -54,6 +54,13 @@ export interface GetOneAction {
   returningSchema: ObjectReturnings
 }
 
+export interface BulkInsertAction {
+  schema: Schema
+  paramsSchema: JSONSchema7
+  changeset: Changeset
+  returningSchema: ObjectReturnings
+}
+
 // TODO: to be implemented
 export interface MultiAction {
   actions: Array<{
