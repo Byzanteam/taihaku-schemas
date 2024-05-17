@@ -17,6 +17,10 @@ const PersonSchema = {
       format: 'date',
       title: '生日',
     },
+    idNumber: {
+      type: 'string',
+      title: '身份证号',
+    },
     profession: {
       type: 'string',
       title: '职业',

@@ -1,41 +1,34 @@
 import { UISchema } from '../mod.ts'
 
-const PersonFormUISchema: UISchema<
-  {
-    name: string
-    gender: string
-    birthday: string
-    profession: string
-    sports: Array<string>
-    signature: string
-  },
-  {
-    md: 1200
-  }
-> = {
+const PersonFormUISchema: UISchema<{
+  name: string
+  gender: string
+  birthday: string
+  profession: string
+  sports: Array<string>
+  signature: string
+  idNumber: string
+}> = {
   // props pass to form
   'ui:options': {
     submitButtonOptions: {
       norender: true,
     },
     layout: {
-      gap: [3, 6],
+      gap: [12, 16],
       columns: 12,
-      screens: {
-        md: 1200,
-      },
       groups: [
         {
           title: 'group A',
           rows: {
             /**
-             * ---------------------------------------------------
-             * | name                   | gender                 |
-             * |-------------------------------------------------|
-             * | birthday               |                        |
-             * |------------------------| signature              |
-             * | professsion| sports    |                        |
-             * ---------------------------------------------------
+             * -----------------------------------------------------
+             * | name                    | gender                  |
+             * |---------------------------------------------------|
+             * | birthday                |                         |
+             * |-------------------------| signature               |
+             * | profession | sports     |                         |
+             * -----------------------------------------------------
              */
             default: [
               [
@@ -86,12 +79,17 @@ const PersonFormUISchema: UISchema<
       columns: 2,
     },
   },
+  idNumber: {
+    'ui:widget': 'SingleLineWidget',
+    'ui:placeholder': '请输入',
+  },
   birthday: {
     'ui:widget': 'date',
     'ui:options': {
       format: 'yyyy年MM月dd日',
     },
     'ui:placeholder': '请选择',
+    'ui:readonly': true,
   },
   profession: {
     'ui:widget': 'RadioButtonWidget',
