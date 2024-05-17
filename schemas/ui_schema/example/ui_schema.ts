@@ -1,4 +1,4 @@
-import { UISchema, FormOptions } from '../mod.ts'
+import { FormOptions, UISchema } from '../mod.ts'
 
 const PersonFormUISchema: UISchema = {
   // props pass to form

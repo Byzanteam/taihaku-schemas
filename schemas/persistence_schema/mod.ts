@@ -1,6 +1,6 @@
 import { JSONSchema7 } from '../types.ts'
 import { Change, Changeset, ColumnChange } from './changeset.ts'
-import { JSONSchemaError, ValidationError, InternalError } from "./error.ts"
+import { InternalError, JSONSchemaError, ValidationError } from './error.ts'
 import { Filter } from './filter.ts'
 import { ObjectReturnings } from './returning.ts'
 import { ColumnType } from './types.ts'

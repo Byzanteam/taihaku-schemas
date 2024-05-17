@@ -8,7 +8,7 @@ export interface EQFilter {
 }
 
 export interface LTFilter {
-  operator: 'LT',
+  operator: 'LT'
   operands: [Operand, Operand]
 }
 
