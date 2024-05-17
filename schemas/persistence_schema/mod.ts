@@ -2,7 +2,9 @@ import { JSONSchema7 } from '../types.ts'
 import { Change, Changeset, ColumnChange } from './changeset.ts'
 import { InternalError, JSONSchemaError, ValidationError } from './error.ts'
 import { Filter } from './filter.ts'
+import { OffsetPagination } from './pagination.ts'
 import { ObjectReturnings } from './returning.ts'
+import { Order } from './sorting.ts'
 import { ColumnType } from './types.ts'
 
 export interface ColumnDef {
@@ -75,6 +77,8 @@ export interface ListAction {
   schema: Schema
   paramsSchema: JSONSchema7
   filter: Array<Filter>
+  sorting?: Array<Order>
+  pagination: OffsetPagination
   returningSchema: ObjectReturnings
 }
 

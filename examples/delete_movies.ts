@@ -6,7 +6,7 @@ const deleteMovieAction: DeleteAction = {
   paramsSchema: {
     type: 'object',
     properties: {
-      release_date: { type: 'date' },
+      release_date: { type: 'string', format: 'date' },
     },
   },
   filter: [
