@@ -1,5 +1,5 @@
 import { JSONSchema7 } from '../types.ts'
-import { Changeset } from './changeset.ts'
+import { Change, Changeset, ColumnChange } from './changeset.ts'
 import { JSONSchemaError, ValidationError, InternalError } from "./error.ts"
 import { Filter } from './filter.ts'
 import { ObjectReturnings } from './returning.ts'
@@ -26,15 +26,14 @@ export interface Schema {
 export interface InsertAction {
   schema: Schema
   paramsSchema: JSONSchema7
-  changeset: Changeset
+  changeset: Changeset<Change>
   returningSchema: ObjectReturnings
 }
 
-// TODO: 前端如何获取初始值
 export interface UpdateAction {
   schema: Schema
   paramsSchema: JSONSchema7
-  changeset: Changeset
+  changeset: Changeset<Change>
   returningSchema: ObjectReturnings
   filter: Array<Filter>
 }
@@ -46,7 +45,6 @@ export interface DeleteAction {
   returningSchema: ObjectReturnings
 }
 
-// TODO: 通过 GetOneACtion 获取初始值
 export interface GetOneAction {
   schema: Schema
   paramsSchema: JSONSchema7
@@ -57,13 +55,13 @@ export interface GetOneAction {
 export interface BulkInsertAction {
   schema: Schema
   paramsSchema: JSONSchema7
-  changeset: Changeset
+  changeset: Changeset<ColumnChange>
 }
 
 export interface BulkUpdateAction {
   schema: Schema
   paramsSchema: JSONSchema7
-  changeset: Changeset
+  changeset: Changeset<ColumnChange>
   filter: Array<Filter>
 }
 
@@ -80,7 +78,6 @@ export interface ListAction {
   returningSchema: ObjectReturnings
 }
 
-// TODO: to be implemented
 export interface MultiAction {
   actions: Array<{
     name: string

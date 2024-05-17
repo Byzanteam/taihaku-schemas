@@ -8,7 +8,7 @@ import {
 } from './types.ts'
 import { Validation } from './validation.ts'
 
-interface ColumnChange {
+export interface ColumnChange {
   name: ColumnName
   /**
    * the new value of the column
@@ -31,9 +31,9 @@ interface ColumnChange {
   schema?: JSONSchema7
 }
 
-interface AssociationChange {
+export interface AssociationChange {
   name: AssociationName
-  changeset: Changeset
+  changeset: Changeset<Change>
   // TODO: onDelete 和 onReplace 应该在 changeset 还是 schema 的定义中
   onReplace:
     | 'MARK_AS_INVALID'
@@ -54,8 +54,8 @@ export interface Validator {
   validations?: Array<Validation>
 }
 
-export interface Changeset {
-  changes: Array<Change>
+export interface Changeset<C> {
+  changes: Array<C>
   /**
    * the corresponding validator for the changes
    */
