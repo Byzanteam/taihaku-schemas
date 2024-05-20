@@ -5,6 +5,7 @@ const moviesSchema: Schema = {
   columns: [
     { name: 'id', type: 'uuid', autoGenerate: true, primaryKey: true },
     { name: 'title', type: 'text' },
+    { name: 'likes', type: 'numeric' },
     { name: 'release_date', type: 'date' },
     { name: 'created_at', type: 'timestamp without time zone' },
     { name: 'updated_at', type: 'timestamp without time zone' },

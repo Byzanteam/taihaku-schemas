@@ -1,8 +1,10 @@
 import { JSONSchema7 } from '../types.ts'
-import { Changeset } from './changeset.ts'
-import { JSONSchemaError, ValidationError, InternalError } from "./error.ts"
+import { Change, Changeset, ColumnChange } from './changeset.ts'
+import { InternalError, JSONSchemaError, ValidationError } from './error.ts'
 import { Filter } from './filter.ts'
+import { OffsetPagination } from './pagination.ts'
 import { ObjectReturnings } from './returning.ts'
+import { Order } from './sorting.ts'
 import { ColumnType } from './types.ts'
 
 export interface ColumnDef {
@@ -26,15 +28,14 @@ export interface Schema {
 export interface InsertAction {
   schema: Schema
   paramsSchema: JSONSchema7
-  changeset: Changeset
+  changeset: Changeset<Change>
   returningSchema: ObjectReturnings
 }
 
-// TODO: 前端如何获取初始值
 export interface UpdateAction {
   schema: Schema
   paramsSchema: JSONSchema7
-  changeset: Changeset
+  changeset: Changeset<Change>
   returningSchema: ObjectReturnings
   filter: Array<Filter>
 }
@@ -46,7 +47,6 @@ export interface DeleteAction {
   returningSchema: ObjectReturnings
 }
 
-// TODO: 通过 GetOneACtion 获取初始值
 export interface GetOneAction {
   schema: Schema
   paramsSchema: JSONSchema7
@@ -54,7 +54,34 @@ export interface GetOneAction {
   returningSchema: ObjectReturnings
 }
 
-// TODO: to be implemented
+export interface BulkInsertAction {
+  schema: Schema
+  paramsSchema: JSONSchema7
+  changeset: Changeset<ColumnChange>
+}
+
+export interface BulkUpdateAction {
+  schema: Schema
+  paramsSchema: JSONSchema7
+  changeset: Changeset<ColumnChange>
+  filter: Array<Filter>
+}
+
+export interface BulkDeleteAction {
+  schema: Schema
+  paramsSchema: JSONSchema7
+  filter: Array<Filter>
+}
+
+export interface ListAction {
+  schema: Schema
+  paramsSchema: JSONSchema7
+  filter: Array<Filter>
+  sorting?: Array<Order>
+  pagination: OffsetPagination
+  returningSchema: ObjectReturnings
+}
+
 export interface MultiAction {
   actions: Array<{
     name: string
