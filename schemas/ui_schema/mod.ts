@@ -1,11 +1,12 @@
 import { FieldType } from './field_type.ts'
 import { CustomFieldUIOptionsMap } from './ui_options.ts'
 
+/**
+ * @link https://rjsf-team.github.io/react-jsonschema-form/docs/api-link/uiSchema#submitbuttonoptions
+ */
 interface SubmitButtonOptions {
-  // 是否渲染提交按钮
   norender: boolean
   submitText: string
-  // 传递给 SubmitButton 组件的参数
   props: {
     disabled: boolean
   }
@@ -15,13 +16,13 @@ type ObjectFieldUIOptions = {
   'ui:order'?: Array<string>
 }
 
-// 具体参考 https://rjsf-team.github.io/react-jsonschema-form/docs/api-reference/uiSchema
+/**
+ * @link https://rjsf-team.github.io/react-jsonschema-form/docs/api-reference/uiSchema
+ */
 type BasicUIOptions = {
   'ui:disabled'?: boolean
   'ui:readonly'?: boolean
-  // 是否隐藏错误的显示
   'ui:hideError'?: boolean
-  // 控制 label 的展示
   'ui:label'?: boolean
   'ui:autocomplete'?: 'on' | 'off'
   'ui:autofocus'?: boolean
@@ -53,16 +54,14 @@ type FieldsUISchema<
 > = {
   [K in keyof O]: O[K] extends object // 嵌套结构（object or array)
     ? O[K] extends Array<infer U> // array
-      ? U extends Record<string, unknown> ? { items: UISchema<U> } // Array<object>
+      ? U extends Record<string, unknown>
+        ? { items: Partial<FieldsUISchema<U>> } // Array<object>
       : FieldUIOptions<T> // normal array field like checkbox
-    : O[K] extends Record<string, unknown> ? UISchema<O[K]> // nested object
+    : O[K] extends Record<string, unknown> ? Partial<FieldsUISchema<O[K]>> // nested object
     : FieldUIOptions<T> // fallback type
     : FieldUIOptions<T> // normal field
 }
 
-/**
- * UISchema 定义了 Form(Object) 与 Fields 等相关的 UI 设置
- */
 export type UISchema<O extends Record<string, unknown>> =
   & Partial<
     FieldsUISchema<O>

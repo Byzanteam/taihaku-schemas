@@ -1,3 +1,4 @@
+/** @enum {string} */
 export enum FieldType {
   Checkbox = 'Checkbox',
   Date = 'Date',
