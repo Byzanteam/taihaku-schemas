@@ -16,10 +16,8 @@ interface SignatureFieldUIOptions extends CommonCustomFieldUIOptions {
    */
   'ui:x-width'?: number | 'auto'
   'ui:x-height'?: number
-  // the pen color
+  /** the pen color */
   'ui:x-penColor'?: string
-  // the background color of canvas
-  'ui:x-backgroundColor'?: string
 }
 
 type ColumnNumber = 1 | 2 | 3 | 4

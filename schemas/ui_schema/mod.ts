@@ -37,11 +37,9 @@ type FormUIOptions =
     'ui:submitButtonOptions'?: Partial<SubmitButtonOptions>
   }
 
-/**
- * 这里添加 T extends FieldType ? M<T> : never 的目的是为了让 ts 遍历
- * 得到 Union 类型。即 M<FieldType.RadioButton> | M<FieldType.Checkbox> | ...
- * 否则得到的是 M<FieldType>
- */
+// 这里添加 T extends FieldType ? M<T> : never 的目的是为了让 ts 遍历
+// 得到 Union 类型。即 M<FieldType.RadioButton> | M<FieldType.Checkbox> | ...
+// 否则得到的是 M<FieldType>
 type FieldUIOptions<T extends FieldType> = T extends FieldType
   ? CustomFieldUIOptionsMap[T] & {
     'ui:widget': `${T}Widget`
