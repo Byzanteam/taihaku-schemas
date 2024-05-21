@@ -1,4 +1,4 @@
-import { Schema } from '../../schemas/persistence_schema/mod.ts'
+import { Schema } from '../../types/persistence_schema/mod.ts'
 import charactersSchema from './characters.ts'
 
 const moviesSchema: Schema = {

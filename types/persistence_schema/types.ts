@@ -2,7 +2,7 @@ import {
   AbsoluteJSONPointer,
   JSONValue,
   RelativeJSONPointer,
-} from '../types.ts'
+} from '../primitive.ts'
 
 export type ColumnName = string
 export type ColumnType =

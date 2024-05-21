@@ -1,4 +1,4 @@
-import { JSONPointer } from '../types.ts'
+import { JSONPointer } from '../primitive.ts'
 import { EQFilter, IsNullFilter, Operand } from './filter.ts'
 import { $SchemaPointer } from './types.ts'
 

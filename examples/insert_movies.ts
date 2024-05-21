@@ -1,4 +1,4 @@
-import { BulkInsertAction } from '../schemas/persistence_schema/mod.ts'
+import { BulkInsertAction } from '../types/persistence_schema/mod.ts'
 import moviesSchema from './schemas/movies.ts'
 
 const insertMoviesAction: BulkInsertAction = {

@@ -1,4 +1,4 @@
-import { UpdateAction } from '../schemas/persistence_schema/mod.ts'
+import { UpdateAction } from '../types/persistence_schema/mod.ts'
 import moviesSchema from './schemas/movies.ts'
 
 const updateMovieWithCharactersAction: UpdateAction = {

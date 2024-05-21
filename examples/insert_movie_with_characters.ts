@@ -1,4 +1,4 @@
-import { InsertAction } from '../schemas/persistence_schema/mod.ts'
+import { InsertAction } from '../types/persistence_schema/mod.ts'
 import moviesSchema from './schemas/movies.ts'
 
 const insertMovieWithCharactersAction: InsertAction = {

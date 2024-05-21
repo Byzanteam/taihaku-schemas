@@ -1,4 +1,4 @@
-import { AbsoluteJSONPointer } from '../types.ts'
+import { AbsoluteJSONPointer } from '../primitive.ts'
 
 export interface JSONSchemaError {
   absoluteKeywordLocation: AbsoluteJSONPointer
