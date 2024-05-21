@@ -7,8 +7,10 @@ enum AppearanceValue {
 
 interface CommonCustomFieldUIOptions {
   'ui:x-appearance'?: AppearanceValue
+  'ui:x-fallback'?: string
 }
-interface SignatureFieldUIOptions extends CommonCustomFieldUIOptions {
+interface SignatureFieldUIOptions
+  extends Omit<CommonCustomFieldUIOptions, 'ui:x-fallback'> {
   /**
    * The size of canvas
    * by default, width is auto (full width of container)
