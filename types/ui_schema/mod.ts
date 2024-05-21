@@ -65,3 +65,5 @@ export type UISchema<O extends Record<string, unknown>> =
     FieldsUISchema<O>
   >
   & Partial<FormUIOptions>
+
+export type { CustomFieldUIOptionsMap, FieldType }
