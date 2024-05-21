@@ -1,4 +1,4 @@
-import { BulkUpdateAction } from '../types/persistence_schema/mod.ts'
+import type { BulkUpdateAction } from '../types/persistence_schema/mod.ts'
 import moviesSchema from './schemas/movies.ts'
 
 const updateMoviesAction: BulkUpdateAction = {

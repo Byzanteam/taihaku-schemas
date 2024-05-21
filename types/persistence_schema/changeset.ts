@@ -1,12 +1,12 @@
-import { JSONSchema7 } from '../primitive.ts'
-import {
+import type { JSONSchema7 } from '../primitive.ts'
+import type {
   $ContextPointer,
   $DataPointer,
   $ValuePointer,
   AssociationName,
   ColumnName,
 } from './types.ts'
-import { Validation } from './validation.ts'
+import type { Validation } from './validation.ts'
 
 export interface ColumnChange {
   name: ColumnName

@@ -1,4 +1,4 @@
-import { $DataPointer, $SchemaPointer, $ValuePointer } from './types.ts'
+import type { $DataPointer, $SchemaPointer, $ValuePointer } from './types.ts'
 
 export type Operand = $DataPointer | $ValuePointer | $SchemaPointer
 

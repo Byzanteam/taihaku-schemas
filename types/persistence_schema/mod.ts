@@ -1,11 +1,15 @@
-import { JSONSchema7 } from '../primitive.ts'
-import { Change, Changeset, ColumnChange } from './changeset.ts'
-import { InternalError, JSONSchemaError, ValidationError } from './error.ts'
-import { Filter } from './filter.ts'
-import { OffsetPagination } from './pagination.ts'
-import { ObjectReturnings } from './returning.ts'
-import { Order } from './sorting.ts'
-import { ColumnType } from './types.ts'
+import type { JSONSchema7 } from '../primitive.ts'
+import type { Change, Changeset, ColumnChange } from './changeset.ts'
+import type {
+  InternalError,
+  JSONSchemaError,
+  ValidationError,
+} from './error.ts'
+import type { Filter } from './filter.ts'
+import type { OffsetPagination } from './pagination.ts'
+import type { ObjectReturnings } from './returning.ts'
+import type { Order } from './sorting.ts'
+import type { ColumnType } from './types.ts'
 
 export interface ColumnDef {
   name: string
