@@ -1,4 +1,4 @@
-import {
+import type {
   $ContextPointer,
   $DataPointer,
   $SchemaPointer,

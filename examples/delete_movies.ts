@@ -1,4 +1,4 @@
-import { BulkDeleteAction } from '../types/persistence_schema/mod.ts'
+import type { BulkDeleteAction } from '../types/persistence_schema/mod.ts'
 import moviesSchema from './schemas/movies.ts'
 
 const deleteMovieAction: BulkDeleteAction = {

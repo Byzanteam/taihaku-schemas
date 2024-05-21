@@ -1,5 +1,5 @@
-import { FieldType } from './field_type.ts'
-import { CustomFieldUIOptionsMap } from './ui_options.ts'
+import type { FieldType } from './field_type.ts'
+import type { CustomFieldUIOptionsMap } from './ui_options.ts'
 
 /**
  * @link https://rjsf-team.github.io/react-jsonschema-form/docs/api-link/uiSchema#submitbuttonoptions
