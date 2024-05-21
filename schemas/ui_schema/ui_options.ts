@@ -7,7 +7,7 @@ enum AppearanceValue {
 
 interface CommonCustomFieldUIOptions {
   'ui:x-appearance'?: AppearanceValue
-  'ui:x-fallback'?: string
+  'ui:x-blankslate'?: string
 }
 interface SignatureFieldUIOptions extends CommonCustomFieldUIOptions {
   /**
