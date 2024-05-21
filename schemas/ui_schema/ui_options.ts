@@ -1,6 +1,14 @@
 import { FieldType } from './field_type.ts'
 
-interface SignatureFieldUIOptions {
+enum AppearanceValue {
+  Input = 'input',
+  Presentation = 'presentation',
+}
+
+interface CommonCustomFieldUIOptions {
+  'ui:x-appearance'?: AppearanceValue
+}
+interface SignatureFieldUIOptions extends CommonCustomFieldUIOptions {
   /**
    * The size of canvas
    * by default, width is auto (full width of container)
@@ -16,7 +24,7 @@ interface SignatureFieldUIOptions {
 
 type ColumnNumber = 1 | 2 | 3 | 4
 
-type RadioButtonFieldUIOptions =
+type RadioButtonFieldUIOptions = (
   | {
       'ui:x-display'?: 'radio'
       'ui:x-columns'?: ColumnNumber
@@ -24,12 +32,14 @@ type RadioButtonFieldUIOptions =
   | {
       'ui:x-display'?: 'select'
     }
+) &
+  CommonCustomFieldUIOptions
 
-interface DateFieldUIOptions {
+interface DateFieldUIOptions extends CommonCustomFieldUIOptions {
   'ui:x-format'?: string
 }
 
-interface CheckBoxFieldUIOptions {
+interface CheckBoxFieldUIOptions extends CommonCustomFieldUIOptions {
   'ui:x-columns'?: ColumnNumber
 }
 
