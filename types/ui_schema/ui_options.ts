@@ -9,6 +9,9 @@ interface CommonCustomFieldUIOptions {
   'ui:x-appearance'?: AppearanceValue
   'ui:x-blankslate'?: string
 }
+
+interface SingleLineFieldUIOptions extends CommonCustomFieldUIOptions {}
+
 interface SignatureFieldUIOptions extends CommonCustomFieldUIOptions {
   /**
    * The size of canvas
@@ -53,5 +56,5 @@ export type CustomFieldUIOptionsMap = {
   [FieldType.DateTime]: DateTimeFieldUIOptions
   [FieldType.RadioButton]: RadioButtonFieldUIOptions
   [FieldType.Signature]: SignatureFieldUIOptions
-  [FieldType.SingleLine]: object
+  [FieldType.SingleLine]: SingleLineFieldUIOptions
 }
