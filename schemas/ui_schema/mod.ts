@@ -29,8 +29,10 @@ type BasicUIOptions = {
   'ui:enumDisabled'?: Array<string | number>
 }
 
-type FormUIOptions = ObjectFieldUIOptions &
-  BasicUIOptions & {
+type FormUIOptions =
+  & ObjectFieldUIOptions
+  & BasicUIOptions
+  & {
     'ui:submitButtonOptions'?: Partial<SubmitButtonOptions>
   }
 
@@ -41,29 +43,28 @@ type FormUIOptions = ObjectFieldUIOptions &
  */
 type FieldUIOptions<T extends FieldType> = T extends FieldType
   ? CustomFieldUIOptionsMap[T] & {
-      'ui:widget': `${T}Widget`
-    } & BasicUIOptions
+    'ui:widget': `${T}Widget`
+  } & BasicUIOptions
   : never
 
 type FieldsUISchema<
   O extends Record<string, unknown>,
-  T extends FieldType = FieldType
+  T extends FieldType = FieldType,
 > = {
   [K in keyof O]: O[K] extends object // 嵌套结构（object or array)
     ? O[K] extends Array<infer U> // array
-      ? U extends Record<string, unknown>
-        ? { items: UISchema<U> } // Array<object>
-        : FieldUIOptions<T> // normal array field like checkbox
-      : O[K] extends Record<string, unknown>
-      ? UISchema<O[K]> // nested object
-      : FieldUIOptions<T> // fallback type
+      ? U extends Record<string, unknown> ? { items: UISchema<U> } // Array<object>
+      : FieldUIOptions<T> // normal array field like checkbox
+    : O[K] extends Record<string, unknown> ? UISchema<O[K]> // nested object
+    : FieldUIOptions<T> // fallback type
     : FieldUIOptions<T> // normal field
 }
 
 /**
  * UISchema 定义了 Form(Object) 与 Fields 等相关的 UI 设置
  */
-export type UISchema<O extends Record<string, unknown>> = Partial<
-  FieldsUISchema<O>
-> &
-  Partial<FormUIOptions>
+export type UISchema<O extends Record<string, unknown>> =
+  & Partial<
+    FieldsUISchema<O>
+  >
+  & Partial<FormUIOptions>

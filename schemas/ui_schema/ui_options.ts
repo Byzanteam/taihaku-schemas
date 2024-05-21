@@ -24,16 +24,17 @@ interface SignatureFieldUIOptions extends CommonCustomFieldUIOptions {
 
 type ColumnNumber = 1 | 2 | 3 | 4
 
-type RadioButtonFieldUIOptions = (
-  | {
+type RadioButtonFieldUIOptions =
+  & (
+    | {
       'ui:x-display'?: 'radio'
       'ui:x-columns'?: ColumnNumber
     }
-  | {
+    | {
       'ui:x-display'?: 'select'
     }
-) &
-  CommonCustomFieldUIOptions
+  )
+  & CommonCustomFieldUIOptions
 
 interface DateFieldUIOptions extends CommonCustomFieldUIOptions {
   'ui:x-format'?: string
