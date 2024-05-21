@@ -9,8 +9,7 @@ interface CommonCustomFieldUIOptions {
   'ui:x-appearance'?: AppearanceValue
   'ui:x-fallback'?: string
 }
-interface SignatureFieldUIOptions
-  extends Omit<CommonCustomFieldUIOptions, 'ui:x-fallback'> {
+interface SignatureFieldUIOptions extends CommonCustomFieldUIOptions {
   /**
    * The size of canvas
    * by default, width is auto (full width of container)
