@@ -1,4 +1,4 @@
-import { JSONSchema7 } from '../types.ts'
+import { JSONSchema7 } from '../primitive.ts'
 import { Change, Changeset, ColumnChange } from './changeset.ts'
 import { InternalError, JSONSchemaError, ValidationError } from './error.ts'
 import { Filter } from './filter.ts'

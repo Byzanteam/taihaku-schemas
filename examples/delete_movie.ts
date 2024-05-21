@@ -1,4 +1,4 @@
-import { DeleteAction } from '../schemas/persistence_schema/mod.ts'
+import { DeleteAction } from '../types/persistence_schema/mod.ts'
 import moviesSchema from './schemas/movies.ts'
 
 const deleteMovieAction: DeleteAction = {

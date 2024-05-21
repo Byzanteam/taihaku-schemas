@@ -1,4 +1,4 @@
-export type { JSONSchema7 } from 'https://cdn.jsdelivr.net/npm/@types/json-schema@7/index.d.ts'
+export type { JSONSchema7 } from 'npm:@types/json-schema@7'
 
 export type JSONPointer = AbsoluteJSONPointer | RelativeJSONPointer
 /**

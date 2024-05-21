@@ -1,4 +1,4 @@
-import { JSONSchema7 } from '../types.ts'
+import { JSONSchema7 } from '../primitive.ts'
 import {
   $ContextPointer,
   $DataPointer,
