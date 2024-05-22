@@ -1,4 +1,4 @@
-import type { FieldType } from './field_type.ts'
+import { FieldType } from './field_type.ts'
 import type { CustomFieldUIOptionsMap } from './ui_options.ts'
 
 /**
@@ -65,6 +65,6 @@ export type UISchema<O extends Record<string, unknown>> =
   >
   & Partial<FormUIOptions>
 
-export type { CustomFieldUIOptionsMap, FieldType }
+export { type CustomFieldUIOptionsMap, FieldType }
 
-export type { AppearanceValue, OptionColumns } from './ui_options.ts'
+export { AppearanceValue, type OptionColumns } from './ui_options.ts'
