@@ -67,4 +67,4 @@ export type UISchema<O extends Record<string, unknown>> =
 
 export type { CustomFieldUIOptionsMap, FieldType }
 
-export type { AppearanceValue, ColumnNumber } from './ui_options.ts'
+export type { AppearanceValue, OptionColumns } from './ui_options.ts'

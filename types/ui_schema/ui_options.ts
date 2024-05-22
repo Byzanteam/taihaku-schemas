@@ -26,13 +26,14 @@ interface SignatureFieldUIOptions extends CommonCustomFieldUIOptions {
   'ui:x-backgroundColor'?: string
 }
 
-export type ColumnNumber = 1 | 2 | 3 | 4
+/** The number of columns for options in radio button or check box fields. */
+export type OptionColumns = 1 | 2 | 3 | 4
 
 type RadioButtonFieldUIOptions =
   & (
     | {
       'ui:x-display'?: 'radio'
-      'ui:x-columns'?: ColumnNumber
+      'ui:x-columns'?: OptionColumns
     }
     | {
       'ui:x-display'?: 'select'
@@ -45,7 +46,7 @@ interface DateFieldUIOptions extends CommonCustomFieldUIOptions {
 }
 
 interface CheckBoxFieldUIOptions extends CommonCustomFieldUIOptions {
-  'ui:x-columns'?: ColumnNumber
+  'ui:x-columns'?: OptionColumns
 }
 
 type DateTimeFieldUIOptions = DateFieldUIOptions
