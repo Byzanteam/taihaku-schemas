@@ -1,6 +1,6 @@
 import type { FieldType } from './field_type.ts'
 
-enum AppearanceValue {
+export enum AppearanceValue {
   Input = 'input',
   Presentation = 'presentation',
 }
@@ -26,7 +26,7 @@ interface SignatureFieldUIOptions extends CommonCustomFieldUIOptions {
   'ui:x-backgroundColor'?: string
 }
 
-type ColumnNumber = 1 | 2 | 3 | 4
+export type ColumnNumber = 1 | 2 | 3 | 4
 
 type RadioButtonFieldUIOptions =
   & (

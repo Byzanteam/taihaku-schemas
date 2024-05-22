@@ -15,7 +15,6 @@ interface SubmitButtonOptions {
 type ObjectFieldUIOptions = {
   'ui:order'?: Array<string>
 }
-
 /**
  * @link https://rjsf-team.github.io/react-jsonschema-form/docs/api-reference/uiSchema
  */
@@ -67,3 +66,5 @@ export type UISchema<O extends Record<string, unknown>> =
   & Partial<FormUIOptions>
 
 export type { CustomFieldUIOptionsMap, FieldType }
+
+export type { AppearanceValue, ColumnNumber } from './ui_options.ts'
