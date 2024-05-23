@@ -101,3 +101,5 @@ export interface MultiAction {
 export interface Result {
   errors: Array<InternalError> | Array<JSONSchemaError | ValidationError>
 }
+
+export type { InternalError, JSONSchemaError, ValidationError }
