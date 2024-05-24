@@ -70,8 +70,8 @@ action = {
 Persistence Schema 执行过程中会有多处涉及到 JSON Schema 的校验，当校验没有通过时
 通过下面的数据结构将错误信息返回。
 
-- `absolute_keyword_location` - 指向 schema 中出错的关键词
-- `instance_location` - 指向数据中出错的值
+- `absoluteKeywordLocation` - 指向 schema 中出错的关键词
+- `instanceLocation` - 指向数据中出错的值
 
 <details>
 <summary>paramsSchema 出错</summary>
@@ -86,8 +86,8 @@ params = {
 {
   "errors": [
     {
-      "absolute_keyword_location": "#/paramsSchema/required/0",
-      "instance_location": "/"
+      "absoluteKeywordLocation": "#/paramsSchema/required/0",
+      "instanceLocation": "/"
     }
   ]
 }
@@ -109,8 +109,8 @@ params = {
 {
   "errors": [
     {
-      "absolute_keyword_location": "#/changeset/changes/0/maxLength",
-      "instance_location": "/title"
+      "absoluteKeywordLocation": "#/changeset/changes/0/maxLength",
+      "instanceLocation": "/title"
     }
   ]
 }
@@ -132,8 +132,8 @@ params = {
 {
   "errors": [
     {
-      "absolute_keyword_location": "#/changeset/validator/schema/properties/release_date/format",
-      "instance_location": "/release_date"
+      "absoluteKeywordLocation": "#/changeset/validator/schema/properties/release_date/format",
+      "instanceLocation": "/release_date"
     }
   ]
 }
@@ -146,8 +146,8 @@ params = {
 Persistence Schema 中可能声明多个 validations，当 validation 的执行失败时，错误
 信息将通过以下格式返回。
 
-- `absolute_validation_location` - 指出失败的 validation 位置
-- `instance_location` - 使用 validation 中定义的 errorKey
+- `absoluteValidationLocation` - 指出失败的 validation 位置
+- `instanceLocation` - 使用 validation 中定义的 errorKey
 - `dependencies` - 声明该 validation 中使用到的数据
 - `errorMessage` - validation 失败时给出的错误信息
 
@@ -165,8 +165,8 @@ params = {
 {
   "errors": [
     {
-      "absolute_keyword_location": "#/changeset/validator/validations/0",
-      "instance_location": "/release_date",
+      "absoluteValidationLocation": "#/changeset/validator/validations/0",
+      "instanceLocation": "/release_date",
       "dependencies": ["/release_date"],
       "errorMessage": "too large date"
     }
