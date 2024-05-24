@@ -1,6 +1,5 @@
 import { FieldType } from './field_type.ts'
-import { LayoutElement } from './layout.ts'
-import { ObjectData } from './layout.ts'
+import type { LayoutElement, ObjectData } from './layout.ts'
 import type { CustomFieldUIOptionsMap } from './ui_options.ts'
 
 /**

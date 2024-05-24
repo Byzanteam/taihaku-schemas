@@ -1,5 +1,5 @@
 import type { FieldType } from './field_type.ts'
-import { LayoutElement } from './layout.ts'
+import type { LayoutElement } from './layout.ts'
 
 export enum AppearanceValue {
   Input = 'input',

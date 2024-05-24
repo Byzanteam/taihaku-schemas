@@ -1,4 +1,4 @@
-import { UISchema } from '../../mod.ts'
+import type { UISchema } from '../../mod.ts'
 
 const LoginFormUISchema: UISchema<{
   name: string
