@@ -1,4 +1,5 @@
 import type { FieldType } from './field_type.ts'
+import { LayoutElement } from './layout.ts'
 
 export enum AppearanceValue {
   Input = 'input',
@@ -8,9 +9,24 @@ export enum AppearanceValue {
 interface CommonCustomFieldUIOptions {
   'ui:x-appearance'?: AppearanceValue
   'ui:x-blankslate'?: string
+  'ui:x-field-layout'?:
+    | LayoutElement<{
+      label: unknown
+      description: unknown
+      control: unknown
+      error: unknown
+    }>
+    | Array<
+      LayoutElement<{
+        label: unknown
+        description: unknown
+        control: unknown
+        error: unknown
+      }>
+    >
 }
 
-interface SingleLineFieldUIOptions extends CommonCustomFieldUIOptions {}
+type SingleLineFieldUIOptions = CommonCustomFieldUIOptions
 
 interface SignatureFieldUIOptions extends CommonCustomFieldUIOptions {
   /**
