@@ -149,6 +149,7 @@ Persistence Schema 中可能声明多个 validations，当 validation 的执行�
 - `absolute_validation_location` - 指出失败的 validation 位置
 - `instance_location` - 使用 validation 中定义的 errorKey
 - `dependencies` - 声明该 validation 中使用到的数据
+- `errorMessage` - validation 失败时给出的错误信息
 
 <details>
 <summary>paramsSchema 出错</summary>
@@ -166,7 +167,8 @@ params = {
     {
       "absolute_keyword_location": "#/changeset/validator/validations/0",
       "instance_location": "/release_date",
-      "dependencies": ["/release_date"]
+      "dependencies": ["/release_date"],
+      "errorMessage": "too large date"
     }
   ]
 }

@@ -9,6 +9,7 @@ export interface ValidationError {
   absoluteValidationLocation: AbsoluteJSONPointer
   instanceLocation: AbsoluteJSONPointer
   dependencies: Array<AbsoluteJSONPointer>
+  errorMessage: string
 }
 
 export interface InternalError {
