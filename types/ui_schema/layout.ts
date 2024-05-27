@@ -1,43 +1,40 @@
 export type ObjectData = Record<string, unknown>
-
-type LayoutFieldElementType = 'Field'
-// Exclude is not working as expected
-// https://github.com/microsoft/TypeScript/issues/47178
-type LayoutElementType = Exclude<string, LayoutFieldElementType>
-
-/**
- * The internal elements of a field except Help
- * @link https://rjsf-team.github.io/react-jsonschema-form/docs/advanced-customization/custom-templates#fieldtemplate
- */
-type LayoutFieldElementsType = 'Label' | 'Control' | 'Error' | 'Description'
-
-interface LayoutBaseElement<T extends string = string> {
+interface BaseElement<T extends string = string> {
   className?: string
   type: T
 }
 
+/** The custom element */
+interface CustomElement<C, T extends string> extends
+  // Exclude is not working as expected
+  // https://github.com/microsoft/TypeScript/issues/47178
+  BaseElement<Exclude<string, T>> {
+  props?: ObjectData
+  children?: Array<C>
+}
+
+type LayoutFieldElementType = 'Field'
+
 /** The container for field */
 interface LayoutFieldElement<O extends ObjectData>
-  extends LayoutBaseElement<LayoutFieldElementType> {
+  extends BaseElement<LayoutFieldElementType> {
   property: keyof O
 }
 
-/** The custom element */
-interface LayoutCustomElement<O extends ObjectData>
-  extends LayoutBaseElement<LayoutElementType> {
-  props?: ObjectData
-  children?: Array<LayoutElement<O>>
-}
+export type ObjectLayout<
+  O extends ObjectData,
+  T extends string = LayoutFieldElementType,
+> = LayoutFieldElement<O> | CustomElement<ObjectLayout<O, T>, T>
 
-export type LayoutElement<O extends ObjectData> =
-  | LayoutFieldElement<O>
-  | LayoutCustomElement<O>
+/**
+ * The internal elements of a field except Help
+ */
+type FieldTemplateElementType = 'Label' | 'Control' | 'Error' | 'Description'
 
-/** The layout element for the internal elements of a field */
-export type FieldElementLayoutElement =
-  | LayoutBaseElement<LayoutFieldElementsType>
-  | LayoutCustomElement<
-    {
-      [K in LayoutFieldElementsType]: unknown
-    }
-  >
+/**
+ * The field template for the internal elements of a field
+ * @link https://rjsf-team.github.io/react-jsonschema-form/docs/advanced-customization/custom-templates#fieldtemplate
+ */
+export type FieldTemplate<T extends string = FieldTemplateElementType> =
+  | BaseElement<T>
+  | CustomElement<FieldTemplate<T>, T>

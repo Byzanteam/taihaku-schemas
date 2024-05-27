@@ -13,7 +13,7 @@ const RegisterFormUISchema: UISchema<{
   },
   name: {
     'ui:widget': 'SingleLineWidget',
-    'ui:x-field-layout': [
+    'ui:x-field-template': [
       {
         type: 'Horizontal',
         children: [
@@ -47,7 +47,7 @@ const RegisterFormUISchema: UISchema<{
   },
   profile: {
     // layout without Description
-    'ui:x-field-layout': {
+    'ui:x-field-template': {
       type: 'Vertical',
       children: [
         {

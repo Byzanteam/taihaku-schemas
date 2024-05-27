@@ -1,5 +1,5 @@
 import { FieldType } from './field_type.ts'
-import type { LayoutElement, ObjectData } from './layout.ts'
+import type { ObjectData, ObjectLayout } from './layout.ts'
 import type {
   CommonCustomFieldUIOptions,
   CustomFieldUIOptionsMap,
@@ -19,7 +19,7 @@ interface SubmitButtonOptions {
 type ObjectFieldUIOptions<O extends ObjectData> = {
   'ui:order'?: Array<keyof O>
   // x-layout 存在时，order 将无效
-  'ui:x-layout'?: LayoutElement<O> | Array<LayoutElement<O>>
+  'ui:x-layout'?: ObjectLayout<O> | Array<ObjectLayout<O>>
 } & CommonCustomFieldUIOptions
 // TODO: define array field options
 // deno-lint-ignore ban-types
