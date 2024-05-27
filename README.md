@@ -1,6 +1,8 @@
 # Schemas for taihaku
 
-## 错误定义
+# 错误定义
+
+## Elixir 端给出的错误
 
 在 Persistence Schema 执行的过程中会产生几种不同的错误，后文将通过下面的 Schema
 进行说明。
@@ -177,6 +179,120 @@ params = {
 </details>
 
 ### 运行时错误
+
+当这一类错误发生时，对用户来说相当于服务器内部错误，无法通过修改参数来解决。因此
+不会用来决定页面的交互逻辑，只是返回一些信息能够帮助定位问题出现的原因。
+
+- `location` - 错误出现的位置
+- `message` - 错误信息的描述
+
+<details>
+<summary>returningSchema 中指定的列不存在</summary>
+
+```TypeScript
+params = {
+  title: 'This is a valid title',
+  release_date: '2024-05-14',
+}
+```
+
+```JSON
+{
+  "errors": [
+    {
+      "location": "#/returningSchema/inserted_at",
+      "message": "column \"inserted_at\" does not exist"
+    }
+  ]
+}
+```
+
+</details>
+
+## Nextjs 后端给出的错误
+
+在 next 后端拿到 Elixir 给出的错误后结合 action
+的定义给出更具体的错误，浏览器会接收到该错误并渲染到用户填写的表单中
+
+### 非运行时错误
+
+把 Elixir 端给出的错误与 action
+的定义结合后得到的精确到表单字段路径上的错误，这一类错误为 JSONSchema 校验错误和
+Validation 错误的集合，均会把错误定位到具体的表单字段路径上
+
+#### JSONSchema 校验错误
+
+该错误是由自己的值通过 jsonSchema 校验失败得到的，和 validationError 相比没有 dependencies 属性，它的错误依赖就是自己
+
+- `errorPath` - 产生的错误在 JSONSchema 中的位置
+- `dependencies` - 产生该错误的依赖字段的位置（在这种错误中就是它自己的路径）
+- `errorType` - 校验错误的类型，都属于
+  [JSONSchema 的校验 keyword](https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-validation-01#section-6)
+- `errorTypeValue` - 错误类型在 jsonSchema 中对应的值，通过 errorType 和 errorTypeValue 让前端页面实现错误的显示
+
+<details>
+<summary>JSONSchema 字段校验失败</summary>
+
+```TypeScript
+params = {
+  release_date: '2024-05-74',
+}
+```
+
+```JSONC
+{
+  "errors": [
+    {
+      "errorPath": "/title",
+      "errorType": "required",
+      "errorTypeValue": null,
+      "dependencies": ["/title"]
+    },
+    {
+      "errorPath": "/release_data",
+      "errorType": "format",
+      "errorTypeValue": "date",
+      "dependencies": ["/release_data"]
+    }
+  ]
+}
+```
+
+</details>
+
+#### Validation 校验错误
+
+- `errorPath` - 产生的错误在 JSONSchema 中的位置
+- `errorMessage` - 错误信息
+- `dependencies` - 产生该错误的依赖字段的位置
+
+<details>
+<summary></summary>
+
+```TypeScript
+params = {
+  title: 'a title',
+  release_date: '4024-05-14',
+}
+```
+
+```JSONC
+{
+  "errors": [
+    {
+      "errorPath": "/release_date",
+      "errorMessage": "too large date",
+      "dependencies": ["/release_date"]
+    }
+  ]
+}
+```
+
+</details>
+
+### 运行时错误
+
+和 Elixir 给出的错误和含义均相同
 
 当这一类错误发生时，对用户来说相当于服务器内部错误，无法通过修改参数来解决。因此
 不会用来决定页面的交互逻辑，只是返回一些信息能够帮助定位问题出现的原因。

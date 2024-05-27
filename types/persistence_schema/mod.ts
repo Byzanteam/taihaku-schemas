@@ -1,6 +1,8 @@
 import type { JSONSchema7 } from '../primitive.ts'
 import type { Change, Changeset, ColumnChange } from './changeset.ts'
 import type {
+  FormatedJSONSchemaError,
+  FormatedValidationError,
   InternalError,
   JSONSchemaError,
   ValidationError,
@@ -102,4 +104,11 @@ export interface Result {
   errors: Array<InternalError> | Array<JSONSchemaError | ValidationError>
 }
 
+export interface NextjsResult {
+  errors:
+    | Array<InternalError>
+    | Array<FormatedJSONSchemaError | FormatedValidationError>
+}
+
 export type { InternalError, JSONSchemaError, ValidationError }
+export type { FormatedJSONSchemaError, FormatedValidationError }

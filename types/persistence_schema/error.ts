@@ -16,3 +16,17 @@ export interface InternalError {
   location?: AbsoluteJSONPointer
   message: string
 }
+
+export interface FormatedValidationError {
+  errorPath: AbsoluteJSONPointer
+  errorMessage: string
+  dependencies: Array<AbsoluteJSONPointer>
+}
+
+export interface FormatedJSONSchemaError {
+  errorPath: AbsoluteJSONPointer
+  /** https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-validation-01#section-6 */
+  errorType: string
+  errorTypeValue: string | null
+  dependencies: Array<AbsoluteJSONPointer>
+}
