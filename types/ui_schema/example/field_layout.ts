@@ -14,14 +14,12 @@ const LoginFormUISchema: UISchema<{
         type: 'Horizontal',
         children: [
           {
-            type: 'Field',
+            type: 'Label',
             className: 'w-40 mr-2 text-right',
-            property: 'label',
           },
           {
-            type: 'Field',
+            type: 'Control',
             className: 'flex-1',
-            property: 'control',
           },
         ],
       },
@@ -29,14 +27,12 @@ const LoginFormUISchema: UISchema<{
         type: 'Horizontal',
         children: [
           {
-            type: 'Field',
+            type: 'Description',
             className: 'w-40 mr-2 text-right',
-            property: 'description',
           },
           {
-            type: 'Field',
+            type: 'Error',
             className: 'flex-1',
-            property: 'error',
           },
         ],
       },
