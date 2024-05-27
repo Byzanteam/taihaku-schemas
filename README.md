@@ -222,13 +222,15 @@ Validation 错误的集合，均会把错误定位到具体的表单字段路径
 
 #### JSONSchema 校验错误
 
-该错误是由自己的值通过 jsonSchema 校验失败得到的，和 validationError 相比没有 dependencies 属性，它的错误依赖就是自己
+该错误是由自己的值通过 jsonSchema 校验失败得到的，和 validationError 相比没有
+dependencies 属性，它的错误依赖就是自己
 
 - `errorPath` - 产生的错误在 JSONSchema 中的位置
 - `dependencies` - 产生该错误的依赖字段的位置（在这种错误中就是它自己的路径）
 - `errorType` - 校验错误的类型，都属于
   [JSONSchema 的校验 keyword](https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-validation-01#section-6)
-- `errorTypeValue` - 错误类型在 jsonSchema 中对应的值，通过 errorType 和 errorTypeValue 让前端页面实现错误的显示
+- `errorTypeValue` - 错误类型在 jsonSchema 中对应的值，通过 errorType 和
+  errorTypeValue 让前端页面实现错误的显示
 
 <details>
 <summary>JSONSchema 字段校验失败</summary>

@@ -1,4 +1,4 @@
-import type { JSONSchema7 } from '../primitive.ts'
+import type { JSONSchema } from '../primitive.ts'
 import type {
   $ContextPointer,
   $DataPointer,
@@ -28,7 +28,7 @@ export interface ColumnChange {
   /**
    * the corresponding validator for the value
    */
-  schema?: JSONSchema7
+  schema?: JSONSchema
 }
 
 export interface AssociationChange {
@@ -44,13 +44,13 @@ export interface AssociationChange {
   /**
    * the corresponding validator for the association values
    */
-  schema?: JSONSchema7
+  schema?: JSONSchema
 }
 
 export type Change = ColumnChange | AssociationChange
 
 export interface Validator {
-  schema?: JSONSchema7
+  schema?: JSONSchema
   validations?: Array<Validation>
 }
 
