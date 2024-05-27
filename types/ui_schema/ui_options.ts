@@ -1,29 +1,17 @@
 import type { FieldType } from './field_type.ts'
-import type { LayoutElement } from './layout.ts'
+import type { FieldElementLayoutElement } from './layout.ts'
 
 export enum AppearanceValue {
   Input = 'input',
   Presentation = 'presentation',
 }
 
-interface CommonCustomFieldUIOptions {
+export interface CommonCustomFieldUIOptions {
   'ui:x-appearance'?: AppearanceValue
   'ui:x-blankslate'?: string
   'ui:x-field-layout'?:
-    | LayoutElement<{
-      label: unknown
-      description: unknown
-      control: unknown
-      error: unknown
-    }>
-    | Array<
-      LayoutElement<{
-        label: unknown
-        description: unknown
-        control: unknown
-        error: unknown
-      }>
-    >
+    | FieldElementLayoutElement
+    | Array<FieldElementLayoutElement>
 }
 
 type SingleLineFieldUIOptions = CommonCustomFieldUIOptions

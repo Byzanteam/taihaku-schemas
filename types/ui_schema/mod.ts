@@ -1,6 +1,9 @@
 import { FieldType } from './field_type.ts'
 import type { LayoutElement, ObjectData } from './layout.ts'
-import type { CustomFieldUIOptionsMap } from './ui_options.ts'
+import type {
+  CommonCustomFieldUIOptions,
+  CustomFieldUIOptionsMap,
+} from './ui_options.ts'
 
 /**
  * @link https://rjsf-team.github.io/react-jsonschema-form/docs/api-link/uiSchema#submitbuttonoptions
@@ -17,12 +20,12 @@ type ObjectFieldUIOptions<O extends ObjectData> = {
   'ui:order'?: Array<keyof O>
   // x-layout 存在时，order 将无效
   'ui:x-layout'?: LayoutElement<O> | Array<LayoutElement<O>>
-}
+} & CommonCustomFieldUIOptions
 // TODO: define array field options
 // deno-lint-ignore ban-types
 type ArrayFieldUIOptions = {
   // 'ui:x-hideAddButton'?: boolean
-}
+} & CommonCustomFieldUIOptions
 
 /**
  * @link https://rjsf-team.github.io/react-jsonschema-form/docs/api-reference/uiSchema

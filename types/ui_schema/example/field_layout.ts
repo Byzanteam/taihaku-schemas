@@ -1,11 +1,15 @@
 import type { UISchema } from '../../mod.ts'
 
-const LoginFormUISchema: UISchema<{
+const RegisterFormUISchema: UISchema<{
   name: string
   password: string
+  profile: {
+    email: string
+    phone: string
+  }
 }> = {
   'ui:submitButtonOptions': {
-    submitText: '登录',
+    submitText: '注册',
   },
   name: {
     'ui:widget': 'SingleLineWidget',
@@ -38,6 +42,45 @@ const LoginFormUISchema: UISchema<{
       },
     ],
   },
+  password: {
+    'ui:widget': 'SingleLineWidget',
+  },
+  profile: {
+    // layout without Description
+    'ui:x-field-layout': {
+      type: 'Vertical',
+      children: [
+        {
+          type: 'Label',
+        },
+        {
+          type: 'Control',
+        },
+        {
+          type: 'Error',
+        },
+      ],
+    },
+    'ui:x-layout': {
+      type: 'Horizontal',
+      children: [
+        {
+          type: 'Field',
+          property: 'email',
+        },
+        {
+          type: 'Field',
+          property: 'phone',
+        },
+      ],
+    },
+    email: {
+      'ui:widget': 'SingleLineWidget',
+    },
+    phone: {
+      'ui:widget': 'SingleLineWidget',
+    },
+  },
 }
 
-export default LoginFormUISchema
+export default RegisterFormUISchema
