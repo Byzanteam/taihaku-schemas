@@ -1,16 +1,18 @@
 import type { FieldType } from './field_type.ts'
+import type { FieldTemplate } from './layout.ts'
 
 export enum AppearanceValue {
   Input = 'input',
   Presentation = 'presentation',
 }
 
-interface CommonCustomFieldUIOptions {
+export interface CommonCustomFieldUIOptions {
   'ui:x-appearance'?: AppearanceValue
   'ui:x-blankslate'?: string
+  'ui:x-field-template'?: FieldTemplate | Array<FieldTemplate>
 }
 
-interface SingleLineFieldUIOptions extends CommonCustomFieldUIOptions {}
+type SingleLineFieldUIOptions = CommonCustomFieldUIOptions
 
 interface SignatureFieldUIOptions extends CommonCustomFieldUIOptions {
   /**

@@ -1,5 +1,9 @@
 import { FieldType } from './field_type.ts'
-import type { CustomFieldUIOptionsMap } from './ui_options.ts'
+import type { ObjectData, ObjectLayout } from './layout.ts'
+import type {
+  CommonCustomFieldUIOptions,
+  CustomFieldUIOptionsMap,
+} from './ui_options.ts'
 
 /**
  * @link https://rjsf-team.github.io/react-jsonschema-form/docs/api-link/uiSchema#submitbuttonoptions
@@ -12,45 +16,16 @@ interface SubmitButtonOptions {
   }
 }
 
-type ObjectData = Record<string, unknown>
-
-type LayoutFieldElementType = 'Field'
-// Exclude is not working as expected
-// https://github.com/microsoft/TypeScript/issues/47178
-type LayoutElementType = Exclude<string, LayoutFieldElementType>
-
-interface LayoutBaseElement<T extends string = string> {
-  className?: string
-  type: T
-}
-
-/** The container for fields */
-interface LayoutFieldElement<O extends ObjectData>
-  extends LayoutBaseElement<LayoutFieldElementType> {
-  property: keyof O
-}
-
-/** The custom element */
-interface LayoutCustomElement<O extends ObjectData>
-  extends LayoutBaseElement<LayoutElementType> {
-  props?: ObjectData
-  children?: Array<LayoutElement<O>>
-}
-
-type LayoutElement<O extends ObjectData> =
-  | LayoutFieldElement<O>
-  | LayoutCustomElement<O>
-
 type ObjectFieldUIOptions<O extends ObjectData> = {
   'ui:order'?: Array<keyof O>
   // x-layout 存在时，order 将无效
-  'ui:x-layout'?: LayoutElement<O> | Array<LayoutElement<O>>
-}
+  'ui:x-layout'?: ObjectLayout<O> | Array<ObjectLayout<O>>
+} & CommonCustomFieldUIOptions
 // TODO: define array field options
 // deno-lint-ignore ban-types
 type ArrayFieldUIOptions = {
   // 'ui:x-hideAddButton'?: boolean
-}
+} & CommonCustomFieldUIOptions
 
 /**
  * @link https://rjsf-team.github.io/react-jsonschema-form/docs/api-reference/uiSchema
