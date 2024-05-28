@@ -23,10 +23,10 @@ export interface FormatedValidationError {
   dependencies: Array<AbsoluteJSONPointer>
 }
 
+// FIXME: 针对每个 keyword 书写类型
 export interface FormatedJSONSchemaError {
   errorLocation: AbsoluteJSONPointer
   /** https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-validation-01#section-6 */
   errorKeyword: string
-  keywordSchema: string | Array<string> | null
-  dependencies: Array<AbsoluteJSONPointer>
+  errorKeywordSchema: unknown
 }

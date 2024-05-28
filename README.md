@@ -10,7 +10,7 @@
 <details>
 <summary>Persistence Schema</summary>
 
-```TypeScript
+```typescript
 action = {
   schema: moviesSchema,
   paramsSchema: {
@@ -78,13 +78,13 @@ Persistence Schema 执行过程中会有多处涉及到 JSON Schema 的校验，
 <details>
 <summary>paramsSchema 出错</summary>
 
-```TypeScript
+```typescript
 params = {
   release_date: '2024-05-14',
 }
 ```
 
-```JSON
+```json
 {
   "errors": [
     {
@@ -100,14 +100,14 @@ params = {
 <details>
 <summary>changes 中字段校验失败</summary>
 
-```TypeScript
+```typescript
 params = {
   title: 'Title',
   release_date: '2024-05-14',
 }
 ```
 
-```JSON
+```json
 {
   "errors": [
     {
@@ -123,14 +123,14 @@ params = {
 <details>
 <summary>validator schema 校验失败</summary>
 
-```TypeScript
+```typescript
 params = {
   title: 'This is a valid title',
   release_date: '2024-05-41',
 }
 ```
 
-```JSON
+```json
 {
   "errors": [
     {
@@ -156,14 +156,14 @@ Persistence Schema 中可能声明多个 validations，当 validation 的执行�
 <details>
 <summary>paramsSchema 出错</summary>
 
-```TypeScript
+```typescript
 params = {
   title: 'This is a valid title',
   release_date: '4202-05-14',
 }
 ```
 
-```JSON
+```json
 {
   "errors": [
     {
@@ -189,14 +189,14 @@ params = {
 <details>
 <summary>returningSchema 中指定的列不存在</summary>
 
-```TypeScript
+```typescript
 params = {
   title: 'This is a valid title',
   release_date: '2024-05-14',
 }
 ```
 
-```JSON
+```json
 {
   "errors": [
     {
@@ -209,37 +209,38 @@ params = {
 
 </details>
 
-## Nextjs 后端给出的错误
+## Next.js 后端给出的错误
 
-在 next 后端拿到 Elixir 给出的错误后结合 action
+在 Next.js 后端拿到 Elixir 给出的错误后结合 action
 的定义给出更具体的错误，浏览器会接收到该错误并渲染到用户填写的表单中。
+
+note: 我们会将所有的错误都转换，但是前端可能只能处理其中的一部分。
 
 ### 非运行时错误
 
-把 Elixir 端给出的错误与 action 的定义结合后得到的精确到表单字段路径上的错误，这一类错误为 JSONSchema 校验错误和
+把 Elixir 端给出的错误与 action
+的定义结合后得到的精确到表单字段路径上的错误，这一类错误为 jsonSchema 校验错误和
 Validation 错误的集合，均会把错误定位到具体的表单字段路径上。
 
-#### JSONSchema 校验错误
+#### JSON Schema 校验出错
 
-该错误是由自己的值通过 JSONSchema 校验失败得到的。
+该错误是由自己的值通过 jsonSchema 校验失败得到的。
 
-- `errorLocation` - 产生的错误在 JSONSchema 中的位置
-- `dependencies` - 产生该错误的依赖字段的位置（在这种错误中就是它自己的路径）
-- `errorKeyword` - 校验错误的类型，都属于
-  [JSONSchema 的校验 keyword](https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-validation-01#section-6)
+- `errorLocation` - 产生的错误在 jsonSchema 中的位置
+- `errorKeyword` - 校验错误的类型，都属于 [jsonSchema 的校验 keyword](https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-validation-01#section-6)
 - `keywordSchema` - 错误类型在 jsonSchema 中对应的值，通过 errorKeyword 和
   keywordSchema 让前端页面实现错误的显示
 
 <details>
-<summary>JSONSchema 字段校验失败</summary>
+<summary>jsonSchema 字段校验失败</summary>
 
-```TypeScript
+```typescript
 params = {
   release_date: '2024-05-74',
 }
 ```
 
-```JSON
+```json
 {
   "errors": [
     {
@@ -262,21 +263,21 @@ params = {
 
 #### Validation 校验错误
 
-- `errorLocation` - 产生的错误在 JSONSchema 中的位置
+- `errorLocation` - 产生的错误在 jsonSchema 中的位置
 - `errorMessage` - 错误信息
 - `dependencies` - 产生该错误的依赖字段的位置
 
 <details>
 <summary></summary>
 
-```TypeScript
+```typescript
 params = {
   title: 'a title',
   release_date: '4024-05-14',
 }
 ```
 
-```JSONC
+```json
 {
   "errors": [
     {
@@ -303,14 +304,14 @@ params = {
 <details>
 <summary>returningSchema 中指定的列不存在</summary>
 
-```TypeScript
+```typescript
 params = {
   title: 'This is a valid title',
   release_date: '2024-05-14',
 }
 ```
 
-```JSON
+```json
 {
   "errors": [
     {
