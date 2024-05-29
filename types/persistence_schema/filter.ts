@@ -1,6 +1,13 @@
 import type { $DataPointer, $SchemaPointer, $ValuePointer } from './types.ts'
 
-export type Operand = $DataPointer | $ValuePointer | $SchemaPointer
+export type Filter = ConditionalFilter | LogicalFilter
+
+export interface ConditionalFilter {
+  operator: 'AND' | 'OR'
+  operands: Array<ConditionalFilter | LogicalFilter>
+}
+
+export type LogicalFilter = EQFilter | LTFilter | IsNullFilter
 
 export interface EQFilter {
   operator: 'EQ'
@@ -17,4 +24,4 @@ export interface IsNullFilter {
   operands: [Operand]
 }
 
-export type Filter = EQFilter | LTFilter | IsNullFilter
+export type Operand = $DataPointer | $ValuePointer | $SchemaPointer

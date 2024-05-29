@@ -12,12 +12,10 @@ const updateMovieAction: UpdateAction = {
     },
     required: ['id'],
   },
-  filter: [
-    {
-      operator: 'EQ',
-      operands: [{ $schema: '/id' }, { $data: '/id' }],
-    },
-  ],
+  filter: {
+    operator: 'EQ',
+    operands: [{ $schema: '/id' }, { $data: '/id' }],
+  },
   changeset: {
     changes: [
       {
