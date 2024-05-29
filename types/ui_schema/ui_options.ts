@@ -53,14 +53,7 @@ interface CheckBoxFieldUIOptions extends CommonCustomFieldUIOptions {
 
 type DateTimeFieldUIOptions = DateFieldUIOptions
 
-export enum NumberAccuracy {
-  Integer = 'integer',
-  Number = 'number',
-}
-
-interface NumberFieldUIOptions extends CommonCustomFieldUIOptions {
-  'ui:x-accuracy'?: NumberAccuracy
-}
+type NumberFieldUIOptions = CommonCustomFieldUIOptions
 
 export type CustomFieldUIOptionsMap = {
   [FieldType.Checkbox]: CheckBoxFieldUIOptions
