@@ -53,10 +53,20 @@ interface CheckBoxFieldUIOptions extends CommonCustomFieldUIOptions {
 
 type DateTimeFieldUIOptions = DateFieldUIOptions
 
+export enum NumberAccuracy {
+  Integer = 'Integer',
+  Number = 'Number',
+}
+
+interface NumberFieldUIOptions extends CommonCustomFieldUIOptions {
+  'ui:x-accuracy'?: NumberAccuracy
+}
+
 export type CustomFieldUIOptionsMap = {
   [FieldType.Checkbox]: CheckBoxFieldUIOptions
   [FieldType.Date]: DateFieldUIOptions
   [FieldType.DateTime]: DateTimeFieldUIOptions
+  [FieldType.Number]: NumberFieldUIOptions
   [FieldType.RadioButton]: RadioButtonFieldUIOptions
   [FieldType.Signature]: SignatureFieldUIOptions
   [FieldType.SingleLine]: SingleLineFieldUIOptions
