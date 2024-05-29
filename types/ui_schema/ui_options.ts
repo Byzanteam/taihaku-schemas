@@ -54,8 +54,8 @@ interface CheckBoxFieldUIOptions extends CommonCustomFieldUIOptions {
 type DateTimeFieldUIOptions = DateFieldUIOptions
 
 export enum NumberAccuracy {
-  Integer = 'Integer',
-  Number = 'Number',
+  Integer = 'integer',
+  Number = 'number',
 }
 
 interface NumberFieldUIOptions extends CommonCustomFieldUIOptions {
