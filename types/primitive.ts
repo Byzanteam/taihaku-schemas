@@ -17,6 +17,7 @@ export type JSONValue = string | number | boolean | string[] | object
  * flexible in the properties they support (i.e. anything else)
  */
 export type GenericObjectType = {
+  // deno-lint-ignore no-explicit-any
   [name: string]: any
 }
 /** Map the JSONSchema to our own type so that we can easily bump to a more recent version at some future date and only
