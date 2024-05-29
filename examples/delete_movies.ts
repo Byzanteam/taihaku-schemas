@@ -9,12 +9,10 @@ const deleteMovieAction: BulkDeleteAction = {
       release_date: { type: 'string', format: 'date' },
     },
   },
-  filter: [
-    {
-      operator: 'LT',
-      operands: [{ $schema: '/release_date' }, { $data: '/release_date' }],
-    },
-  ],
+  filter: {
+    operator: 'LT',
+    operands: [{ $schema: '/release_date' }, { $data: '/release_date' }],
+  },
 }
 
 export default deleteMovieAction

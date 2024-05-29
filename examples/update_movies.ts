@@ -9,12 +9,10 @@ const updateMoviesAction: BulkUpdateAction = {
       title: { type: 'string' },
     },
   },
-  filter: [
-    {
-      operator: 'IS_NULL',
-      operands: [{ $schema: '/release_date' }],
-    },
-  ],
+  filter: {
+    operator: 'IS_NULL',
+    operands: [{ $schema: '/release_date' }],
+  },
   changeset: {
     changes: [
       // SET
