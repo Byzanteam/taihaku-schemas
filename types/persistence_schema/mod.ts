@@ -41,22 +41,22 @@ export interface InsertAction {
 export interface UpdateAction {
   schema: Schema
   paramsSchema: JSONSchema
+  filter: Filter
   changeset: Changeset<Change>
   returningSchema: ObjectReturnings
-  filter: Array<Filter>
 }
 
 export interface DeleteAction {
   schema: Schema
   paramsSchema: JSONSchema
-  filter: Array<Filter>
+  filter: Filter
   returningSchema: ObjectReturnings
 }
 
 export interface GetOneAction {
   schema: Schema
   paramsSchema: JSONSchema
-  filter: Array<Filter>
+  filter: Filter
   returningSchema: ObjectReturnings
 }
 
@@ -69,20 +69,20 @@ export interface BulkInsertAction {
 export interface BulkUpdateAction {
   schema: Schema
   paramsSchema: JSONSchema
+  filter: Filter
   changeset: Changeset<ColumnChange>
-  filter: Array<Filter>
 }
 
 export interface BulkDeleteAction {
   schema: Schema
   paramsSchema: JSONSchema
-  filter: Array<Filter>
+  filter: Filter
 }
 
 export interface ListAction {
   schema: Schema
   paramsSchema: JSONSchema
-  filter: Array<Filter>
+  filter: Filter
   sorting?: Array<Order>
   pagination: OffsetPagination
   returningSchema: ObjectReturnings

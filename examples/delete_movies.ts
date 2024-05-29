@@ -9,12 +9,19 @@ const deleteMovieAction: BulkDeleteAction = {
       release_date: { type: 'string', format: 'date' },
     },
   },
-  filter: [
-    {
-      operator: 'LT',
-      operands: [{ $schema: '/release_date' }, { $data: '/release_date' }],
-    },
-  ],
+  filter: {
+    operator: 'AND',
+    operands: [
+      {
+        operator: 'LT',
+        operands: [{ $schema: '/release_date' }, { $data: '/release_date' }],
+      },
+      {
+        operator: 'IS_NULL',
+        operands: [{ $schema: '/likes' }],
+      },
+    ],
+  },
 }
 
 export default deleteMovieAction

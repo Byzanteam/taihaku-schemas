@@ -9,12 +9,10 @@ const deleteMovieAction: DeleteAction = {
       id: { type: 'string', format: 'uuid' },
     },
   },
-  filter: [
-    {
-      operator: 'EQ',
-      operands: [{ $schema: '/id' }, { $data: '/id' }],
-    },
-  ],
+  filter: {
+    operator: 'EQ',
+    operands: [{ $schema: '/id' }, { $data: '/id' }],
+  },
   returningSchema: {
     id: { $schema: '/id' },
     title: { $schema: '/title' },
