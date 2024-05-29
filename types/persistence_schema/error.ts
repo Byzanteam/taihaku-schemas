@@ -1,7 +1,4 @@
-import type {
-  AbsoluteJSONPointer,
-  StrictJSONSchema,
-} from '../primitive.ts'
+import type { AbsoluteJSONPointer, StrictJSONSchema } from '../primitive.ts'
 
 export interface JSONSchemaError {
   absoluteKeywordLocation: AbsoluteJSONPointer
@@ -28,7 +25,7 @@ export interface FormatedValidationError {
 
 type ErrorKeywordAndSchemaType<T extends keyof StrictJSONSchema> = {
   errorKeyword: T
-  errorKeywordSchema: StrictJSONSchema[T]
+  errorKeywordSchema: Exclude<StrictJSONSchema[T], undefined>
 }
 
 export type FormatedJSONSchemaError =
