@@ -45,6 +45,7 @@ type FormUIOptions<O extends ObjectData> =
   & ObjectFieldUIOptions<O>
   & BasicUIOptions
   & {
+    'ui:rootFieldId'?: string
     'ui:submitButtonOptions'?: Partial<SubmitButtonOptions>
   }
 
