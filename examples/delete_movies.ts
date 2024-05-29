@@ -10,8 +10,17 @@ const deleteMovieAction: BulkDeleteAction = {
     },
   },
   filter: {
-    operator: 'LT',
-    operands: [{ $schema: '/release_date' }, { $data: '/release_date' }],
+    operator: 'AND',
+    operands: [
+      {
+        operator: 'LT',
+        operands: [{ $schema: '/release_date' }, { $data: '/release_date' }],
+      },
+      {
+        operator: 'IS_NULL',
+        operands: [{ $schema: '/likes' }],
+      },
+    ],
   },
 }
 
