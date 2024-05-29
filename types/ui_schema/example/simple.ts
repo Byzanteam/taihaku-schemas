@@ -15,6 +15,7 @@ const PersonFormUISchema: UISchema<{
     title: string
   }>
 }> = {
+  'ui:rootFieldId': 'PersonForm',
   'ui:submitButtonOptions': {
     norender: true,
   },
