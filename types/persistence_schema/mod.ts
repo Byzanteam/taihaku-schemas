@@ -1,6 +1,8 @@
-import type { JSONSchema7 } from '../primitive.ts'
+import type { JSONSchema } from '../primitive.ts'
 import type { Change, Changeset, ColumnChange } from './changeset.ts'
 import type {
+  FormatedJSONSchemaError,
+  FormatedValidationError,
   InternalError,
   JSONSchemaError,
   ValidationError,
@@ -31,14 +33,14 @@ export interface Schema {
 
 export interface InsertAction {
   schema: Schema
-  paramsSchema: JSONSchema7
+  paramsSchema: JSONSchema
   changeset: Changeset<Change>
   returningSchema: ObjectReturnings
 }
 
 export interface UpdateAction {
   schema: Schema
-  paramsSchema: JSONSchema7
+  paramsSchema: JSONSchema
   changeset: Changeset<Change>
   returningSchema: ObjectReturnings
   filter: Array<Filter>
@@ -46,40 +48,40 @@ export interface UpdateAction {
 
 export interface DeleteAction {
   schema: Schema
-  paramsSchema: JSONSchema7
+  paramsSchema: JSONSchema
   filter: Array<Filter>
   returningSchema: ObjectReturnings
 }
 
 export interface GetOneAction {
   schema: Schema
-  paramsSchema: JSONSchema7
+  paramsSchema: JSONSchema
   filter: Array<Filter>
   returningSchema: ObjectReturnings
 }
 
 export interface BulkInsertAction {
   schema: Schema
-  paramsSchema: JSONSchema7
+  paramsSchema: JSONSchema
   changeset: Changeset<ColumnChange>
 }
 
 export interface BulkUpdateAction {
   schema: Schema
-  paramsSchema: JSONSchema7
+  paramsSchema: JSONSchema
   changeset: Changeset<ColumnChange>
   filter: Array<Filter>
 }
 
 export interface BulkDeleteAction {
   schema: Schema
-  paramsSchema: JSONSchema7
+  paramsSchema: JSONSchema
   filter: Array<Filter>
 }
 
 export interface ListAction {
   schema: Schema
-  paramsSchema: JSONSchema7
+  paramsSchema: JSONSchema
   filter: Array<Filter>
   sorting?: Array<Order>
   pagination: OffsetPagination
@@ -101,3 +103,12 @@ export interface MultiAction {
 export interface Result {
   errors: Array<InternalError> | Array<JSONSchemaError | ValidationError>
 }
+
+export interface NextjsResult {
+  errors:
+    | Array<InternalError>
+    | Array<FormatedJSONSchemaError | FormatedValidationError>
+}
+
+export type { InternalError, JSONSchemaError, ValidationError }
+export type { FormatedJSONSchemaError, FormatedValidationError }
