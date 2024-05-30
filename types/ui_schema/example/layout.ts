@@ -96,6 +96,7 @@ const LayoutedFormUISchema: UISchema<{
   profile: {
     // same to 'ui:x-layout': [Field<nickname>, Field<email>]
     // but without className defined
+    'ui:label': false,
     'ui:order': ['nickname', 'email'],
     nickname: {
       'ui:widget': 'SingleLineWidget',
@@ -107,10 +108,13 @@ const LayoutedFormUISchema: UISchema<{
     'ui:widget': 'SignatureWidget',
     'ui:x-penColor': 'black',
     'ui:x-height': 200,
+    'ui:label': false,
   },
   birthday: {
     'ui:widget': 'DateWidget',
     'ui:x-format': 'yyyy-MM-dd',
+    'ui:label': false,
+    'ui:placeholder': '出生日期',
   },
   gender: {
     'ui:widget': 'RadioButtonWidget',
@@ -126,8 +130,9 @@ const LayoutedFormUISchema: UISchema<{
   tags: {
     // you can define ui:options to tags property of person
     // like disable person.tags's label
-    // 'ui:label': false
+    'ui:label': false,
     items: {
+      'ui:label': false,
       /**
        * Inner layout
        * -----------------------
@@ -150,11 +155,14 @@ const LayoutedFormUISchema: UISchema<{
       },
       title: {
         'ui:widget': 'SingleLineWidget',
-        'ui:placeholder': '请输入',
+        'ui:placeholder': '标签名称',
+        'ui:label': false,
       },
       color: {
         'ui:widget': 'RadioButtonWidget',
         'ui:x-display': 'select',
+        'ui:label': false,
+        'ui:placeholder': '标签颜色',
       },
     },
   },
