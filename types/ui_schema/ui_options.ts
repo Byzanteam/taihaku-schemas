@@ -53,13 +53,13 @@ interface CheckBoxFieldUIOptions extends CommonCustomFieldUIOptions {
 
 type DateTimeFieldUIOptions = DateFieldUIOptions
 
-type NumberFieldUIOptions = CommonCustomFieldUIOptions
+type NumericFieldUIOptions = CommonCustomFieldUIOptions
 
 export type CustomFieldUIOptionsMap = {
   [FieldType.Checkbox]: CheckBoxFieldUIOptions
   [FieldType.Date]: DateFieldUIOptions
   [FieldType.DateTime]: DateTimeFieldUIOptions
-  [FieldType.Number]: NumberFieldUIOptions
+  [FieldType.Numeric]: NumericFieldUIOptions
   [FieldType.RadioButton]: RadioButtonFieldUIOptions
   [FieldType.Signature]: SignatureFieldUIOptions
   [FieldType.SingleLine]: SingleLineFieldUIOptions

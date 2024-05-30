@@ -3,7 +3,7 @@ export enum FieldType {
   Checkbox = 'Checkbox',
   Date = 'Date',
   DateTime = 'DateTime',
-  Number = 'Number',
+  Numeric = 'Numeric',
   RadioButton = 'RadioButton',
   Signature = 'Signature',
   SingleLine = 'SingleLine',
