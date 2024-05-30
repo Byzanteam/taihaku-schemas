@@ -2,6 +2,7 @@ import type { Schema } from '../../types/persistence_schema/mod.ts'
 import charactersSchema from './characters.ts'
 
 const moviesSchema: Schema = {
+  source: 'movies',
   columns: [
     { name: 'id', type: 'uuid', autoGenerate: true, primaryKey: true },
     { name: 'title', type: 'text' },
