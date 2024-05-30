@@ -1,6 +1,7 @@
 import type { Schema } from '../../types/persistence_schema/mod.ts'
 
 const charactersSchema: Schema = {
+  source: 'characters',
   columns: [
     { name: 'id', type: 'uuid', autoGenerate: true, primaryKey: true },
     { name: 'name', type: 'text' },

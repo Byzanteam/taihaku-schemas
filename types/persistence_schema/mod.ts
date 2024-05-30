@@ -28,6 +28,7 @@ export interface AssociationDef {
 }
 
 export interface Schema {
+  source: string
   columns: Array<ColumnDef | AssociationDef>
 }
 
