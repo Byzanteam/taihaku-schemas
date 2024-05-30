@@ -16,16 +16,23 @@ interface SubmitButtonOptions {
   }
 }
 
-type ObjectFieldUIOptions<O extends ObjectData> = {
-  'ui:order'?: Array<keyof O>
-  // x-layout 存在时，order 将无效
-  'ui:x-layout'?: ObjectLayout<O> | Array<ObjectLayout<O>>
-} & CommonCustomFieldUIOptions
+type ObjectFieldUIOptions<O extends ObjectData> =
+  & {
+    'ui:order'?: Array<keyof O>
+    // x-layout 存在时，order 将无效
+    'ui:x-layout'?: ObjectLayout<O> | Array<ObjectLayout<O>>
+  }
+  & CommonCustomFieldUIOptions
+  & BasicUIOptions
+
 // TODO: define array field options
-// deno-lint-ignore ban-types
-type ArrayFieldUIOptions = {
-  // 'ui:x-hideAddButton'?: boolean
-} & CommonCustomFieldUIOptions
+type ArrayFieldUIOptions =
+  // deno-lint-ignore ban-types
+  & {
+    // 'ui:x-hideAddButton'?: boolean
+  }
+  & CommonCustomFieldUIOptions
+  & BasicUIOptions
 
 /**
  * @link https://rjsf-team.github.io/react-jsonschema-form/docs/api-reference/uiSchema
@@ -61,13 +68,10 @@ type FieldUIOptions<T extends FieldType> = T extends FieldType
 type FieldsUISchema<O extends ObjectData, T extends FieldType = FieldType> = {
   [K in keyof O]: O[K] extends object // 嵌套结构（object or array)
     ? O[K] extends Array<infer U> // array
-      ? U extends ObjectData ?
-          & {
-            /** define ArrayItem's uiSchema */
-            items: Partial<FieldsUISchema<U>> & ObjectFieldUIOptions<U>
-          }
-          & ArrayFieldUIOptions
-          & BasicUIOptions // Array<object>
+      ? U extends ObjectData ? {
+          /** define ArrayItem's uiSchema */
+          items: Partial<FieldsUISchema<U>> & ObjectFieldUIOptions<U>
+        } & ArrayFieldUIOptions // Array<object>
       : FieldUIOptions<T> & ArrayFieldUIOptions // normal array field like checkbox
     : O[K] extends ObjectData
       ? Partial<FieldsUISchema<O[K]>> & ObjectFieldUIOptions<O[K]> // nested object
