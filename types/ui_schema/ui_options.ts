@@ -15,13 +15,10 @@ export interface CommonCustomFieldUIOptions {
 type SingleLineFieldUIOptions = CommonCustomFieldUIOptions
 
 interface SignatureFieldUIOptions extends CommonCustomFieldUIOptions {
-  /**
-   * The size of canvas
-   * by default, width is auto (full width of container)
-   * height is 200px
-   */
-  'ui:x-width'?: number | 'auto'
-  'ui:x-height'?: number
+  'ui:x-padDescription'?: string
+  'ui:x-clearText'?: string
+  'ui:x-saveText'?: string
+  'ui:x-cancelText'?: string
   /** the pen color */
   'ui:x-penColor'?: string
   /** the background color of canvas */
