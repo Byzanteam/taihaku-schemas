@@ -1,6 +1,7 @@
 import { FieldType } from './field_type.ts'
 import type { ObjectData, ObjectLayout } from './layout.ts'
 import type {
+  AppearanceValue,
   CommonCustomFieldUIOptions,
   CustomFieldUIOptionsMap,
 } from './ui_options.ts'
@@ -48,12 +49,19 @@ type BasicUIOptions = {
   'ui:enumDisabled'?: Array<string | number>
 }
 
+type GlobalUIOptions = {
+  'ui:x-appearance'?: AppearanceValue
+  disabled?: boolean
+  readonly?: boolean
+}
+
 type FormUIOptions<O extends ObjectData> =
   & ObjectFieldUIOptions<O>
   & BasicUIOptions
   & {
     'ui:rootFieldId'?: string
     'ui:submitButtonOptions'?: Partial<SubmitButtonOptions>
+    'ui:globalOptions'?: GlobalUIOptions
   }
 
 // 这里添加 T extends FieldType ? M<T> : never 的目的是为了让 ts 遍历
