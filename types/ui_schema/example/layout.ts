@@ -107,7 +107,6 @@ const LayoutedFormUISchema: UISchema<{
   signature: {
     'ui:widget': 'SignatureWidget',
     'ui:x-penColor': 'black',
-    'ui:x-height': 200,
     'ui:label': false,
   },
   birthday: {
