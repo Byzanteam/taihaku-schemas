@@ -28,7 +28,7 @@ const insertMovieWithCharactersAction: InsertAction = {
       { name: 'updated_at', value: { $sql: 'now()' } },
       {
         name: 'characters',
-        onReplace: 'DELETE',
+        onReplace: 'delete',
         changeset: {
           changes: [
             { name: 'name', value: { $data: '0/name' } },
@@ -45,7 +45,7 @@ const insertMovieWithCharactersAction: InsertAction = {
             },
             validations: [
               {
-                operator: 'CUSTOM',
+                operator: 'custom',
                 operands: [{ $data: '0/age' }],
                 expression: 'operands[0] >= 0',
                 errorKey: '0/age',
@@ -67,7 +67,7 @@ const insertMovieWithCharactersAction: InsertAction = {
       },
       validations: [
         {
-          operator: 'CUSTOM',
+          operator: 'custom',
           operands: [{ $data: '/release_date' }],
           expression: 'Date.parse(operands[0]) <= Date.now()',
           errorKey: '/release_date',

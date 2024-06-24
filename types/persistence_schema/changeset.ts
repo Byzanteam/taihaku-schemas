@@ -36,11 +36,11 @@ export interface AssociationChange {
   changeset: Changeset<Change>
   // TODO: onDelete 和 onReplace 应该在 changeset 还是 schema 的定义中
   onReplace:
-    | 'MARK_AS_INVALID'
-    | 'NILIFY'
-    | 'UPDATE'
-    | 'DELETE'
-    | 'DELETE_IF_EXISTS'
+    | 'mark_as_invalid'
+    | 'nilify'
+    | 'update'
+    | 'delete'
+    | 'delete_if_exists'
   /**
    * the corresponding validator for the association values
    */

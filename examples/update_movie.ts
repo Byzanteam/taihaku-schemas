@@ -13,7 +13,7 @@ const updateMovieAction: UpdateAction = {
     required: ['id'],
   },
   filter: {
-    operator: 'EQ',
+    operator: 'eq',
     operands: [{ $schema: '/id' }, { $data: '/id' }],
   },
   changeset: {
@@ -40,7 +40,7 @@ const updateMovieAction: UpdateAction = {
       },
       validations: [
         {
-          operator: 'CUSTOM',
+          operator: 'custom',
           operands: [{ $data: '/release_date' }],
           expression: 'Date.parse(operands[0]) <= Date.now()',
           errorKey: '/release_date',

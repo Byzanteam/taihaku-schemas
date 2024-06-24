@@ -22,7 +22,7 @@ export interface ColumnDef {
 
 export interface AssociationDef {
   name: string
-  type: 'HAS_ONE' | 'HAS_MANY'
+  type: 'has_one' | 'has_many'
   foreignKey: string
   associationSchema: Schema
 }

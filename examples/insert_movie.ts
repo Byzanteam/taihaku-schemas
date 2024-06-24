@@ -36,7 +36,7 @@ const insertMovieAction: InsertAction = {
       },
       validations: [
         {
-          operator: 'CUSTOM',
+          operator: 'custom',
           operands: [{ $data: '/release_date' }],
           expression: 'Date.parse(operands[0]) <= Date.now()',
           errorKey: '/release_date',

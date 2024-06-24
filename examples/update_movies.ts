@@ -10,21 +10,21 @@ const updateMoviesAction: BulkUpdateAction = {
     },
   },
   filter: {
-    operator: 'AND',
+    operator: 'and',
     operands: [
       {
-        operator: 'EQ',
+        operator: 'eq',
         operands: [{ $schema: '/created_at' }, { $schema: '/updated_at' }],
       },
       {
-        operator: 'OR',
+        operator: 'or',
         operands: [
           {
-            operator: 'IS_NULL',
+            operator: 'is_null',
             operands: [{ $schema: '/likes' }],
           },
           {
-            operator: 'IS_NULL',
+            operator: 'is_null',
             operands: [{ $schema: '/release_date' }],
           },
         ],
