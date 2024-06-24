@@ -18,13 +18,13 @@ export interface EQValidation extends BaseValidation, EQFilter {}
 export interface IsNullValidation extends BaseValidation, IsNullFilter {}
 
 export interface UniqueValidation extends BaseValidation {
-  operator: 'UNIQUE'
+  operator: 'unique'
   operands: Array<$SchemaPointer>
   constraintName?: string // the unique constraint name
 }
 
 export interface CustomValidation extends BaseValidation {
-  operator: 'CUSTOM'
+  operator: 'custom'
   operands: Array<Operand>
   expression: string // the JavaScript expression to be evaluated
 }

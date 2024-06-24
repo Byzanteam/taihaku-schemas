@@ -10,7 +10,7 @@ const deleteMovieAction: DeleteAction = {
     },
   },
   filter: {
-    operator: 'EQ',
+    operator: 'eq',
     operands: [{ $schema: '/id' }, { $data: '/id' }],
   },
   returningSchema: {

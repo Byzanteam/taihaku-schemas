@@ -10,7 +10,7 @@ export type ColumnType =
   | 'text'
   | 'numeric'
   | 'boolean'
-  | 'timestamp without time zone'
+  | 'timestamp'
   | 'jsonb'
   | 'date'
   | 'text[]'
