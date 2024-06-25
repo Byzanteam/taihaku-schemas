@@ -1,4 +1,4 @@
-import type { FieldType } from './field_type.ts'
+import type { FieldType } from '../field_type.ts'
 import type { FieldTemplate } from './layout.ts'
 
 export enum AppearanceValue {
