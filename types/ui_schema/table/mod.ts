@@ -4,8 +4,11 @@ type ObjectData = {
   [key: string]: unknown
 }
 
-type FieldUISchema<TData extends ObjectData> = {
+type FieldUIOptions<TData extends ObjectData> = {
   [K in keyof TData]?: {
+    /** define how to render current field */
+    widget?: `${FieldType}Widget`
+    /** define size and resize of current field */
     size?: number
     minSize?: number
     enableResizing?: boolean
@@ -14,29 +17,30 @@ type FieldUISchema<TData extends ObjectData> = {
 }
 
 interface TableOptions<TData extends ObjectData> {
+  /** initial order of table columns(fields) */
   order: Array<keyof TData>
+  /** initial pinning settings */
   pinning: {
     left?: Array<keyof TData>
     right?: Array<keyof TData>
   }
+  /** initial visibility settings */
   columnVisibility: {
     [K in keyof TData]?: boolean
   }
 }
 
-type Fields<TData extends ObjectData> = {
-  [K in keyof TData]: GenericField<K, FieldType>
-}
-
-export type TableUISchema<TData extends ObjectData> =
-  & Partial<
-    TableOptions<TData>
-  >
-  & Partial<FieldUISchema<TData>>
+export type TableUISchema<TData extends ObjectData> = Partial<
+  TableOptions<TData>
+> &
+  Partial<FieldUIOptions<TData>>
 
 export type TableSchema<TData extends ObjectData> = {
+  /** uniqueId of a schema */
   id: string
   name?: string
-  fields: Fields<TData>
+  fields: {
+    [K in keyof TData]: GenericField<K, FieldType>
+  }
   uiSchema?: TableUISchema<TData>
 }
