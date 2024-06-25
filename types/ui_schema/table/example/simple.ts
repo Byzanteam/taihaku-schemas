@@ -1,4 +1,4 @@
-import { type TableSchema } from '../mod.ts'
+import type { TableSchema } from '../mod.ts'
 
 const moviesTableSchema: TableSchema<{
   title: string

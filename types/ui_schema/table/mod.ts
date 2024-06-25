@@ -1,4 +1,4 @@
-import { FieldType, type GenericField } from '../field.ts'
+import type { FieldType, GenericField } from '../field.ts'
 
 type ObjectData = {
   [key: string]: unknown

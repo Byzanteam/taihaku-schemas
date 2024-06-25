@@ -1,4 +1,4 @@
-import { FieldType } from '../field.ts'
+import type { FieldType } from '../field.ts'
 import type { ObjectData, ObjectLayout } from './layout.ts'
 import type {
   AppearanceValue,
