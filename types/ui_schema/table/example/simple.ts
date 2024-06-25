@@ -56,11 +56,22 @@ const moviesTableSchema: TableSchema<{
     },
   },
   uiSchema: {
-    order: ['title', 'rating', 'score', 'duration', 'releaseYear'],
-    pinning: {
+    'ui:order': ['title', 'rating', 'score', 'duration', 'releaseYear'],
+    'ui:pinning': {
       left: ['title'],
     },
-    columnVisibility: {},
+    'ui:column-visibility': {
+      title: true,
+      rating: false,
+      releaseYear: true,
+    },
+    title: {
+      'ui:size': 400,
+    },
+    rating: {
+      'ui:widget': 'RadioButtonWidget',
+      'ui:max-size': 100,
+    },
   },
 }
 
