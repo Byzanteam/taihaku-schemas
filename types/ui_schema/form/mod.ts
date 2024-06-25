@@ -1,4 +1,4 @@
-import { FieldType } from '../field_type.ts'
+import { FieldType } from '../field.ts'
 import type { ObjectData, ObjectLayout } from './layout.ts'
 import type {
   AppearanceValue,
@@ -96,7 +96,5 @@ export type {
   CustomFieldUIOptionsMap,
   ObjectFieldUIOptions,
 }
-
-export { FieldType }
 
 export { AppearanceValue, type OptionColumns } from './ui_options.ts'
