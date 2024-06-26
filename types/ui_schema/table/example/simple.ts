@@ -56,11 +56,11 @@ const moviesTableSchema: TableSchema<{
     },
   },
   uiSchema: {
-    'ui:order': ['title', 'rating', 'score', 'duration', 'releaseYear'],
-    'ui:pinning': {
+    'ui:field-order': ['title', 'rating', 'score', 'duration', 'releaseYear'],
+    'ui:field-pinning': {
       left: ['title'],
     },
-    'ui:visibility': {
+    'ui:field-visibility': {
       title: true,
       rating: false,
       releaseYear: true,
