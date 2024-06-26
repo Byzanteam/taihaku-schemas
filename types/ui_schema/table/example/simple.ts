@@ -8,7 +8,7 @@ const moviesTableSchema: TableSchema<{
   score: number
 }> = {
   id: 'movie_list_schema',
-  fields: {
+  columns: {
     releaseYear: {
       fieldType: 'NumericField',
       name: 'releaseYear',
@@ -56,11 +56,11 @@ const moviesTableSchema: TableSchema<{
     },
   },
   uiSchema: {
-    'ui:field-order': ['title', 'rating', 'score', 'duration', 'releaseYear'],
-    'ui:field-pinning': {
+    'ui:column-order': ['title', 'rating', 'score', 'duration', 'releaseYear'],
+    'ui:column-pinning': {
       left: ['title'],
     },
-    'ui:field-visibility': {
+    'ui:column-visibility': {
       title: true,
       rating: false,
       releaseYear: true,
