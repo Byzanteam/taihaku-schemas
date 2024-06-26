@@ -60,7 +60,7 @@ const moviesTableSchema: TableSchema<{
     'ui:pinning': {
       left: ['title'],
     },
-    'ui:column-visibility': {
+    'ui:visibility': {
       title: true,
       rating: false,
       releaseYear: true,

@@ -8,14 +8,23 @@ type FieldUIOptions<TData extends ObjectData> = {
   [K in keyof TData]?: {
     /** define how to render current field */
     'ui:widget'?: `${FieldType}Widget`
-    /** define the size of current field with px unit */
+    /**
+     * The size of current field with px unit
+     * default size setting should be provide by render component
+     */
     'ui:size'?: number
-    /** The min size of current field with px unit */
+    /**
+     * The min size of current field with px unit
+     * default min-size setting should be provide by render component
+     */
     'ui:min-size'?: number
-    /** allow user resize field width */
-    'ui:enable-resizing'?: boolean
-    /** The max size of current field with px unit */
+    /**
+     * The max size of current field with px unit
+     * default max-size setting should be provide by render component
+     */
     'ui:max-size'?: number
+    /** allow user resize the field width */
+    'ui:enable-resizing'?: boolean
     /**
      * TODO: define custom ui options
      * @example
@@ -28,16 +37,19 @@ type FieldUIOptions<TData extends ObjectData> = {
 interface TableOptions<TData extends ObjectData> {
   /** The order of table columns(fields) */
   'ui:order': Array<keyof TData>
-  /** The pinning settings */
+  /**
+   * The pinning settings
+   * 'ui:order' only affect the unpinned fields
+   */
   'ui:pinning': {
     left?: Array<keyof TData> /** Field names */
     right?: Array<keyof TData> /** Field names */
   }
-  /** The visibility settings. */
-  'ui:column-visibility': {
+  /** The visibility settings */
+  'ui:visibility': {
     /**
-     * column is visible if it set to true or undefined.
-     * column is invisible if it set to false
+     * field is visible if it set to true or undefined.
+     * field is invisible if it set to false
      * key is the field name
      */
     [K in keyof TData]?: boolean
