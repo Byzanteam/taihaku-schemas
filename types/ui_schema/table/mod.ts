@@ -9,20 +9,25 @@ type FieldUIOptions<TData extends ObjectData> = {
     /** define how to render current field */
     'ui:widget'?: `${FieldType}Widget`
     /**
-     * The size of current field with px unit
+     * @link https://tanstack.com/table/latest/docs/guide/column-sizing#column-widths
+     * The size of current field
+     * usually interpreted as pixel unit values with number type
+     * if it set as string, interpreted as css styles.
      * default size setting should be provide by render component
      */
-    'ui:size'?: number
+    'ui:size'?: number | string
     /**
-     * The min size of current field with px unit
+     * The min size of current field
+     * enforced during column resizing
      * default min-size setting should be provide by render component
      */
-    'ui:min-size'?: number
+    'ui:min-size'?: number | string
     /**
-     * The max size of current field with px unit
+     * The max size of current field
+     * enforced during column resizing
      * default max-size setting should be provide by render component
      */
-    'ui:max-size'?: number
+    'ui:max-size'?: number | string
     /** allow user resize the field width */
     'ui:enable-resizing'?: boolean
     /**
@@ -36,17 +41,17 @@ type FieldUIOptions<TData extends ObjectData> = {
 
 interface TableOptions<TData extends ObjectData> {
   /** The order of table columns(fields) */
-  'ui:order': Array<keyof TData>
+  'ui:field-order': Array<keyof TData>
   /**
    * The pinning settings
    * 'ui:order' only affect the unpinned fields
    */
-  'ui:pinning': {
+  'ui:field-pinning': {
     left?: Array<keyof TData> /** Field names */
     right?: Array<keyof TData> /** Field names */
   }
   /** The visibility settings */
-  'ui:visibility': {
+  'ui:field-visibility': {
     /**
      * field is visible if it set to true or undefined.
      * field is invisible if it set to false
