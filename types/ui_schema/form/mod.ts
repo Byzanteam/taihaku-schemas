@@ -1,5 +1,6 @@
 import type { FieldType } from '../field.ts'
-import type { ObjectData, ObjectLayout } from './layout.ts'
+import type { ObjectData } from '../types.ts'
+import type { ObjectLayout } from './layout.ts'
 import type {
   AppearanceValue,
   CommonCustomFieldUIOptions,
@@ -87,7 +88,7 @@ type FieldsUISchema<O extends ObjectData, T extends FieldType = FieldType> = {
     : FieldUIOptions<T> // normal field
 }
 
-export type UISchema<O extends ObjectData> =
+export type UISchema<O extends ObjectData = ObjectData> =
   & Partial<FieldsUISchema<O>>
   & Partial<FormUIOptions<O>>
 
