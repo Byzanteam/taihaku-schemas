@@ -33,6 +33,7 @@ export interface ColumnChange {
 
 export interface AssociationChange {
   name: AssociationName
+  value: $DataPointer | $ValuePointer
   changeset: Changeset<Change>
   // TODO: onDelete 和 onReplace 应该在 changeset 还是 schema 的定义中
   onReplace:
