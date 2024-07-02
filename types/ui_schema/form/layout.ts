@@ -1,4 +1,5 @@
-export type ObjectData = Record<string, unknown>
+import type { ObjectData } from '../types.ts'
+
 interface BaseElement<T extends string = string> {
   className?: string
   type: T
@@ -24,7 +25,9 @@ interface LayoutFieldElement<O extends ObjectData>
 export type ObjectLayout<
   O extends ObjectData,
   T extends string = LayoutFieldElementType,
-> = LayoutFieldElement<O> | CustomElement<ObjectLayout<O, T>, T>
+> =
+  | LayoutFieldElement<O>
+  | CustomElement<ObjectLayout<O, T>, T>
 
 /**
  * The internal elements of a field except Help

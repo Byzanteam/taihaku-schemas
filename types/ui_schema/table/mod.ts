@@ -1,8 +1,5 @@
 import type { FieldType, GenericField } from '../field.ts'
-
-type ObjectData = {
-  [key: string]: unknown
-}
+import type { ObjectData } from '../types.ts'
 
 type ColumnUIOptions = {
   /** define how to render current column */
@@ -37,7 +34,7 @@ type ColumnUIOptions = {
    */
 }
 
-interface TableOptions<TData extends ObjectData> {
+interface TableOptions<TData extends ObjectData = ObjectData> {
   /** The order of table columns */
   'ui:column-order': Array<keyof TData>
   /**
@@ -59,15 +56,13 @@ interface TableOptions<TData extends ObjectData> {
   }
 }
 
-export type TableUISchema<TData extends ObjectData> =
-  & Partial<
-    TableOptions<TData>
-  >
+export type TableUISchema<TData extends ObjectData = ObjectData> =
+  & Partial<TableOptions<TData>>
   & {
     [K in keyof TData]?: ColumnUIOptions
   }
 
-export type TableSchema<TData extends ObjectData> = {
+export type TableSchema<TData extends ObjectData = ObjectData> = {
   /** uniqueId of a schema */
   id: string
   name?: string
