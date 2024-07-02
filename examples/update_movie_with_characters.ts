@@ -45,6 +45,7 @@ const updateMovieWithCharactersAction: UpdateAction = {
       {
         name: 'characters',
         onReplace: 'delete',
+        value: { $data: '/characters' },
         changeset: {
           changes: [
             { name: 'name', value: { $data: '0/name' } },
