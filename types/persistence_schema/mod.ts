@@ -113,3 +113,6 @@ export interface NextjsResult {
 
 export type { InternalError, JSONSchemaError, ValidationError }
 export type { FormatedJSONSchemaError, FormatedValidationError }
+export type { Filter, Order }
+export type { ConditionalFilter, LogicalFilter } from './filter.ts'
+export * from './types.ts'
