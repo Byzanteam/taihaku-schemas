@@ -1,9 +1,8 @@
 import type { FieldType, GenericField } from '../field.ts'
 import type { ObjectData } from '../types.ts'
+import type { CustomColumnUIOptionsMap } from './ui_options.ts'
 
-type ColumnUIOptions = {
-  /** define how to render current column */
-  'ui:widget'?: `${FieldType}Widget`
+type BasicUIOptions = {
   /**
    * @link https://tanstack.com/table/latest/docs/guide/column-sizing#column-widths
    * The size of current column
@@ -26,13 +25,19 @@ type ColumnUIOptions = {
   'ui:max-size'?: number | string
   /** allow user resize the column width */
   'ui:enable-resizing'?: boolean
-  /**
-   * TODO: define custom ui options
-   * @example
-   *  'ui:widget': 'DateFieldUIOptions'
-   *  'ui:x-format': 'YYYY-mm-dd'
-   */
 }
+
+// 这里添加 T extends FieldType ? M<T> : never 的目的是为了让 ts 遍历
+// 得到 Union 类型。即 M<FieldType.RadioButton> | M<FieldType.Checkbox> | ...
+// 否则得到的是 M<FieldType>
+type ColumnUIOptions<T extends FieldType = FieldType> = T extends FieldType ?
+    & CustomColumnUIOptionsMap[T]
+    & BasicUIOptions
+    & {
+      /** define how to render current column */
+      'ui:widget': `${T}Widget`
+    }
+  : never
 
 interface TableOptions<TData extends ObjectData = ObjectData> {
   /** The order of table columns */
@@ -54,10 +59,16 @@ interface TableOptions<TData extends ObjectData = ObjectData> {
      */
     [K in keyof TData]?: boolean
   }
+  /**
+   * global appearance setting of table cells
+   */
+  'ui:x-appearance': 'input' | 'presentation'
 }
 
 export type TableUISchema<TData extends ObjectData = ObjectData> =
-  & Partial<TableOptions<TData>>
+  & Partial<
+    TableOptions<TData>
+  >
   & {
     [K in keyof TData]?: ColumnUIOptions
   }
