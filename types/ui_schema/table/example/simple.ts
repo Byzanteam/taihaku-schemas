@@ -66,6 +66,7 @@ const moviesTableSchema: TableSchema<{
       releaseYear: true,
     },
     title: {
+      'ui:widget': 'SingleLineWidget',
       'ui:size': 400,
     },
     rating: {
