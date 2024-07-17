@@ -1,6 +1,6 @@
 import type { JSONPointer } from '../primitive.ts'
 import type { EQFilter, IsNullFilter, Operand } from './filter.ts'
-import type { $SchemaPointer } from './types.ts'
+import type { SchemaPointer } from './types.ts'
 
 export interface BaseValidation {
   /**
@@ -19,7 +19,7 @@ export interface IsNullValidation extends BaseValidation, IsNullFilter {}
 
 export interface UniqueValidation extends BaseValidation {
   operator: 'unique'
-  operands: Array<$SchemaPointer>
+  operands: Array<SchemaPointer>
   constraintName?: string // the unique constraint name
 }
 

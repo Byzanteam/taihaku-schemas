@@ -1,7 +1,7 @@
 import type {
   AbsoluteJSONPointer,
+  JSONPointer,
   JSONValue,
-  RelativeJSONPointer,
 } from '../primitive.ts'
 
 export type ColumnName = string
@@ -18,30 +18,33 @@ export type ColumnType =
 export type AssociationName = string
 
 /**
- * Pointing to a value from JSON data via absolute pointer
+ * Pointing to a context value
  */
-export type $DataAbsolutePointer = { $data: AbsoluteJSONPointer }
-/**
- * Pointing to a value from JSON data via relative pointer
- */
-export type $DataRelativePointer = { $data: RelativeJSONPointer }
+export type ContextPointer = {
+  type: 'context'
+  value: AbsoluteJSONPointer
+}
 
 /**
  * Pointing to a value from JSON data, either absolute or relative
  */
-export type $DataPointer = $DataAbsolutePointer | $DataRelativePointer
-
-/**
- * Present a literal value
- */
-export type $ValuePointer = { $value: JSONValue }
-
-/**
- * Pointing to a context value
- */
-export type $ContextPointer = { $context: AbsoluteJSONPointer }
+export type DataPointer = {
+  type: 'data'
+  value: JSONPointer
+}
 
 /**
  * Pointing to the value of the column in the schema
  */
-export type $SchemaPointer = { $schema: AbsoluteJSONPointer }
+export type SchemaPointer = {
+  type: 'schema'
+  value: JSONPointer
+}
+
+/**
+ * Present a literal value
+ */
+export type ValuePointer = {
+  type: 'value'
+  value: JSONValue
+}

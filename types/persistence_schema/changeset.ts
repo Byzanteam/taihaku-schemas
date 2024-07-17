@@ -1,28 +1,29 @@
 import type { JSONSchema } from '../primitive.ts'
 import type {
-  $ContextPointer,
-  $DataPointer,
-  $ValuePointer,
   AssociationName,
   ColumnName,
+  ContextPointer,
+  DataPointer,
+  ValuePointer,
 } from './types.ts'
 import type { Validation } from './validation.ts'
 
 export interface ColumnChange {
+  type: 'column'
   name: ColumnName
   /**
    * the new value of the column
    */
   value:
-    | $DataPointer
-    | $ValuePointer
-    | $ContextPointer
+    | ContextPointer
+    | DataPointer
+    | ValuePointer
     | {
       $sql:
         | string
         | {
           expression: string
-          arguments: Array<$DataPointer | $ValuePointer>
+          arguments: Array<DataPointer | ValuePointer>
         }
     }
   /**
@@ -32,8 +33,9 @@ export interface ColumnChange {
 }
 
 export interface AssociationChange {
+  type: 'association'
   name: AssociationName
-  value: $DataPointer | $ValuePointer
+  value: DataPointer | ValuePointer
   changeset: Changeset<Change>
   // TODO: onDelete 和 onReplace 应该在 changeset 还是 schema 的定义中
   onReplace:

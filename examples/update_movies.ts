@@ -14,18 +14,21 @@ const updateMoviesAction: BulkUpdateAction = {
     operands: [
       {
         operator: 'eq',
-        operands: [{ $schema: '/created_at' }, { $schema: '/updated_at' }],
+        operands: [
+          { type: 'schema', value: '/created_at' },
+          { type: 'schema', value: '/updated_at' },
+        ],
       },
       {
         operator: 'or',
         operands: [
           {
             operator: 'is_null',
-            operands: [{ $schema: '/likes' }],
+            operands: [{ type: 'schema', value: '/likes' }],
           },
           {
             operator: 'is_null',
-            operands: [{ $schema: '/release_date' }],
+            operands: [{ type: 'schema', value: '/release_date' }],
           },
         ],
       },
@@ -35,18 +38,20 @@ const updateMoviesAction: BulkUpdateAction = {
     changes: [
       // SET
       {
+        type: 'column',
         name: 'title',
-        value: { $data: '/title' },
+        value: { type: 'data', value: '/title' },
         schema: { type: 'string', maxLength: 255, minLength: 1 },
       },
       // INC
       {
+        type: 'column',
         name: 'likes',
         value: {
           $sql: '? + 1',
         },
       },
-      { name: 'updated_at', value: { $sql: 'now()' } },
+      { type: 'column', name: 'updated_at', value: { $sql: 'now()' } },
     ],
     validator: {
       schema: {

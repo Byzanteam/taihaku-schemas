@@ -14,11 +14,14 @@ const deleteMovieAction: BulkDeleteAction = {
     operands: [
       {
         operator: 'lt',
-        operands: [{ $schema: '/release_date' }, { $data: '/release_date' }],
+        operands: [
+          { type: 'schema', value: '/release_date' },
+          { type: 'data', value: '/release_date' },
+        ],
       },
       {
         operator: 'is_null',
-        operands: [{ $schema: '/likes' }],
+        operands: [{ type: 'schema', value: '/likes' }],
       },
     ],
   },

@@ -1,5 +1,4 @@
-import type { $DataPointer, $SchemaPointer, $ValuePointer } from './types.ts'
-
+import type { DataPointer, SchemaPointer, ValuePointer } from './types.ts'
 export type Filter = ConditionalFilter | LogicalFilter
 
 export interface ConditionalFilter {
@@ -24,4 +23,4 @@ export interface IsNullFilter {
   operands: [Operand]
 }
 
-export type Operand = $DataPointer | $ValuePointer | $SchemaPointer
+export type Operand = DataPointer | SchemaPointer | ValuePointer
