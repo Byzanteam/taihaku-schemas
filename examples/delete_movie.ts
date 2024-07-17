@@ -11,15 +11,38 @@ const deleteMovieAction: DeleteAction = {
   },
   filter: {
     operator: 'eq',
-    operands: [{ $schema: '/id' }, { $data: '/id' }],
+    operands: [
+      { type: 'schema', value: '/id' },
+      { type: 'data', value: '/id' },
+    ],
   },
-  returningSchema: {
-    id: { $schema: '/id' },
-    title: { $schema: '/title' },
-    release_date: { $schema: '/release_date' },
-    created_at: { $schema: '/created_at' },
-    updated_at: { $schema: '/updated_at' },
-  },
+  returningSchema: [
+    {
+      type: 'column',
+      name: 'id',
+      value: { type: 'schema', value: '/id' },
+    },
+    {
+      type: 'column',
+      name: 'title',
+      value: { type: 'schema', value: '/title' },
+    },
+    {
+      type: 'column',
+      name: 'release_date',
+      value: { type: 'schema', value: '/release_date' },
+    },
+    {
+      type: 'column',
+      name: 'created_at',
+      value: { type: 'schema', value: '/created_at' },
+    },
+    {
+      type: 'column',
+      name: 'updated_at',
+      value: { type: 'schema', value: '/updated_at' },
+    },
+  ],
 }
 
 export default deleteMovieAction

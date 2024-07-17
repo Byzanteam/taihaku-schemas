@@ -14,21 +14,26 @@ const updateMovieAction: UpdateAction = {
   },
   filter: {
     operator: 'eq',
-    operands: [{ $schema: '/id' }, { $data: '/id' }],
+    operands: [
+      { type: 'schema', value: '/id' },
+      { type: 'data', value: '/id' },
+    ],
   },
   changeset: {
     changes: [
       {
+        type: 'column',
         name: 'title',
-        value: { $data: '/title' },
+        value: { type: 'data', value: '/title' },
         schema: { type: 'string', maxLength: 255, minLength: 1 },
       },
       {
+        type: 'column',
         name: 'release_date',
-        value: { $data: '/release_date' },
+        value: { type: 'data', value: '/release_date' },
         schema: { type: 'string', format: 'date' },
       },
-      { name: 'updated_at', value: { $sql: 'now()' } },
+      { type: 'column', name: 'updated_at', value: { $sql: 'now()' } },
     ],
     validator: {
       schema: {
@@ -41,7 +46,7 @@ const updateMovieAction: UpdateAction = {
       validations: [
         {
           operator: 'custom',
-          operands: [{ $data: '/release_date' }],
+          operands: [{ type: 'data', value: '/release_date' }],
           expression: 'Date.parse(operands[0]) <= Date.now()',
           errorKey: '/release_date',
           errorMessage: 'Release date should be less than or equal to today',
@@ -49,13 +54,33 @@ const updateMovieAction: UpdateAction = {
       ],
     },
   },
-  returningSchema: {
-    id: { $schema: '/id' },
-    title: { $schema: '/title' },
-    release_date: { $schema: '/release_date' },
-    created_at: { $schema: '/created_at' },
-    updated_at: { $schema: '/updated_at' },
-  },
+  returningSchema: [
+    {
+      type: 'column',
+      name: 'id',
+      value: { type: 'schema', value: '/id' },
+    },
+    {
+      type: 'column',
+      name: 'title',
+      value: { type: 'schema', value: '/title' },
+    },
+    {
+      type: 'column',
+      name: 'release_date',
+      value: { type: 'schema', value: '/release_date' },
+    },
+    {
+      type: 'column',
+      name: 'created_at',
+      value: { type: 'schema', value: '/created_at' },
+    },
+    {
+      type: 'column',
+      name: 'updated_at',
+      value: { type: 'schema', value: '/updated_at' },
+    },
+  ],
 }
 
 export default updateMovieAction

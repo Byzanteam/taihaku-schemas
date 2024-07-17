@@ -13,17 +13,19 @@ const insertMoviesAction: BulkInsertAction = {
   changeset: {
     changes: [
       {
+        type: 'column',
         name: 'title',
-        value: { $data: '/title' },
+        value: { type: 'data', value: '/title' },
         schema: { type: 'string', maxLength: 255, minLength: 1 },
       },
       {
+        type: 'column',
         name: 'release_date',
-        value: { $data: '/release_date' },
+        value: { type: 'data', value: '/release_date' },
         schema: { type: 'string', format: 'date' },
       },
-      { name: 'created_at', value: { $sql: 'now()' } },
-      { name: 'updated_at', value: { $sql: 'now()' } },
+      { type: 'column', name: 'created_at', value: { $sql: 'now()' } },
+      { type: 'column', name: 'updated_at', value: { $sql: 'now()' } },
     ],
     validator: {
       schema: {
@@ -37,7 +39,7 @@ const insertMoviesAction: BulkInsertAction = {
       validations: [
         {
           operator: 'custom',
-          operands: [{ $data: '/release_date' }],
+          operands: [{ type: 'data', value: '/release_date' }],
           expression: 'Date.parse(operands[0]) <= Date.now()',
           errorKey: '/release_date',
           errorMessage: 'Release date should be less than or equal to today',

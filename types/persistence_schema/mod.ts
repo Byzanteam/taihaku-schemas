@@ -9,7 +9,7 @@ import type {
 } from './error.ts'
 import type { Filter } from './filter.ts'
 import type { OffsetPagination } from './pagination.ts'
-import type { ObjectReturnings } from './returning.ts'
+import type { ObjectReturning } from './returning.ts'
 import type { Order } from './sorting.ts'
 import type { ColumnType } from './types.ts'
 
@@ -36,7 +36,7 @@ export interface InsertAction {
   schema: Schema
   paramsSchema: JSONSchema
   changeset: Changeset<Change>
-  returningSchema: ObjectReturnings
+  returningSchema: Array<ObjectReturning>
 }
 
 export interface UpdateAction {
@@ -44,21 +44,21 @@ export interface UpdateAction {
   paramsSchema: JSONSchema
   filter: Filter
   changeset: Changeset<Change>
-  returningSchema: ObjectReturnings
+  returningSchema: Array<ObjectReturning>
 }
 
 export interface DeleteAction {
   schema: Schema
   paramsSchema: JSONSchema
   filter: Filter
-  returningSchema: ObjectReturnings
+  returningSchema: Array<ObjectReturning>
 }
 
 export interface GetOneAction {
   schema: Schema
   paramsSchema: JSONSchema
   filter: Filter
-  returningSchema: ObjectReturnings
+  returningSchema: Array<ObjectReturning>
 }
 
 export interface BulkInsertAction {
@@ -86,7 +86,7 @@ export interface ListAction {
   filter: Filter
   sorting?: Array<Order>
   pagination: OffsetPagination
-  returningSchema: ObjectReturnings
+  returningSchema: Array<ObjectReturning>
 }
 
 export interface MultiAction {
@@ -98,7 +98,7 @@ export interface MultiAction {
       | DeleteAction
       | GetOneAction
   }>
-  returningSchema: ObjectReturnings
+  returningSchema: Array<ObjectReturning>
 }
 
 export interface Result {
