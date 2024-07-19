@@ -1,2 +1,4 @@
-type Direction = 'asc' | 'desc'
-export type Order = [string, Direction]
+export interface Order {
+  field: string
+  direction: 'asc' | 'desc'
+}
