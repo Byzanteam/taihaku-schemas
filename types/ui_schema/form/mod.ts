@@ -40,14 +40,16 @@ type ArrayFieldUIOptions =
  * @link https://rjsf-team.github.io/react-jsonschema-form/docs/api-reference/uiSchema
  */
 type BasicUIOptions = {
-  'ui:disabled'?: boolean
-  'ui:readonly'?: boolean
-  'ui:hideError'?: boolean
-  'ui:label'?: boolean
   'ui:autocomplete'?: 'on' | 'off'
   'ui:autofocus'?: boolean
-  'ui:placeholder'?: string
+  'ui:disabled'?: boolean
   'ui:enumDisabled'?: Array<string | number>
+  'ui:hideError'?: boolean
+  /** Used to change the input type (for example, `tel` or `email`) for an <input> */
+  'ui:inputType'?: string
+  'ui:label'?: boolean
+  'ui:placeholder'?: string
+  'ui:readonly'?: boolean
 }
 
 type GlobalUIOptions = {
@@ -89,7 +91,9 @@ type FieldsUISchema<O extends ObjectData, T extends FieldType = FieldType> = {
 }
 
 export type UISchema<O extends ObjectData = ObjectData> =
-  & Partial<FieldsUISchema<O>>
+  & Partial<
+    FieldsUISchema<O>
+  >
   & Partial<FormUIOptions<O>>
 
 export type {
