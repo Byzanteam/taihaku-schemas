@@ -16,4 +16,5 @@ export type CustomColumnUIOptionsMap = {
   [FieldType.RadioButton]: CommonCustomFieldUIOptions
   [FieldType.Signature]: CommonCustomFieldUIOptions
   [FieldType.SingleLine]: SingleLineFieldUIOptions
+  [FieldType.Textarea]: CommonCustomFieldUIOptions
 }

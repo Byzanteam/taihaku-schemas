@@ -60,4 +60,5 @@ export type CustomFieldUIOptionsMap = {
   [FieldType.RadioButton]: RadioButtonFieldUIOptions
   [FieldType.Signature]: SignatureFieldUIOptions
   [FieldType.SingleLine]: SingleLineFieldUIOptions
+  [FieldType.Textarea]: CommonCustomFieldUIOptions
 }
