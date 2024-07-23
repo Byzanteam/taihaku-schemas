@@ -7,6 +7,7 @@ export enum FieldType {
   RadioButton = 'RadioButton',
   Signature = 'Signature',
   SingleLine = 'SingleLine',
+  Textarea = 'Textarea',
 }
 
 interface EnumSettings {

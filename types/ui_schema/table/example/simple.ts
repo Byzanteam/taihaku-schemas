@@ -6,6 +6,7 @@ const moviesTableSchema: TableSchema<{
   duration: string
   rating: string
   score: number
+  description: string
 }> = {
   id: 'movie_list_schema',
   columns: {
@@ -53,6 +54,11 @@ const moviesTableSchema: TableSchema<{
       fieldType: 'NumericField',
       name: 'score',
       label: '评分',
+    },
+    description: {
+      name: 'description',
+      fieldType: 'TextareaField',
+      label: '介绍',
     },
   },
   uiSchema: {

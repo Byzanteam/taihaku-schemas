@@ -14,6 +14,7 @@ const PersonFormUISchema: UISchema<{
   tags: Array<{
     title: string
   }>
+  maxim: string
 }> = {
   'ui:rootFieldId': 'PersonForm',
   'ui:submitButtonOptions': {
@@ -63,6 +64,10 @@ const PersonFormUISchema: UISchema<{
         'ui:placeholder': '请输入',
       },
     },
+  },
+  maxim: {
+    'ui:widget': 'TextareaWidget',
+    'ui:placeholder': '请输入',
   },
 }
 
