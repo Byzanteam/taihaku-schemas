@@ -7,11 +7,19 @@ interface CommonCustomFieldUIOptions {
 
 type SingleLineFieldUIOptions = CommonCustomFieldUIOptions
 
+type DateTimeFieldUIOptions = CommonCustomFieldUIOptions & {
+  'ui:x-format': string
+}
+
+type DateFieldUIOptions = CommonCustomFieldUIOptions & {
+  'ui:x-format': string
+}
+
 export type CustomColumnUIOptionsMap = {
   // TODO: define Checkbox to Signature's UIOptions
   [FieldType.Checkbox]: CommonCustomFieldUIOptions
-  [FieldType.Date]: CommonCustomFieldUIOptions
-  [FieldType.DateTime]: CommonCustomFieldUIOptions
+  [FieldType.Date]: DateFieldUIOptions
+  [FieldType.DateTime]: DateTimeFieldUIOptions
   [FieldType.Numeric]: CommonCustomFieldUIOptions
   [FieldType.RadioButton]: CommonCustomFieldUIOptions
   [FieldType.Signature]: CommonCustomFieldUIOptions
