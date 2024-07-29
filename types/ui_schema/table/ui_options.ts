@@ -8,11 +8,11 @@ interface CommonCustomFieldUIOptions {
 type SingleLineFieldUIOptions = CommonCustomFieldUIOptions
 
 type DateTimeFieldUIOptions = CommonCustomFieldUIOptions & {
-  'ui:x-format': string
+  'ui:x-format'?: string
 }
 
 type DateFieldUIOptions = CommonCustomFieldUIOptions & {
-  'ui:x-format': string
+  'ui:x-format'?: string
 }
 
 export type CustomColumnUIOptionsMap = {
