@@ -7,6 +7,7 @@ import type {
   JSONSchemaError,
   ValidationError,
 } from './error.ts'
+import type { Fetching } from './fetching.ts'
 import type { Filter } from './filter.ts'
 import type { OffsetPagination } from './pagination.ts'
 import type { ObjectReturning } from './returning.ts'
@@ -58,6 +59,7 @@ export interface GetOneAction {
   schema: Schema
   paramsSchema: JSONSchema
   filter: Filter
+  fetchingSchema: Array<Fetching>
   returningSchema: Array<ObjectReturning>
 }
 
@@ -86,6 +88,7 @@ export interface ListAction {
   filter: Filter
   sorting?: Array<Order>
   pagination: OffsetPagination
+  fetchingSchema: Array<Fetching>
   returningSchema: Array<ObjectReturning>
 }
 
