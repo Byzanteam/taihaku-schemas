@@ -15,13 +15,29 @@ type DateFieldUIOptions = CommonCustomFieldUIOptions & {
   'ui:x-format'?: string
 }
 
+type RadioButtonUIOptions = CommonCustomFieldUIOptions & {
+  'ui:x-options-fallback-style'?: /** className */ string
+  'ui:x-options-style'?: Record<
+    /** option-value */ string,
+    /** className */ string
+  >
+}
+
+type CheckboxUIOptions = CommonCustomFieldUIOptions & {
+  'ui:x-options-fallback-style'?: /** className */ string
+  'ui:x-options-style'?: Record<
+    /** option-value */ string,
+    /** className */ string
+  >
+}
+
 export type CustomColumnUIOptionsMap = {
   // TODO: define Checkbox to Signature's UIOptions
-  [FieldType.Checkbox]: CommonCustomFieldUIOptions
+  [FieldType.Checkbox]: CheckboxUIOptions
   [FieldType.Date]: DateFieldUIOptions
   [FieldType.DateTime]: DateTimeFieldUIOptions
   [FieldType.Numeric]: CommonCustomFieldUIOptions
-  [FieldType.RadioButton]: CommonCustomFieldUIOptions
+  [FieldType.RadioButton]: RadioButtonUIOptions
   [FieldType.Signature]: CommonCustomFieldUIOptions
   [FieldType.SingleLine]: SingleLineFieldUIOptions
   [FieldType.Textarea]: CommonCustomFieldUIOptions
