@@ -16,7 +16,7 @@ type DateFieldUIOptions = CommonCustomFieldUIOptions & {
 }
 
 type RadioButtonUIOptions = CommonCustomFieldUIOptions & {
-  'ui:x-options-fallback-style'?: /** className */ string
+  'ui:x-option-fallback-style'?: /** className */ string
   'ui:x-options-style'?: Record<
     /** option-value */ string,
     /** className */ string
@@ -24,7 +24,7 @@ type RadioButtonUIOptions = CommonCustomFieldUIOptions & {
 }
 
 type CheckboxUIOptions = CommonCustomFieldUIOptions & {
-  'ui:x-options-fallback-style'?: /** className */ string
+  'ui:x-option-fallback-style'?: /** className */ string
   'ui:x-options-style'?: Record<
     /** option-value */ string,
     /** className */ string

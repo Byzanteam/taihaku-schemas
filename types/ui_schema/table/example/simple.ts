@@ -78,8 +78,7 @@ const moviesTableSchema: TableSchema<{
     rating: {
       'ui:widget': 'RadioButtonWidget',
       'ui:max-size': 100,
-      'ui:x-options-fallback-style':
-        'text-gray-500 bg-gray-200 border-gray-500',
+      'ui:x-option-fallback-style': 'text-gray-500 bg-gray-200 border-gray-500',
       'ui:x-options-style': {
         Approved: 'text-green-500 bg-green-200 border-green-500',
         PG: 'text-orange-500 bg-orange-200 border-orange-500',
