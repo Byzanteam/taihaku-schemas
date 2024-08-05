@@ -27,16 +27,30 @@ type BasicUIOptions = {
   'ui:enable-resizing'?: boolean
 }
 
+type UIOptionMap = {
+  [key: string]: ObjectData
+}
+
 // 这里添加 T extends FieldType ? M<T> : never 的目的是为了让 ts 遍历
 // 得到 Union 类型。即 M<FieldType.RadioButton> | M<FieldType.Checkbox> | ...
 // 否则得到的是 M<FieldType>
-type ColumnUIOptions<T extends FieldType = FieldType> = T extends FieldType ?
-    & CustomColumnUIOptionsMap[T]
+type ColumnUIOptions<
+  T extends FieldType,
+  TCustomUIOptionMap extends UIOptionMap,
+  MT = T | keyof TCustomUIOptionMap,
+> = MT extends FieldType ?
+    & CustomColumnUIOptionsMap[MT]
     & BasicUIOptions
     & {
       /** define how to render current column */
-      'ui:widget': `${T}Widget`
+      'ui:widget': `${MT}Widget`
     }
+  : MT extends keyof TCustomUIOptionMap ?
+      & TCustomUIOptionMap[MT]
+      & BasicUIOptions
+      & {
+        'ui:widget': MT
+      }
   : never
 
 interface TableOptions<TData extends ObjectData = ObjectData> {
@@ -65,15 +79,19 @@ interface TableOptions<TData extends ObjectData = ObjectData> {
   'ui:x-appearance': 'input' | 'presentation'
 }
 
-export type TableUISchema<TData extends ObjectData = ObjectData> =
-  & Partial<
-    TableOptions<TData>
-  >
+export type TableUISchema<
+  TData extends ObjectData = ObjectData,
+  TCustomUIOptionMap extends UIOptionMap = Record<never, ObjectData>,
+> =
+  & Partial<TableOptions<TData>>
   & {
-    [K in keyof TData]?: ColumnUIOptions
+    [K in keyof TData]?: ColumnUIOptions<FieldType, TCustomUIOptionMap>
   }
 
-export type TableSchema<TData extends ObjectData = ObjectData> = {
+export type TableSchema<
+  TData extends ObjectData = ObjectData,
+  TCustomUIOptionMap extends UIOptionMap = Record<never, ObjectData>,
+> = {
   /** uniqueId of a schema */
   id: string
   name?: string
@@ -81,5 +99,5 @@ export type TableSchema<TData extends ObjectData = ObjectData> = {
     /** column name */
     [K in keyof TData]?: GenericField<K, FieldType>
   }
-  uiSchema?: TableUISchema<TData>
+  uiSchema?: TableUISchema<TData, TCustomUIOptionMap>
 }
