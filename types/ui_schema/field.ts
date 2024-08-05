@@ -1,8 +1,11 @@
 /** @enum {string} */
 export enum FieldType {
+  BelongsTo = 'BelongsTo',
   Checkbox = 'Checkbox',
   Date = 'Date',
   DateTime = 'DateTime',
+  HasMany = 'HasMany',
+  HasOne = 'HasOne',
   Numeric = 'Numeric',
   RadioButton = 'RadioButton',
   Signature = 'Signature',
@@ -17,13 +20,24 @@ interface EnumSettings {
   }>
 }
 
+interface AssocitaionSettings {
+  /** association resource identifier */
+  associationResource: string
+}
+
 type SettingsRequiredFieldType =
+  | FieldType.BelongsTo
   | FieldType.Checkbox
+  | FieldType.HasMany
+  | FieldType.HasOne
   | FieldType.RadioButton
   | FieldType.Signature
 
 interface FieldSettingsMap {
+  [FieldType.BelongsTo]: AssocitaionSettings
   [FieldType.Checkbox]: EnumSettings
+  [FieldType.HasMany]: AssocitaionSettings
+  [FieldType.HasOne]: AssocitaionSettings
   [FieldType.RadioButton]: EnumSettings
   [FieldType.Signature]: {
     contentMediaType?: string
