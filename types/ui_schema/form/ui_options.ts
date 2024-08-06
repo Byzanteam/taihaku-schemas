@@ -57,7 +57,7 @@ type AssociationFieldUIOptions = {
   'ui:x-association-resource': string
   /** which property should be shown as current assoication row value */
   'ui:x-display-property'?: string
-}
+} & CommonCustomFieldUIOptions
 
 export type CustomFieldUIOptionsMap = {
   [FieldType.BelongsTo]: AssociationFieldUIOptions
