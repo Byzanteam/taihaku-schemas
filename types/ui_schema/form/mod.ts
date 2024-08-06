@@ -67,33 +67,58 @@ type FormUIOptions<O extends ObjectData> =
     'ui:globalOptions'?: GlobalUIOptions
   }
 
+type UIOptionMap = {
+  [key: string]: ObjectData
+}
+
 // 这里添加 T extends FieldType ? M<T> : never 的目的是为了让 ts 遍历
 // 得到 Union 类型。即 M<FieldType.RadioButton> | M<FieldType.Checkbox> | ...
 // 否则得到的是 M<FieldType>
-type FieldUIOptions<T extends FieldType> = T extends FieldType
-  ? CustomFieldUIOptionsMap[T] & {
-    'ui:widget': `${T}Widget`
+type FieldUIOptions<
+  T extends FieldType,
+  TCustomUIOptionMap extends UIOptionMap,
+  MT = T | keyof TCustomUIOptionMap,
+> = MT extends FieldType ? CustomFieldUIOptionsMap[MT] & {
+    'ui:widget': `${MT}Widget`
   } & BasicUIOptions
+  : MT extends keyof TCustomUIOptionMap ?
+      & {
+        'ui:widget': MT
+      }
+      & TCustomUIOptionMap[MT]
+      & BasicUIOptions
   : never
 
-type FieldsUISchema<O extends ObjectData, T extends FieldType = FieldType> = {
+type FieldsUISchema<
+  O extends ObjectData,
+  T extends FieldType,
+  TCustomUIOptionMap extends UIOptionMap,
+> = {
   [K in keyof O]: O[K] extends object // 嵌套结构（object or array)
     ? O[K] extends Array<infer U> // array
-      ? U extends ObjectData ? {
-          /** define ArrayItem's uiSchema */
-          items: Partial<FieldsUISchema<U>> & ObjectFieldUIOptions<U>
-        } & ArrayFieldUIOptions // Array<object>
-      : FieldUIOptions<T> & ArrayFieldUIOptions // normal array field like checkbox
-    : O[K] extends ObjectData
-      ? Partial<FieldsUISchema<O[K]>> & ObjectFieldUIOptions<O[K]> // nested object
-    : FieldUIOptions<T> // fallback type
-    : FieldUIOptions<T> // normal field
+      ? U extends ObjectData ?
+          & {
+            /** define ArrayItem's uiSchema */
+            items?:
+              & Partial<FieldsUISchema<U, T, TCustomUIOptionMap>>
+              & ObjectFieldUIOptions<U>
+            // array type value can set ui:widget, but it is optional
+          }
+          & Partial<FieldUIOptions<T, TCustomUIOptionMap>>
+          & ArrayFieldUIOptions // Array<object>
+      : FieldUIOptions<T, TCustomUIOptionMap> & ArrayFieldUIOptions // normal array field like checkbox
+    : O[K] extends ObjectData ?
+        & Partial<FieldsUISchema<O[K], T, TCustomUIOptionMap>>
+        & ObjectFieldUIOptions<O[K]> // nested object
+    : FieldUIOptions<T, TCustomUIOptionMap> // fallback type
+    : FieldUIOptions<T, TCustomUIOptionMap> // normal field
 }
 
-export type UISchema<O extends ObjectData = ObjectData> =
-  & Partial<
-    FieldsUISchema<O>
-  >
+export type UISchema<
+  O extends ObjectData = ObjectData,
+  TCustomUIOptionMap extends UIOptionMap = Record<never, ObjectData>,
+> =
+  & Partial<FieldsUISchema<O, FieldType, TCustomUIOptionMap>>
   & Partial<FormUIOptions<O>>
 
 export type {

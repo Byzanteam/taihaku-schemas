@@ -52,10 +52,20 @@ type DateTimeFieldUIOptions = DateFieldUIOptions
 
 type NumericFieldUIOptions = CommonCustomFieldUIOptions
 
+type AssociationFieldUIOptions = {
+  /** association resource identifier */
+  'ui:x-association-resource': string
+  /** which property should be shown as current assoication row value */
+  'ui:x-display-property'?: string
+}
+
 export type CustomFieldUIOptionsMap = {
+  [FieldType.BelongsTo]: AssociationFieldUIOptions
   [FieldType.Checkbox]: CheckBoxFieldUIOptions
   [FieldType.Date]: DateFieldUIOptions
   [FieldType.DateTime]: DateTimeFieldUIOptions
+  [FieldType.HasMany]: AssociationFieldUIOptions
+  [FieldType.HasOne]: AssociationFieldUIOptions
   [FieldType.Numeric]: NumericFieldUIOptions
   [FieldType.RadioButton]: RadioButtonFieldUIOptions
   [FieldType.Signature]: SignatureFieldUIOptions

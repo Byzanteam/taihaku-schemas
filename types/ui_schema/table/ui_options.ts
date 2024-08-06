@@ -31,11 +31,19 @@ type CheckboxUIOptions = CommonCustomFieldUIOptions & {
   >
 }
 
+type AssociationUIOptions = CommonCustomFieldUIOptions & {
+  /** which property should be shown as current assoication row value */
+  'ui:x-display-property': string
+}
+
 export type CustomColumnUIOptionsMap = {
   // TODO: define Checkbox to Signature's UIOptions
+  [FieldType.BelongsTo]: AssociationUIOptions
   [FieldType.Checkbox]: CheckboxUIOptions
   [FieldType.Date]: DateFieldUIOptions
   [FieldType.DateTime]: DateTimeFieldUIOptions
+  [FieldType.HasMany]: AssociationUIOptions
+  [FieldType.HasOne]: AssociationUIOptions
   [FieldType.Numeric]: CommonCustomFieldUIOptions
   [FieldType.RadioButton]: RadioButtonUIOptions
   [FieldType.Signature]: CommonCustomFieldUIOptions

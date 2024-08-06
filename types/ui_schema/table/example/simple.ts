@@ -1,13 +1,31 @@
 import type { TableSchema } from '../mod.ts'
 
-const moviesTableSchema: TableSchema<{
-  title: string
-  releaseYear: number
-  duration: string
-  rating: string
-  score: number
-  description: string
-}> = {
+const moviesTableSchema: TableSchema<
+  {
+    title: string
+    releaseYear: number
+    duration: string
+    rating: string
+    score: number
+    description: string
+    director?: {
+      id: string // format: 'uuid'
+      name: string
+    }
+    poster?: {
+      id: string // format: 'uuid'
+      name: string
+    }
+    actors: Array<{ id: string; name: string }>
+  },
+  /** Custom Widget UIOption Map */
+  {
+    FileWidget: {
+      'ui:x-multiple': boolean
+      'ui:x-accept': string
+    }
+  }
+> = {
   id: 'movie_list_schema',
   columns: {
     releaseYear: {
@@ -60,6 +78,30 @@ const moviesTableSchema: TableSchema<{
       fieldType: 'TextareaField',
       label: '介绍',
     },
+    director: {
+      name: 'director',
+      fieldType: 'BelongsToField',
+      label: '导演',
+      settings: {
+        associationResource: 'director',
+      },
+    },
+    poster: {
+      name: 'poster',
+      fieldType: 'HasOneField',
+      label: '海报',
+      settings: {
+        associationResource: 'object',
+      },
+    },
+    actors: {
+      name: 'actors',
+      fieldType: 'HasManyField',
+      label: '演员',
+      settings: {
+        associationResource: 'star',
+      },
+    },
   },
   uiSchema: {
     'ui:column-order': ['title', 'rating', 'score', 'duration', 'releaseYear'],
@@ -84,6 +126,19 @@ const moviesTableSchema: TableSchema<{
         PG: 'text-orange-500 bg-orange-200 border-orange-500',
         R: 'text-red-500 bg-red-200 border-red-500',
       },
+    },
+    director: {
+      'ui:widget': 'BelongsToWidget',
+      'ui:x-display-property': 'name',
+    },
+    poster: {
+      'ui:widget': 'FileWidget',
+      'ui:x-multiple': false,
+      'ui:x-accept': 'image/*',
+    },
+    actors: {
+      'ui:widget': 'HasManyWidget',
+      'ui:x-display-property': 'name',
     },
   },
 }
