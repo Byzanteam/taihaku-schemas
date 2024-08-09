@@ -57,6 +57,17 @@ type AssociationFieldUIOptions = {
   'ui:x-association-resource': string
   /** which property should be shown as current assoication row value */
   'ui:x-display-property'?: string
+  // 以下选项仅 Input 模式生效
+  'ui:x-search-placeholder'?: string
+  'ui:x-no-result-hint'?: string
+  /** default: 50 */
+  'ui:x-page-size'?: number
+  /**
+   * content 的 className，用来指定 popover content 宽度与 trigger 宽度相同
+   * 但是因为该 class 的实现只能在应用端，所以需要通过参数传递
+   * default: 'popover-trigger-width'
+   */
+  'ui:x-popover-content-class-name'?: string
 } & CommonCustomFieldUIOptions
 
 export type CustomFieldUIOptionsMap = {
