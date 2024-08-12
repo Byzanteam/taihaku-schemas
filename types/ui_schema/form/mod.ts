@@ -1,3 +1,4 @@
+import type { JSONSchema } from '../../primitive.ts'
 import type { FieldType } from '../field.ts'
 import type { ObjectData } from '../types.ts'
 import type { ObjectLayout } from './layout.ts'
@@ -114,7 +115,7 @@ type FieldsUISchema<
     : FieldUIOptions<T, TCustomUIOptionMap> // normal field
 }
 
-export type UISchema<
+export type FormUISchema<
   O extends ObjectData = ObjectData,
   TCustomUIOptionMap extends UIOptionMap = Record<never, ObjectData>,
 > =
@@ -128,3 +129,14 @@ export type {
 }
 
 export { AppearanceValue, type OptionColumns } from './ui_options.ts'
+
+export type FormSchema<
+  TData extends ObjectData = ObjectData,
+  TCustomUIOptionMap extends UIOptionMap = Record<never, ObjectData>,
+> = {
+  /** uniqueId of a schema */
+  id: string
+  name?: string
+  schema: JSONSchema
+  uiSchema?: FormUISchema<TData, TCustomUIOptionMap>
+}
