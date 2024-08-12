@@ -134,9 +134,6 @@ export type FormSchema<
   TData extends ObjectData = ObjectData,
   TCustomUIOptionMap extends UIOptionMap = Record<never, ObjectData>,
 > = {
-  /** uniqueId of a schema */
-  id: string
-  name?: string
   schema: JSONSchema
   uiSchema?: FormUISchema<TData, TCustomUIOptionMap>
 }
