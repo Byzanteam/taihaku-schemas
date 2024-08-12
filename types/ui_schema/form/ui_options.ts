@@ -1,13 +1,8 @@
 import type { FieldType } from '../field.ts'
 import type { FieldTemplate } from './layout.ts'
 
-export enum AppearanceValue {
-  Input = 'input',
-  Presentation = 'presentation',
-}
-
 export interface CommonCustomFieldUIOptions {
-  'ui:x-appearance'?: AppearanceValue
+  'ui:x-appearance'?: 'input' | 'presentation'
   'ui:x-blankslate'?: string
   'ui:x-field-template'?: FieldTemplate | Array<FieldTemplate>
 }
