@@ -92,6 +92,7 @@ export type TableSchema<
   TData extends ObjectData = ObjectData,
   TCustomUIOptionMap extends UIOptionMap = Record<never, ObjectData>,
 > = {
+  title?: string
   columns: {
     /** column name */
     [K in keyof TData]?: GenericField<K, FieldType>
