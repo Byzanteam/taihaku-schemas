@@ -21,7 +21,14 @@ export interface ColumnDef {
   primaryKey?: boolean
 }
 
-export interface AssociationDef {
+export interface BelongsAssociationDef {
+  name: string
+  type: 'belongs_to'
+  foreignKey: string
+  associationSchema: Schema
+}
+
+export interface HasAssociationDef {
   name: string
   type: 'has_one' | 'has_many'
   foreignKey: string
@@ -30,7 +37,7 @@ export interface AssociationDef {
 
 export interface Schema {
   source: string
-  columns: Array<ColumnDef | AssociationDef>
+  columns: Array<ColumnDef | BelongsAssociationDef | HasAssociationDef>
 }
 
 export interface InsertAction {
