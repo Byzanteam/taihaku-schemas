@@ -1,25 +1,42 @@
 import type { DataPointer, SchemaPointer, ValuePointer } from './types.ts'
 export type Filter = ConditionalFilter | LogicalFilter
 
+export enum ConditionalFilterOperator {
+  AND = 'and',
+  OR = 'or',
+}
+
+export enum LogicalFilterOperator {
+  CO = 'co',
+  EQ = 'eq',
+  LT = 'lt',
+  IS_NULL = 'is_null',
+}
+
 export interface ConditionalFilter {
-  operator: 'and' | 'or'
+  operator: ConditionalFilterOperator
   operands: Array<ConditionalFilter | LogicalFilter>
 }
 
-export type LogicalFilter = EQFilter | LTFilter | IsNullFilter
+export type LogicalFilter = COFilter | EQFilter | LTFilter | IsNullFilter
+
+export interface COFilter {
+  operator: LogicalFilterOperator.CO
+  operands: [Operand, Operand]
+}
 
 export interface EQFilter {
-  operator: 'eq'
+  operator: LogicalFilterOperator.EQ
   operands: [Operand, Operand]
 }
 
 export interface LTFilter {
-  operator: 'lt'
+  operator: LogicalFilterOperator.LT
   operands: [Operand, Operand]
 }
 
 export interface IsNullFilter {
-  operator: 'is_null'
+  operator: LogicalFilterOperator.IS_NULL
   operands: [Operand]
 }
 

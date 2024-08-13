@@ -1,7 +1,9 @@
 import type { FieldType } from '../field.ts'
 
+export type TableAppearance = 'input' | 'presentation'
+
 interface CommonCustomFieldUIOptions {
-  'ui:x-appearance'?: 'input' | 'presentation'
+  'ui:x-appearance'?: TableAppearance
   'ui:x-blankslate'?: string
 }
 
