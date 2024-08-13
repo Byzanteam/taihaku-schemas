@@ -1,6 +1,6 @@
 import type { FieldType, GenericField } from '../field.ts'
 import type { ObjectData } from '../types.ts'
-import type { CustomColumnUIOptionsMap } from './ui_options.ts'
+import type { CustomColumnUIOptionsMap, TableAppearance } from './ui_options.ts'
 
 type BasicUIOptions = {
   /**
@@ -76,7 +76,7 @@ interface TableOptions<TData extends ObjectData = ObjectData> {
   /**
    * global appearance setting of table cells
    */
-  'ui:x-appearance': 'input' | 'presentation'
+  'ui:x-appearance': TableAppearance
 }
 
 export type TableUISchema<

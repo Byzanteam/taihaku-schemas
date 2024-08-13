@@ -3,9 +3,9 @@ import type { FieldType } from '../field.ts'
 import type { ObjectData } from '../types.ts'
 import type { ObjectLayout } from './layout.ts'
 import type {
-  AppearanceValue,
   CommonCustomFieldUIOptions,
   CustomFieldUIOptionsMap,
+  FormAppearance,
 } from './ui_options.ts'
 
 /**
@@ -54,7 +54,7 @@ type BasicUIOptions = {
 }
 
 type GlobalUIOptions = {
-  'ui:x-appearance'?: AppearanceValue
+  'ui:x-appearance'?: FormAppearance
   disabled?: boolean
   readonly?: boolean
 }
@@ -128,7 +128,7 @@ export type {
   ObjectFieldUIOptions,
 }
 
-export { AppearanceValue, type OptionColumns } from './ui_options.ts'
+export { type OptionColumns } from './ui_options.ts'
 
 export type FormSchema<
   TData extends ObjectData = ObjectData,

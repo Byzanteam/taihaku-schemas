@@ -1,8 +1,10 @@
 import type { FieldType } from '../field.ts'
 import type { FieldTemplate } from './layout.ts'
 
+export type FormAppearance = 'input' | 'presentation'
+
 export interface CommonCustomFieldUIOptions {
-  'ui:x-appearance'?: 'input' | 'presentation'
+  'ui:x-appearance'?: FormAppearance
   'ui:x-blankslate'?: string
   'ui:x-field-template'?: FieldTemplate | Array<FieldTemplate>
 }
