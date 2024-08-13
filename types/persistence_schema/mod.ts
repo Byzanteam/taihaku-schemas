@@ -11,7 +11,7 @@ import type { Fetching } from './fetching.ts'
 import type { Filter } from './filter.ts'
 import type { OffsetPagination } from './pagination.ts'
 import type { ObjectReturning } from './returning.ts'
-import type { Order } from './sorting.ts'
+import type { Order, Sorters } from './sorting.ts'
 import type { ColumnType } from './types.ts'
 
 export interface ColumnDef {
@@ -86,7 +86,7 @@ export interface ListAction {
   schema: Schema
   paramsSchema: JSONSchema
   filter: Filter
-  sorting?: Array<Order>
+  sorting?: Sorters
   pagination: OffsetPagination
   fetchingSchema: Array<Fetching>
   returningSchema: Array<ObjectReturning>
@@ -116,6 +116,6 @@ export interface NextjsResult {
 
 export type { InternalError, JSONSchemaError, ValidationError }
 export type { FormatedJSONSchemaError, FormatedValidationError }
-export type { Filter, Order }
+export type { Filter, Order, Sorters }
 export type { ConditionalFilter, LogicalFilter } from './filter.ts'
 export * from './types.ts'
