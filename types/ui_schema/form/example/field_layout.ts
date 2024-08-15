@@ -1,6 +1,6 @@
-import type { UISchema } from '../mod.ts'
+import type { FormUISchema } from '../mod.ts'
 
-const RegisterFormUISchema: UISchema<{
+const RegisterFormUISchema: FormUISchema<{
   name: string
   password: string
   profile: {
