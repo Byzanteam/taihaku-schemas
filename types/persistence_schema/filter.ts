@@ -14,29 +14,29 @@ export enum LogicalFilterOperator {
 }
 
 export interface ConditionalFilter {
-  operator: ConditionalFilterOperator
+  operator: `${ConditionalFilterOperator}`
   operands: Array<ConditionalFilter | LogicalFilter>
 }
 
 export type LogicalFilter = COFilter | EQFilter | LTFilter | IsNullFilter
 
 export interface COFilter {
-  operator: LogicalFilterOperator.CO
+  operator: `${LogicalFilterOperator.CO}`
   operands: [Operand, Operand]
 }
 
 export interface EQFilter {
-  operator: LogicalFilterOperator.EQ
+  operator: `${LogicalFilterOperator.EQ}`
   operands: [Operand, Operand]
 }
 
 export interface LTFilter {
-  operator: LogicalFilterOperator.LT
+  operator: `${LogicalFilterOperator.LT}`
   operands: [Operand, Operand]
 }
 
 export interface IsNullFilter {
-  operator: LogicalFilterOperator.IS_NULL
+  operator: `${LogicalFilterOperator.IS_NULL}`
   operands: [Operand]
 }
 
