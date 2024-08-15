@@ -12,7 +12,7 @@ import type { Filter } from './filter.ts'
 import type { OffsetPagination } from './pagination.ts'
 import type { ObjectReturning } from './returning.ts'
 import type { Order, Sorters } from './sorting.ts'
-import type { ColumnType } from './types.ts'
+import type { ColumnType, DataPointer } from './types.ts'
 
 export interface ColumnDef {
   name: string
@@ -50,7 +50,7 @@ export interface InsertAction {
 export interface UpdateAction {
   schema: Schema
   paramsSchema: JSONSchema
-  filter: Filter
+  filter: DataPointer | Filter
   changeset: Changeset<Change>
   returningSchema: Array<ObjectReturning>
 }
@@ -58,14 +58,14 @@ export interface UpdateAction {
 export interface DeleteAction {
   schema: Schema
   paramsSchema: JSONSchema
-  filter: Filter
+  filter: DataPointer | Filter
   returningSchema: Array<ObjectReturning>
 }
 
 export interface GetOneAction {
   schema: Schema
   paramsSchema: JSONSchema
-  filter: Filter
+  filter: DataPointer | Filter
   fetchingSchema: Array<Fetching>
   returningSchema: Array<ObjectReturning>
 }
@@ -79,20 +79,20 @@ export interface BulkInsertAction {
 export interface BulkUpdateAction {
   schema: Schema
   paramsSchema: JSONSchema
-  filter: Filter
+  filter: DataPointer | Filter
   changeset: Changeset<ColumnChange>
 }
 
 export interface BulkDeleteAction {
   schema: Schema
   paramsSchema: JSONSchema
-  filter: Filter
+  filter: DataPointer | Filter
 }
 
 export interface ListAction {
   schema: Schema
   paramsSchema: JSONSchema
-  filter: Filter
+  filter: DataPointer | Filter
   sorting?: Sorters
   pagination: OffsetPagination
   fetchingSchema: Array<Fetching>
