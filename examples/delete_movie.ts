@@ -1,4 +1,3 @@
-import { LogicalFilterOperator } from '../types/mod.ts'
 import type { DeleteAction } from '../types/persistence_schema/mod.ts'
 import moviesSchema from './schemas/movies.ts'
 
@@ -11,7 +10,7 @@ const deleteMovieAction: DeleteAction = {
     },
   },
   filter: {
-    operator: LogicalFilterOperator.EQ,
+    operator: 'eq',
     operands: [
       { type: 'schema', value: '/id' },
       { type: 'data', value: '/id' },
