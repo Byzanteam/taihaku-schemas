@@ -5,7 +5,7 @@ export enum OrderDirection {
 
 export interface Order {
   field: string
-  direction: OrderDirection
+  direction: `${OrderDirection}`
 }
 
 export type Sorters = Array<Order>
