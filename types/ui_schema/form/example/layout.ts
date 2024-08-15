@@ -1,6 +1,6 @@
-import type { UISchema } from '../mod.ts'
+import type { FormUISchema } from '../mod.ts'
 
-const LayoutedFormUISchema: UISchema<{
+const LayoutedFormFormUISchema: FormUISchema<{
   name: string
   signature: string
   birthday: string
@@ -167,4 +167,4 @@ const LayoutedFormUISchema: UISchema<{
   },
 }
 
-export default LayoutedFormUISchema
+export default LayoutedFormFormUISchema

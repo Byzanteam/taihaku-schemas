@@ -1,3 +1,7 @@
+import {
+  ConditionalFilterOperator,
+  LogicalFilterOperator,
+} from '../types/mod.ts'
 import type { BulkUpdateAction } from '../types/persistence_schema/mod.ts'
 import moviesSchema from './schemas/movies.ts'
 
@@ -10,24 +14,24 @@ const updateMoviesAction: BulkUpdateAction = {
     },
   },
   filter: {
-    operator: 'and',
+    operator: ConditionalFilterOperator.AND,
     operands: [
       {
-        operator: 'eq',
+        operator: LogicalFilterOperator.EQ,
         operands: [
           { type: 'schema', value: '/created_at' },
           { type: 'schema', value: '/updated_at' },
         ],
       },
       {
-        operator: 'or',
+        operator: ConditionalFilterOperator.OR,
         operands: [
           {
-            operator: 'is_null',
+            operator: LogicalFilterOperator.IS_NULL,
             operands: [{ type: 'schema', value: '/likes' }],
           },
           {
-            operator: 'is_null',
+            operator: LogicalFilterOperator.IS_NULL,
             operands: [{ type: 'schema', value: '/release_date' }],
           },
         ],
