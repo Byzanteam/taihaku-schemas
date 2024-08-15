@@ -1,6 +1,6 @@
-import type { UISchema } from '../mod.ts'
+import type { FormUISchema } from '../mod.ts'
 
-const MovieFormUISchema: UISchema<
+const MovieFormUISchema: FormUISchema<
   {
     name: string
     director?: {

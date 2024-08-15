@@ -26,7 +26,6 @@ const moviesTableSchema: TableSchema<
     }
   }
 > = {
-  id: 'movie_list_schema',
   columns: {
     releaseYear: {
       fieldType: 'NumericField',

@@ -1,3 +1,4 @@
+import { LogicalFilterOperator } from '../types/mod.ts'
 import type { UpdateAction } from '../types/persistence_schema/mod.ts'
 import moviesSchema from './schemas/movies.ts'
 
@@ -26,7 +27,7 @@ const updateMovieWithCharactersAction: UpdateAction = {
     required: ['id'],
   },
   filter: {
-    operator: 'eq',
+    operator: LogicalFilterOperator.EQ,
     operands: [
       { type: 'schema', value: '/id' },
       { type: 'data', value: '/id' },
