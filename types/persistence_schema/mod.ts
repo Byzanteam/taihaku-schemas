@@ -9,9 +9,9 @@ import type {
 } from './error.ts'
 import type { Fetching } from './fetching.ts'
 import type { Filter } from './filter.ts'
+import type { Order, Sorters } from './orders.ts'
 import type { OffsetPagination } from './pagination.ts'
 import type { ObjectReturning } from './returning.ts'
-import type { Order, Sorters } from './sorting.ts'
 import type { ColumnType, DataPointer } from './types.ts'
 
 export interface ColumnDef {
@@ -93,7 +93,7 @@ export interface ListAction {
   schema: Schema
   paramsSchema: JSONSchema
   filter: DataPointer | Filter
-  sorting?: DataPointer | Array<DataPointer | Order>
+  orders?: DataPointer | Array<DataPointer | Order>
   pagination: OffsetPagination
   fetchingSchema: Array<Fetching>
   returningSchema: Array<ObjectReturning>
@@ -130,5 +130,5 @@ export {
   type LogicalFilter,
   LogicalFilterOperator,
 } from './filter.ts'
-export { OrderDirection } from './sorting.ts'
+export { OrderDirection } from './orders.ts'
 export * from './types.ts'
