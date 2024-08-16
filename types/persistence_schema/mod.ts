@@ -93,7 +93,7 @@ export interface ListAction {
   schema: Schema
   paramsSchema: JSONSchema
   filter: DataPointer | Filter
-  sorting?: Sorters
+  sorting?: DataPointer | Array<DataPointer | Order>
   pagination: OffsetPagination
   fetchingSchema: Array<Fetching>
   returningSchema: Array<ObjectReturning>
