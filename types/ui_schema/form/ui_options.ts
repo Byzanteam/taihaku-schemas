@@ -71,8 +71,14 @@ type AssociationFieldUIOptions = {
   'ui:x-candidate-popover-content-class-name'?: string
 } & CommonCustomFieldUIOptions
 
+type BooleanFieldUIOptions = {
+  'ui:x-truthy-label'?: string
+  'ui:x-falsy-label'?: string
+} & CommonCustomFieldUIOptions
+
 export type CustomFieldUIOptionsMap = {
   [FieldType.BelongsTo]: AssociationFieldUIOptions
+  [FieldType.Boolean]: BooleanFieldUIOptions
   [FieldType.Checkbox]: CheckBoxFieldUIOptions
   [FieldType.Date]: DateFieldUIOptions
   [FieldType.DateTime]: DateTimeFieldUIOptions

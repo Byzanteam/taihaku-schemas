@@ -1,6 +1,7 @@
 /** @enum {string} */
 export enum FieldType {
   BelongsTo = 'BelongsTo',
+  Boolean = 'Boolean',
   Checkbox = 'Checkbox',
   Date = 'Date',
   DateTime = 'DateTime',
