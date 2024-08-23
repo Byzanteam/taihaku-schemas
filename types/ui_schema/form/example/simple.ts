@@ -8,6 +8,7 @@ const PersonFormUISchema: FormUISchema<{
   sports: Array<string>
   signature: string
   idNumber: string
+  marriage: boolean
   profile: {
     nickname: string
   }
@@ -37,6 +38,11 @@ const PersonFormUISchema: FormUISchema<{
     'ui:x-format': 'yyyy年MM月dd日',
     'ui:placeholder': '请选择',
     'ui:readonly': true,
+  },
+  marriage: {
+    'ui:widget': 'BooleanWidget',
+    'ui:x-falsy-label': '未婚',
+    'ui:x-truthy-label': '已婚',
   },
   profession: {
     'ui:widget': 'RadioButtonWidget',

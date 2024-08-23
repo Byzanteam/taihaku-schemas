@@ -38,9 +38,15 @@ type AssociationUIOptions = CommonCustomFieldUIOptions & {
   'ui:x-display-property': string
 }
 
+type BooleanUIOptions = CommonCustomFieldUIOptions & {
+  'ui:x-truthy-label'?: string
+  'ui:x-falsy-label'?: string
+}
+
 export type CustomColumnUIOptionsMap = {
   // TODO: define Checkbox to Signature's UIOptions
   [FieldType.BelongsTo]: AssociationUIOptions
+  [FieldType.Boolean]: BooleanUIOptions
   [FieldType.Checkbox]: CheckboxUIOptions
   [FieldType.Date]: DateFieldUIOptions
   [FieldType.DateTime]: DateTimeFieldUIOptions

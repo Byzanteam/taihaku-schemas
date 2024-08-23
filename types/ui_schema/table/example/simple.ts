@@ -12,6 +12,7 @@ const moviesTableSchema: TableSchema<
       id: string // format: 'uuid'
       name: string
     }
+    published: boolean
     poster?: {
       id: string // format: 'uuid'
       name: string
@@ -27,6 +28,11 @@ const moviesTableSchema: TableSchema<
   }
 > = {
   columns: {
+    published: {
+      fieldType: 'BooleanField',
+      name: 'published',
+      label: '是否上映',
+    },
     releaseYear: {
       fieldType: 'NumericField',
       name: 'releaseYear',
@@ -111,6 +117,11 @@ const moviesTableSchema: TableSchema<
       title: true,
       rating: false,
       releaseYear: true,
+    },
+    published: {
+      'ui:widget': 'BooleanWidget',
+      'ui:x-falsy-label': '未上映',
+      'ui:x-truthy-label': '已上映',
     },
     title: {
       'ui:widget': 'SingleLineWidget',
