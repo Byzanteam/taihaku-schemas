@@ -3,6 +3,7 @@
   "name": "@byzanteam/taihaku-schemas",
   "version": "0.5.3",
   "exports": "./types/mod.ts",
+  "license": "UNLICENSED",
   "compilerOptions": {
     "strict": true,
     "useUnknownInCatchVariables": true,
