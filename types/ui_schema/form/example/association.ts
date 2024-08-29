@@ -33,8 +33,10 @@ const MovieFormUISchema: FormUISchema<
   },
   poster: {
     'ui:widget': 'FileWidget',
-    'ui:x-multiple': false,
+    'ui:x-max-file-item-size': 20 * 1024 * 1024,
+    'ui:x-capture': 'user',
     'ui:x-accept': 'image/*',
+    'ui:x-max-count': 1,
   },
   score: {
     'ui:widget': 'RatingWidget',

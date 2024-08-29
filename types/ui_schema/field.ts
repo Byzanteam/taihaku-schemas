@@ -27,9 +27,14 @@ interface AssocitaionSettings {
   associationResource: string
 }
 
-// 文件字段属于关联字段的特例，associationResource 相对确定
-// 但不排除应用自建存储表, 所以还是有 associationResource 的设置
-type FileSettings = AssocitaionSettings
+interface FileSettings {
+  /** Size limit of single file with Byte unit, default Infinity */
+  maxFileItemSize?: number
+  /** Count limit, default 1 */
+  maxCount?: number
+  /** Allowed mimetype pattern, default '*' */
+  accept?: string
+}
 
 type SettingsRequiredFieldType =
   | FieldType.BelongsTo

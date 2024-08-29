@@ -92,10 +92,12 @@ const moviesTableSchema: TableSchema<
     },
     poster: {
       name: 'poster',
-      fieldType: 'HasOneField',
+      fieldType: 'FileField',
       label: '海报',
       settings: {
-        associationResource: 'object',
+        accept: 'image/*',
+        maxCount: 1,
+        maxFileItemSize: 20 * 1024 * 1024,
       },
     },
     actors: {
@@ -142,8 +144,6 @@ const moviesTableSchema: TableSchema<
     },
     poster: {
       'ui:widget': 'FileWidget',
-      'ui:x-multiple': false,
-      'ui:x-accept': 'image/*',
     },
     actors: {
       'ui:widget': 'HasManyWidget',

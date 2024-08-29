@@ -31,8 +31,7 @@ type AssociationUIOptions = CommonCustomFieldUIOptions & {
 }
 
 type FileUIOptions = CommonCustomFieldUIOptions & {
-  'ui:x-multiple'?: boolean
-  'ui:x-accept'?: /** mimetype pattern */ string
+  'ui:x-capture'?: 'user' | 'environment'
 }
 
 type BooleanUIOptions = CommonCustomFieldUIOptions & {

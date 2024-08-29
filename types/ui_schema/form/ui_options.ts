@@ -77,8 +77,10 @@ type BooleanFieldUIOptions = {
 } & CommonCustomFieldUIOptions
 
 type FileFieldUIOptions = {
-  'ui:x-multiple'?: boolean
+  'ui:x-max-file-item-size'?: number
   'ui:x-accept'?: string
+  'ui:x-capture'?: 'user' | 'environment'
+  'ui:x-max-count'?: number
 } & CommonCustomFieldUIOptions
 
 export type CustomFieldUIOptionsMap = {
