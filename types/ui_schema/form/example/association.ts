@@ -7,6 +7,7 @@ const MovieFormUISchema: FormUISchema<
       id: string // format: 'uuid'
       name?: string
     }
+    score: number
     poster?: {
       id?: string // format: 'uuid'
       name: string
@@ -15,9 +16,8 @@ const MovieFormUISchema: FormUISchema<
   },
   /** Custom Widget UIOption Map */
   {
-    FileWidget: {
-      'ui:x-multiple': boolean
-      'ui:x-accept': string
+    RatingWidget: {
+      'ui:x-count'?: number
     }
   }
 > = {
@@ -35,6 +35,10 @@ const MovieFormUISchema: FormUISchema<
     'ui:widget': 'FileWidget',
     'ui:x-multiple': false,
     'ui:x-accept': 'image/*',
+  },
+  score: {
+    'ui:widget': 'RatingWidget',
+    'ui:x-count': 5,
   },
   actors: {
     'ui:widget': 'HasManyWidget',

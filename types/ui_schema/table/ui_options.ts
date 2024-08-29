@@ -13,9 +13,7 @@ type DateTimeFieldUIOptions = CommonCustomFieldUIOptions & {
   'ui:x-format'?: string
 }
 
-type DateFieldUIOptions = CommonCustomFieldUIOptions & {
-  'ui:x-format'?: string
-}
+type DateFieldUIOptions = DateTimeFieldUIOptions
 
 type RadioButtonUIOptions = CommonCustomFieldUIOptions & {
   'ui:x-option-fallback-style'?: /** className */ string
@@ -25,17 +23,16 @@ type RadioButtonUIOptions = CommonCustomFieldUIOptions & {
   >
 }
 
-type CheckboxUIOptions = CommonCustomFieldUIOptions & {
-  'ui:x-option-fallback-style'?: /** className */ string
-  'ui:x-options-style'?: Record<
-    /** option-value */ string,
-    /** className */ string
-  >
-}
+type CheckboxUIOptions = RadioButtonUIOptions
 
 type AssociationUIOptions = CommonCustomFieldUIOptions & {
   /** which property should be shown as current assoication row value */
   'ui:x-display-property': string
+}
+
+type FileUIOptions = CommonCustomFieldUIOptions & {
+  'ui:x-multiple'?: boolean
+  'ui:x-accept'?: /** mimetype pattern */ string
 }
 
 type BooleanUIOptions = CommonCustomFieldUIOptions & {
@@ -44,12 +41,12 @@ type BooleanUIOptions = CommonCustomFieldUIOptions & {
 }
 
 export type CustomColumnUIOptionsMap = {
-  // TODO: define Checkbox to Signature's UIOptions
   [FieldType.BelongsTo]: AssociationUIOptions
   [FieldType.Boolean]: BooleanUIOptions
   [FieldType.Checkbox]: CheckboxUIOptions
   [FieldType.Date]: DateFieldUIOptions
   [FieldType.DateTime]: DateTimeFieldUIOptions
+  [FieldType.File]: FileUIOptions
   [FieldType.HasMany]: AssociationUIOptions
   [FieldType.HasOne]: AssociationUIOptions
   [FieldType.Numeric]: CommonCustomFieldUIOptions

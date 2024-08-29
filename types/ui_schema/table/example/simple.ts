@@ -21,9 +21,8 @@ const moviesTableSchema: TableSchema<
   },
   /** Custom Widget UIOption Map */
   {
-    FileWidget: {
-      'ui:x-multiple': boolean
-      'ui:x-accept': string
+    RatingWidget: {
+      'ui:x-count'?: number
     }
   }
 > = {
@@ -149,6 +148,10 @@ const moviesTableSchema: TableSchema<
     actors: {
       'ui:widget': 'HasManyWidget',
       'ui:x-display-property': 'name',
+    },
+    score: {
+      'ui:widget': 'RatingWidget',
+      'ui:x-count': 5,
     },
   },
 }

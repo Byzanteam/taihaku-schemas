@@ -76,12 +76,18 @@ type BooleanFieldUIOptions = {
   'ui:x-falsy-label'?: string
 } & CommonCustomFieldUIOptions
 
+type FileFieldUIOptions = {
+  'ui:x-multiple'?: boolean
+  'ui:x-accept'?: string
+} & CommonCustomFieldUIOptions
+
 export type CustomFieldUIOptionsMap = {
   [FieldType.BelongsTo]: AssociationFieldUIOptions
   [FieldType.Boolean]: BooleanFieldUIOptions
   [FieldType.Checkbox]: CheckBoxFieldUIOptions
   [FieldType.Date]: DateFieldUIOptions
   [FieldType.DateTime]: DateTimeFieldUIOptions
+  [FieldType.File]: FileFieldUIOptions
   [FieldType.HasMany]: AssociationFieldUIOptions
   [FieldType.HasOne]: AssociationFieldUIOptions
   [FieldType.Numeric]: NumericFieldUIOptions
