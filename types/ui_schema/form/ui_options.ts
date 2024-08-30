@@ -76,12 +76,21 @@ type BooleanFieldUIOptions = {
   'ui:x-falsy-label'?: string
 } & CommonCustomFieldUIOptions
 
+type FileFieldUIOptions = {
+  'ui:x-max-file-item-size-limit-in-mb'?: number
+  'ui:x-accept'?: string
+  /** @link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/capture */
+  'ui:x-capture'?: 'user' | 'environment'
+  'ui:x-max-count'?: number
+} & CommonCustomFieldUIOptions
+
 export type CustomFieldUIOptionsMap = {
   [FieldType.BelongsTo]: AssociationFieldUIOptions
   [FieldType.Boolean]: BooleanFieldUIOptions
   [FieldType.Checkbox]: CheckBoxFieldUIOptions
   [FieldType.Date]: DateFieldUIOptions
   [FieldType.DateTime]: DateTimeFieldUIOptions
+  [FieldType.File]: FileFieldUIOptions
   [FieldType.HasMany]: AssociationFieldUIOptions
   [FieldType.HasOne]: AssociationFieldUIOptions
   [FieldType.Numeric]: NumericFieldUIOptions

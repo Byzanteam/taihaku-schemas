@@ -21,9 +21,8 @@ const moviesTableSchema: TableSchema<
   },
   /** Custom Widget UIOption Map */
   {
-    FileWidget: {
-      'ui:x-multiple': boolean
-      'ui:x-accept': string
+    RatingWidget: {
+      'ui:x-count'?: number
     }
   }
 > = {
@@ -93,10 +92,12 @@ const moviesTableSchema: TableSchema<
     },
     poster: {
       name: 'poster',
-      fieldType: 'HasOneField',
+      fieldType: 'FileField',
       label: '海报',
       settings: {
-        associationResource: 'object',
+        accept: 'image/*',
+        maxCount: 1,
+        maxFileItemSizeLimitInMB: 20,
       },
     },
     actors: {
@@ -143,12 +144,14 @@ const moviesTableSchema: TableSchema<
     },
     poster: {
       'ui:widget': 'FileWidget',
-      'ui:x-multiple': false,
-      'ui:x-accept': 'image/*',
     },
     actors: {
       'ui:widget': 'HasManyWidget',
       'ui:x-display-property': 'name',
+    },
+    score: {
+      'ui:widget': 'RatingWidget',
+      'ui:x-count': 5,
     },
   },
 }
