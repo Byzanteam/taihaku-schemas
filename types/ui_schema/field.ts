@@ -28,11 +28,17 @@ interface AssocitaionSettings {
 }
 
 interface FileSettings {
-  /** Size limit of single file with Byte unit, default Infinity */
-  maxFileItemSize?: number
-  /** Count limit, default 1 */
+  /**
+   * Defines the max size of a file upload in megabytes (MB) (inclusive)
+   * that can be selected for uploading, default Infinity
+   */
+  maxFileItemSizeLimitInMB?: number
+  /** Count limit, undefined means unlimited */
   maxCount?: number
-  /** Allowed mimetype pattern, default '*' */
+  /**
+   * Allowed mimetype pattern, default '*'
+   * See more at: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept
+   */
   accept?: string
 }
 

@@ -77,8 +77,9 @@ type BooleanFieldUIOptions = {
 } & CommonCustomFieldUIOptions
 
 type FileFieldUIOptions = {
-  'ui:x-max-file-item-size'?: number
+  'ui:x-max-file-item-size-limit-in-mb'?: number
   'ui:x-accept'?: string
+  /** @link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/capture */
   'ui:x-capture'?: 'user' | 'environment'
   'ui:x-max-count'?: number
 } & CommonCustomFieldUIOptions

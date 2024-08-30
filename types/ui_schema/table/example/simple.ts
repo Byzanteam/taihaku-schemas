@@ -97,7 +97,7 @@ const moviesTableSchema: TableSchema<
       settings: {
         accept: 'image/*',
         maxCount: 1,
-        maxFileItemSize: 20 * 1024 * 1024,
+        maxFileItemSizeLimitInMB: 20,
       },
     },
     actors: {
