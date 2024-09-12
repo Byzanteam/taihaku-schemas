@@ -1,0 +1,200 @@
+{
+  "$schema": "../schema.json",
+  "schema": {
+    "type": "object",
+    "required": [
+      "no",
+      "subject",
+      "source",
+      "contactName",
+      "content",
+      "requiresMajorLeadershipApproval",
+      "deadline"
+    ],
+    "properties": {
+      "no": {
+        "type": "string",
+        "title": "工单编号"
+      },
+      "subject": {
+        "type": "string",
+        "title": "工单主题"
+      },
+      "source": {
+        "type": "string",
+        "title": "事件来源",
+        "oneOf": [
+          {
+            "const": "mailbox",
+            "title": "市长信箱"
+          }
+        ]
+      },
+      "contactName": {
+        "type": "string",
+        "title": "姓名"
+      },
+      "contactPhone": {
+        "type": "string",
+        "title": "联系电话"
+      },
+      "contactAddress": {
+        "type": "string",
+        "title": "联系地址"
+      },
+      "content": {
+        "type": "string",
+        "title": "来话内容"
+      },
+      "deadline": {
+        "type": "string",
+        "title": "办理期限",
+        "format": "date-time"
+      },
+      "requiresMajorLeadershipApproval": {
+        "type": "boolean",
+        "title": "是否需要主要领导签批"
+      },
+      "attachments": {
+        "type": "array",
+        "title": "附件",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      }
+    }
+  },
+  "uiSchema": {
+    "ui:rootFieldId": "NewTicketForm",
+    "ui:submitButtonOptions": {
+      "norender": true
+    },
+    "ui:globalOptions": {
+      "ui:x-appearance": "input"
+    },
+    "ui:x-layout": {
+      "type": "Vertical",
+      "className": "space-y-4",
+      "children": [
+        {
+          "type": "GroupLabel",
+          "props": {
+            "label": "事件信息"
+          }
+        },
+        {
+          "type": "Grid",
+          "className": "grid-cols-2 gap-x-3 gap-y-5",
+          "children": [
+            { "type": "Field", "property": "no" },
+            { "type": "Field", "property": "subject" },
+            { "type": "Field", "property": "source" }
+          ]
+        },
+        {
+          "type": "GroupLabel",
+          "props": {
+            "label": "来话信息"
+          }
+        },
+        {
+          "type": "Grid",
+          "className": "grid-cols-2 gap-x-3 gap-y-5",
+          "children": [
+            { "type": "Field", "property": "contactName" },
+            { "type": "Field", "property": "contactPhone" },
+            {
+              "type": "Field",
+              "property": "contactAddress",
+              "className": "col-span-2"
+            },
+            {
+              "type": "Field",
+              "property": "content",
+              "className": "col-span-2"
+            },
+            {
+              "type": "Field",
+              "property": "attachments",
+              "className": "col-span-2"
+            }
+          ]
+        },
+        {
+          "type": "GroupLabel",
+          "props": {
+            "label": "派单信息"
+          }
+        },
+        {
+          "type": "Grid",
+          "className": "grid-cols-2 gap-x-3 gap-y-5",
+          "children": [
+            { "type": "Field", "property": "requiresMajorLeadershipApproval" },
+            {
+              "type": "Field",
+              "property": "deadline",
+              "className": "row-start-2"
+            }
+          ]
+        }
+      ]
+    },
+    "no": {
+      "ui:widget": "SingleLineWidget",
+      "ui:placeholder": "请输入"
+    },
+    "subject": {
+      "ui:widget": "SingleLineWidget",
+      "ui:placeholder": "请输入"
+    },
+    "source": {
+      "ui:widget": "RadioButtonWidget",
+      "ui:x-display": "select",
+      "ui:placeholder": "请选择"
+    },
+    "contactName": {
+      "ui:widget": "SingleLineWidget",
+      "ui:placeholder": "请输入"
+    },
+    "contactPhone": {
+      "ui:widget": "SingleLineWidget",
+      "ui:placeholder": "请输入",
+      "ui:inputType": "tel"
+    },
+    "contactAddress": {
+      "ui:widget": "SingleLineWidget",
+      "ui:placeholder": "请输入"
+    },
+    "content": {
+      "ui:widget": "TextareaWidget",
+      "ui:placeholder": "请输入"
+    },
+    "attachments": {
+      "ui:widget": "HasManyWidget",
+      "ui:placeholder": "请选择",
+      "ui:x-association-resource": "storageObjects",
+      "ui:x-display-property": "url",
+      "ui:x-candidate-page-size": 50,
+      "ui:x-candidate-search-placeholder": "请输入搜索",
+      "ui:x-candidate-popover-content-class-name": "popover-trigger-width",
+      "ui:x-candidate-no-result-hint": "没有找到相关的内容"
+    },
+    "requiresMajorLeadershipApproval": {
+      "ui:widget": "BooleanWidget",
+      "ui:x-truthy-label": "是",
+      "ui:x-falsy-label": "否"
+    },
+    "deadline": {
+      "ui:widget": "DateTimeWidget",
+      "ui:placeholder": "请选择",
+      "ui:x-format": "yyyy-MM-dd HH:mm"
+    }
+  }
+}
