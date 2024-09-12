@@ -49,7 +49,7 @@
         }
       },
       "patternProperties": {
-        ".*": {
+        "^(?!ui:).*": {
           "$ref": "#/definitions/fieldUIOptions"
         }
       }
@@ -213,7 +213,12 @@
             }
           }
         }
-      ]
+      ],
+      "patternProperties": {
+        "^(?!ui:).*": {
+          "$ref": "#/definitions/fieldUIOptions"
+        }
+      }
     },
     "builtInFieldUIOptions": {
       "required": ["ui:widget"],

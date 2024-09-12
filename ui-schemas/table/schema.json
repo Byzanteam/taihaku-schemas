@@ -17,7 +17,7 @@
       "type": "object",
       "$ref": "#/definitions/tableOptions",
       "patternProperties": {
-        ".*": {
+        "^(?!ui:).*": {
           "$ref": "#/definitions/columnUIOptions"
         }
       }
