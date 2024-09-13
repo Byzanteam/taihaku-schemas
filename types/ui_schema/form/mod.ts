@@ -3,8 +3,7 @@ import type { FieldType } from '../field.ts'
 import type { ObjectData } from '../types.ts'
 import type { ObjectLayout } from './layout.ts'
 import type {
-  CommonCustomFieldUIOptions,
-  CustomFieldUIOptionsMap,
+  CustomFieldUIOptionsMap as BuiltInFieldUIOptionMap,
   FormAppearance,
 } from './ui_options.ts'
 
@@ -15,27 +14,22 @@ interface SubmitButtonOptions {
   norender: boolean
   submitText: string
   props: {
-    disabled: boolean
+    disabled?: boolean
   }
 }
 
-type ObjectFieldUIOptions<O extends ObjectData> =
-  & {
-    'ui:order'?: Array<keyof O>
-    // x-layout 存在时，order 将无效
-    'ui:x-layout'?: ObjectLayout<O> | Array<ObjectLayout<O>>
-  }
-  & CommonCustomFieldUIOptions
-  & BasicUIOptions
+type ObjectFieldUIOptions<O extends ObjectData> = {
+  'ui:order'?: Array<keyof O>
+  // x-layout 存在时，order 将无效
+  'ui:x-layout'?: ObjectLayout<O> | Array<ObjectLayout<O>>
+}
 
 // TODO: define array field options
 type ArrayFieldUIOptions =
   // deno-lint-ignore ban-types
-  & {
+  {
     // 'ui:x-hideAddButton'?: boolean
   }
-  & CommonCustomFieldUIOptions
-  & BasicUIOptions
 
 /**
  * @link https://rjsf-team.github.io/react-jsonschema-form/docs/api-reference/uiSchema
@@ -59,14 +53,11 @@ type GlobalUIOptions = {
   readonly?: boolean
 }
 
-type FormUIOptions<O extends ObjectData> =
-  & ObjectFieldUIOptions<O>
-  & BasicUIOptions
-  & {
-    'ui:rootFieldId'?: string
-    'ui:submitButtonOptions'?: Partial<SubmitButtonOptions>
-    'ui:globalOptions'?: GlobalUIOptions
-  }
+type FormUIOptions = {
+  'ui:rootFieldId'?: string
+  'ui:submitButtonOptions'?: Partial<SubmitButtonOptions>
+  'ui:globalOptions'?: GlobalUIOptions
+}
 
 type UIOptionMap = {
   [key: string]: ObjectData
@@ -79,7 +70,7 @@ type FieldUIOptions<
   T extends FieldType,
   TCustomUIOptionMap extends UIOptionMap,
   MT = T | keyof TCustomUIOptionMap,
-> = MT extends FieldType ? CustomFieldUIOptionsMap[MT] & {
+> = MT extends FieldType ? BuiltInFieldUIOptionMap[MT] & {
     'ui:widget': `${MT}Widget`
   } & BasicUIOptions
   : MT extends keyof TCustomUIOptionMap ?
@@ -90,41 +81,65 @@ type FieldUIOptions<
       & BasicUIOptions
   : never
 
-type FieldsUISchema<
+/**
+ * 当面对值为 object 类型时有两种处理方式
+ * 1. 用组件完全接管整个对象的值，即将这个对象当作一个值来看待
+ * 2. 将对象当作一个可遍历的元素看待，递归渲染（rjsf 默认的行为）
+ *
+ * 情况 1 时必有 ui:widget 参数，没有 ui:widget 参数时为第二种情况。
+ */
+type ObjectUISchema<
   O extends ObjectData,
   T extends FieldType,
   TCustomUIOptionMap extends UIOptionMap,
-> = {
-  [K in keyof O]: O[K] extends object // 嵌套结构（object or array)
-    ? O[K] extends Array<infer U> // array
-      ? U extends ObjectData ?
-          & {
-            /** define ArrayItem's uiSchema */
-            items?:
-              & Partial<FieldsUISchema<U, T, TCustomUIOptionMap>>
-              & ObjectFieldUIOptions<U>
-            // array type value can set ui:widget, but it is optional
-          }
-          & Partial<FieldUIOptions<T, TCustomUIOptionMap>>
-          & ArrayFieldUIOptions // Array<object>
-      : FieldUIOptions<T, TCustomUIOptionMap> & ArrayFieldUIOptions // normal array field like checkbox
-    : O[K] extends ObjectData ?
-        & Partial<FieldsUISchema<O[K], T, TCustomUIOptionMap>>
-        & ObjectFieldUIOptions<O[K]> // nested object
-    : FieldUIOptions<T, TCustomUIOptionMap> // fallback type
-    : FieldUIOptions<T, TCustomUIOptionMap> // normal field
-}
+> =
+  | FieldUIOptions<T, TCustomUIOptionMap> // 作为整体看待时
+  | (
+    & {
+      [K in keyof O]?: FieldUISchema<O[K], T, TCustomUIOptionMap>
+    }
+    & ObjectFieldUIOptions<O>
+  ) // 作为可遍历的元素看待
+
+/**
+ * 对象数组也可以当整体来看待，或当可遍历的的元素看待
+ */
+type ArrayUISchema<
+  TItem,
+  T extends FieldType,
+  TCustomUIOptionMap extends UIOptionMap,
+> =
+  | FieldUIOptions<T, TCustomUIOptionMap> // 视为整体看待
+  | ({
+    items: FieldUISchema<TItem, T, TCustomUIOptionMap>
+  } & ArrayFieldUIOptions) // 当可遍历的元素看待，此时必须设置 items 如何渲染
+
+type FieldUISchema<
+  O,
+  T extends FieldType,
+  TCustomUIOptionMap extends UIOptionMap,
+> = O extends object
+  ? O extends Array<infer U>
+    ? U extends ObjectData ? ArrayUISchema<U, T, TCustomUIOptionMap> // For Array
+    : FieldUIOptions<T, TCustomUIOptionMap> // Normal Array like checkbox
+  : O extends ObjectData ? ObjectUISchema<O, T, TCustomUIOptionMap> // nested object, such as person.profile
+  : never
+  : FieldUIOptions<T, TCustomUIOptionMap>
 
 export type FormUISchema<
   O extends ObjectData = ObjectData,
   TCustomUIOptionMap extends UIOptionMap = Record<never, ObjectData>,
 > =
-  & Partial<FieldsUISchema<O, FieldType, TCustomUIOptionMap>>
-  & Partial<FormUIOptions<O>>
+  & {
+    [K in keyof O]?: FieldUISchema<O[K], FieldType, TCustomUIOptionMap>
+  }
+  & FormUIOptions
+  & ObjectFieldUIOptions<O>
+  & BasicUIOptions
 
 export type {
   ArrayFieldUIOptions,
-  CustomFieldUIOptionsMap,
+  BuiltInFieldUIOptionMap,
   ObjectFieldUIOptions,
 }
 
