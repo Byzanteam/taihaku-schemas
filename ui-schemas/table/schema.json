@@ -9,6 +9,7 @@
       "type": "object",
       "patternProperties": {
         ".*": {
+          "description": "The key should be equal to name property",
           "$ref": "#/$defs/columnDef"
         }
       }
@@ -115,9 +116,18 @@
         "settings": {
           "type": "object",
           "properties": {
-            "maxFileItemSizeLimitInMB": { "type": "number" },
-            "maxCount": { "type": "integer" },
-            "accept": { "type": "string", "$comment": "mimetype" }
+            "maxFileItemSizeLimitInMB": {
+              "type": "number",
+              "description": "size limit of single file with MB unit"
+            },
+            "maxCount": {
+              "type": "integer",
+              "description": "max count of file"
+            },
+            "accept": {
+              "type": "string",
+              "description": "define allowed file type"
+            }
           }
         }
       }
@@ -138,34 +148,38 @@
       "properties": {
         "ui:column-order": {
           "type": "array",
+          "description": "The order of table columns, only affect to the unpinned columns",
           "items": {
             "type": "string",
-            "$comment": "keyof columns"
+            "description": "keyof columns"
           }
         },
         "ui:column-pinning": {
           "type": "object",
+          "description": "The pinning settings",
           "properties": {
             "left": {
               "type": "array",
-              "items": { "type": "string", "$comment": "keyof columns" }
+              "items": { "type": "string", "description": "keyof columns" }
             },
             "right": {
               "type": "array",
-              "items": { "type": "string", "$comment": "keyof columns" }
+              "items": { "type": "string", "description": "keyof columns" }
             }
           }
         },
         "ui:column-visibility": {
           "type": "object",
+          "description": "The visibility settings, the key should be keyof columns",
           "patternProperties": {
             ".*": {
               "type": "boolean",
-              "$comment": "key should be keyof columns"
+              "description": "set false to hide column, otherwise visibility"
             }
           }
         },
         "ui:x-appearance": {
+          "description": "global appearance setting of table cells",
           "type": "string",
           "enum": ["input", "presentation"]
         }
@@ -209,23 +223,27 @@
       "properties": {
         "ui:size": {
           "type": ["number", "string"],
-          "$comment": "interpreted as pixel unit values with number type. otherwise, interpreted as css styles."
+          "description": "interpreted as pixel unit values with number type. otherwise, interpreted as css styles."
         },
         "ui:min-size": {
           "type": ["number", "string"],
-          "$comment": "same to ui:size"
+          "description": "same to ui:size"
         },
         "ui:max-size": {
           "type": ["number", "string"],
-          "$comment": "same to ui:size"
+          "description": "same to ui:size"
         },
-        "ui:enable-resizing": { "type": "boolean" }
+        "ui:enable-resizing": {
+          "type": "boolean",
+          "description": "allow user resize the column width"
+        }
       }
     },
     "builtInColumnUIOptions": {
       "unevaluatedProperties": false,
       "allOf": [
         {
+          "$comment": "unevaluatedProperties required all properties defined in current schema",
           "$ref": "#/$defs/basicColumnUIOptions"
         },
         {
@@ -283,7 +301,7 @@
         },
         "ui:x-display-property": {
           "type": "string",
-          "$comment": "key of associationResourceRow"
+          "description": "key of associationResourceRow"
         }
       }
     },
@@ -304,14 +322,14 @@
         },
         "ui:x-option-fallback-style": {
           "type": "string",
-          "$comment": "className"
+          "description": "fallback className of unstyle option by (x-options-style)"
         },
         "ui:x-options-style": {
           "type": "object",
           "patternProperties": {
             ".*": {
               "type": "string",
-              "$comment": "className of current option. The key is the option.value which defined in column"
+              "description": "className of current option. The key is the option.value which defined in column"
             }
           }
         }
@@ -325,7 +343,7 @@
         "ui:x-capture": {
           "type": "string",
           "enum": ["user", "environment"],
-          "$comment": "https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/capture"
+          "description": "https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/capture"
         }
       }
     },

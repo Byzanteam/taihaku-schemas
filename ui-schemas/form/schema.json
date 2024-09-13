@@ -11,14 +11,42 @@
     },
     "uiSchema": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/formUIOptions"
+        },
+        {
+          "$ref": "#/$defs/objectFieldUIOptions"
+        },
+        {
+          "$ref": "#/$defs/basicUIOptions"
+        }
+      ],
+      "patternProperties": {
+        "^(?!ui:).*": {
+          "$ref": "#/$defs/fieldUISchema"
+        }
+      },
+      "unevaluatedProperties": false
+    }
+  },
+  "$defs": {
+    "formUIOptions": {
       "properties": {
-        "ui:rootFieldId": { "type": "string" },
+        "ui:rootFieldId": {
+          "type": "string",
+          "description": "useful when multiple form in one page"
+        },
         "ui:submitButtonOptions": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "norender": { "type": "boolean" },
-            "submitText": { "type": "string" },
+            "norender": {
+              "type": "boolean"
+            },
+            "submitText": {
+              "type": "string"
+            },
             "props": {
               "type": "object",
               "properties": {
@@ -31,62 +59,120 @@
         "ui:globalOptions": {
           "type": "object",
           "additionalProperties": false,
+          "description": "define options for all fields",
           "properties": {
             "ui:x-appearance": {
+              "description": "appearance of field should render",
               "type": "string",
               "enum": ["input", "presentation"]
             },
             "disabled": { "type": "boolean" },
             "readonly": { "type": "boolean" }
           }
-        },
+        }
+      }
+    },
+    "objectFieldUIOptions": {
+      "properties": {
         "ui:order": {
           "type": "array",
+          "description": "define render order of fields if no ui:x-layout set",
           "items": {
             "type": "string",
-            "$comment": "key of schema properties"
+            "description": "key of schema properties"
           }
         },
         "ui:x-layout": {
-          "$ref": "#/$defs/objectLayout"
+          "description": "custom render layout of fields",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/objectLayout"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/objectLayout"
+              }
+            }
+          ]
         }
-      },
-      "patternProperties": {
-        "^(?!ui:).*": {
-          "$ref": "#/$defs/fieldUIOptions"
+      }
+    },
+    "arrayFieldUIOptions": {
+      "$comment": "ArrayFieldUIOptions",
+      "type": "object"
+    },
+    "basicUIOptions": {
+      "description": "basic field ui options",
+      "properties": {
+        "ui:autocomplete": {
+          "type": "string",
+          "description": "same to HTML autocomplete attribute",
+          "enum": ["on", "off"]
+        },
+        "ui:autofocus": {
+          "type": "boolean",
+          "description": "same to HTML autofocus attribute"
+        },
+        "ui:disabled": {
+          "type": "boolean",
+          "description": "same to HTML disabled attribute"
+        },
+        "ui:enumDisabled": {
+          "type": "array",
+          "description": "use to disable some enum options",
+          "items": {
+            "type": ["string", "number"]
+          }
+        },
+        "ui:hideError": {
+          "type": "boolean",
+          "description": "hide the default error display"
+        },
+        "ui:inputType": {
+          "type": "string",
+          "description": "same to HTMLInputElement's type attribute"
+        },
+        "ui:label": { "type": "boolean", "description": "should should label" },
+        "ui:placeholder": {
+          "type": "string",
+          "description": "same to HTML placeholder attribute"
+        },
+        "ui:readonly": {
+          "type": "boolean",
+          "description": "same to HTML readonly attribute"
         }
-      },
-      "additionalProperties": false
-    }
-  },
-  "$defs": {
+      }
+    },
     "objectLayout": {
       "type": "object",
       "required": ["type"],
+      "properties": {
+        "className": { "type": "string" }
+      },
+      "unevaluatedProperties": false,
       "oneOf": [
         {
-          "$comment": "Field element",
           "required": ["property"],
-          "additionalProperties": false,
+          "$comment": "use to refer a field when custom fields's layout",
           "properties": {
             "type": { "const": "Field" },
-            "className": { "type": "string" },
             "property": { "type": "string" }
           }
         },
         {
-          "$comment": "custom layout element",
-          "additionalProperties": false,
+          "$comment": "use to refer a custom layout component to render",
           "properties": {
-            "className": { "type": "string" },
             "type": {
               "type": "string",
+              "description": "the layout component name",
               "not": {
                 "const": "Field"
               }
             },
             "props": {
               "type": "object",
+              "description": "the additional properties for custom layout component",
               "additionalProperties": true
             },
             "children": {
@@ -99,35 +185,80 @@
         }
       ]
     },
-    "basicUIOptions": {
+    "fieldTemplate": {
+      "type": "object",
+      "required": ["type"],
       "properties": {
-        "ui:autocomplete": {
-          "type": "string",
-          "enum": ["on", "off"]
-        },
-        "ui:autofocus": { "type": "boolean" },
-        "ui:disabled": { "type": "boolean" },
-        "ui:enumDisabled": {
-          "type": "array",
-          "items": {
-            "type": ["string", "number"]
+        "className": { "type": "string" }
+      },
+      "oneOf": [
+        {
+          "$comment": "use to refer builtin field elements to render",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["Label", "Control", "Error", "Description"]
+            }
           }
         },
-        "ui:hideError": { "type": "boolean" },
-        "ui:inputType": { "type": "string" },
-        "ui:label": { "type": "boolean" },
-        "ui:placeholder": { "type": "string" },
-        "ui:readonly": { "type": "boolean" },
-        "ui:order": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "$comment": "key of schema properties"
+        {
+          "$comment": "use to refer custom layout components",
+          "properties": {
+            "type": {
+              "type": "string",
+              "not": {
+                "enum": ["Label", "Control", "Error", "Description"]
+              }
+            },
+            "props": {
+              "type": "object",
+              "description": "the additional properties for custom layout component",
+              "additionalProperties": true
+            },
+            "children": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/fieldTemplate"
+              }
+            }
           }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "fieldUISchema": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "oneOf": [
+        {
+          "$comment": "use to define field's uiOptions",
+          "$ref": "#/$defs/fieldUIOptions"
         },
-        "ui:x-layout": {
-          "$ref": "#/$defs/objectLayout"
+        {
+          "$comment": "useful when define nested object, such as AddressField",
+          "$ref": "#/$defs/objectUISchema"
         },
+        {
+          "$comment": "useful when define DetailField",
+          "$ref": "#/$defs/arrayUISchema"
+        }
+      ]
+    },
+    "fieldUIOptions": {
+      "type": "object",
+      "$ref": "#/$defs/basicUIOptions",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/builtInFieldUIOptions"
+        },
+        {
+          "$ref": "#/$defs/customFieldUIOptions"
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "commonFieldUIOptions": {
+      "properties": {
         "ui:x-appearance": {
           "type": "string",
           "enum": ["input", "presentation"]
@@ -148,55 +279,6 @@
           ]
         }
       }
-    },
-    "fieldTemplate": {
-      "type": "object",
-      "required": ["type"],
-      "properties": {
-        "className": { "type": "string" }
-      },
-      "oneOf": [
-        {
-          "properties": {
-            "type": {
-              "type": "string",
-              "enum": ["Label", "Control", "Error", "Description"]
-            }
-          }
-        },
-        {
-          "properties": {
-            "type": {
-              "type": "string",
-              "not": {
-                "enum": ["Label", "Control", "Error", "Description"]
-              }
-            },
-            "props": {
-              "type": "object",
-              "additionalProperties": true
-            },
-            "children": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/fieldTemplate"
-              }
-            }
-          }
-        }
-      ]
-    },
-    "fieldUIOptions": {
-      "type": "object",
-      "$ref": "#/$defs/basicUIOptions",
-      "oneOf": [
-        {
-          "$ref": "#/$defs/builtInFieldUIOptions"
-        },
-        {
-          "$ref": "#/$defs/customFieldUIOptions"
-        }
-      ]
     },
     "customFieldUIOptions": {
       "$comment": "custom widget's uiOptions",
@@ -253,13 +335,58 @@
           "$ref": "#/$defs/signatureFieldUIOptions"
         }
       ],
-      "$ref": "#/$defs/basicUIOptions",
-      "required": ["ui:widget"],
-      "patternProperties": {
-        "^(?!ui:).*": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/basicUIOptions"
+        },
+        {
+          "$comment": "common field uiOptions for builtin fieldType",
+          "$ref": "#/$defs/commonFieldUIOptions"
+        }
+      ],
+      "required": ["ui:widget"]
+    },
+    "objectUISchema": {
+      "oneOf": [
+        {
+          "$comment": "use as an iterable object",
+          "$ref": "#/$defs/objectFieldUIOptions",
+          "patternProperties": {
+            "^(?!ui:).*": {
+              "$ref": "#/$defs/fieldUISchema"
+            }
+          },
+          "unevaluatedProperties": false
+        },
+        {
+          "$comment": "use as a whole",
           "$ref": "#/$defs/fieldUIOptions"
         }
-      }
+      ],
+      "unevaluatedProperties": false
+    },
+    "arrayUISchema": {
+      "unevaluatedProperties": false,
+      "oneOf": [
+        {
+          "$comment": "use as a whole",
+          "$ref": "#/$defs/fieldUIOptions"
+        },
+        {
+          "$comment": "use as an iterable array",
+          "$ref": "#/$defs/arrayFieldUIOptions",
+          "properties": {
+            "items": {
+              "type": "object",
+              "patternProperties": {
+                "^(?!ui:).*": {
+                  "$ref": "#/$defs/fieldUISchema"
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "simpleFieldUIOptions": {
       "properties": {
@@ -276,14 +403,26 @@
           "type": "string",
           "enum": ["BelongsToWidget", "HasManyWidget", "HasOneWidget"]
         },
-        "ui:x-association-resource": { "type": "string" },
-        "ui:x-display-property": { "type": "string" },
+        "ui:x-association-resource": {
+          "type": "string",
+          "description": "association resource identifier"
+        },
+        "ui:x-display-property": {
+          "type": "string",
+          "description": "which property should be shown as current assoication row value"
+        },
         "ui:x-candidate-search-placeholder": { "type": "string" },
-        "ui:x-candidate-no-result-hint": { "type": "string" },
-        "ui:x-candidate-page-size": { "type": "integer" },
+        "ui:x-candidate-no-result-hint": {
+          "type": "string",
+          "description": "no results hint"
+        },
+        "ui:x-candidate-page-size": {
+          "type": "integer",
+          "description": "page size of candidates"
+        },
         "ui:x-candidate-popover-content-class-name": {
           "type": "string",
-          "$comment": "className of popover content width"
+          "description": "className of popover content width"
         }
       }
     },
@@ -298,6 +437,7 @@
       "properties": {
         "ui:widget": { "const": "CheckboxWidget" },
         "ui:x-columns": {
+          "description": "The number of columns for options",
           "type": "integer",
           "enum": [1, 2, 3, 4]
         }
@@ -315,13 +455,23 @@
     "fileFieldUIOptions": {
       "properties": {
         "ui:widget": { "const": "FileWidget" },
-        "ui:x-max-file-item-size-limit-in-mb": { "type": "number" },
-        "ui:x-accept": { "type": "string" },
+        "ui:x-max-file-item-size-limit-in-mb": {
+          "type": "number",
+          "description": "size limit of single file with MB unit"
+        },
+        "ui:x-accept": {
+          "type": "string",
+          "description": "define allowed file type"
+        },
         "ui:x-capture": {
           "type": "string",
+          "description": "define camera facing",
           "enum": ["user", "environment"]
         },
-        "ui:x-max-count": { "type": "integer" }
+        "ui:x-max-count": {
+          "type": "integer",
+          "description": "max count of file"
+        }
       }
     },
     "radioButtonFieldUIOptions": {
@@ -332,9 +482,11 @@
         {
           "properties": {
             "ui:x-display": {
+              "description": "render as radio",
               "const": "radio"
             },
             "ui:x-columns": {
+              "description": "The number of columns for options",
               "type": "integer",
               "enum": [1, 2, 3, 4]
             }
@@ -342,7 +494,10 @@
         },
         {
           "properties": {
-            "ui:x-display": { "const": "select" }
+            "ui:x-display": {
+              "const": "select",
+              "description": "render as select"
+            }
           }
         }
       ]
@@ -350,7 +505,10 @@
     "signatureFieldUIOptions": {
       "properties": {
         "ui:widget": { "const": "SignatureWidget" },
-        "ui:x-padDescription": { "type": "string" },
+        "ui:x-padDescription": {
+          "type": "string",
+          "description": "blankslate hint"
+        },
         "ui:x-clearText": { "type": "string" },
         "ui:x-saveText": { "type": "string" },
         "ui:x-cancelText": { "type": "string" },
