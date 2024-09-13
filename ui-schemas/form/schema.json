@@ -1,12 +1,12 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft/2019-09/schema#",
   "$id": "form-schema.json",
   "title": "form schema",
   "type": "object",
   "required": ["schema"],
   "properties": {
     "schema": {
-      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$ref": "http://json-schema.org/draft-07/schema#",
       "$comment": "schema field is a json-schema of draft-07 version"
     },
     "uiSchema": {
@@ -15,6 +15,7 @@
         "ui:rootFieldId": { "type": "string" },
         "ui:submitButtonOptions": {
           "type": "object",
+          "additionalProperties": false,
           "properties": {
             "norender": { "type": "boolean" },
             "submitText": { "type": "string" },
@@ -22,12 +23,14 @@
               "type": "object",
               "properties": {
                 "disabled": { "type": "boolean" }
-              }
+              },
+              "additionalProperties": false
             }
           }
         },
         "ui:globalOptions": {
           "type": "object",
+          "additionalProperties": false,
           "properties": {
             "ui:x-appearance": {
               "type": "string",
@@ -45,35 +48,37 @@
           }
         },
         "ui:x-layout": {
-          "$ref": "#/definitions/objectLayout"
+          "$ref": "#/$defs/objectLayout"
         }
       },
       "patternProperties": {
         "^(?!ui:).*": {
-          "$ref": "#/definitions/fieldUIOptions"
+          "$ref": "#/$defs/fieldUIOptions"
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
-  "definitions": {
+  "$defs": {
     "objectLayout": {
       "type": "object",
       "required": ["type"],
-      "properties": {
-        "className": { "type": "string" }
-      },
       "oneOf": [
         {
           "$comment": "Field element",
           "required": ["property"],
+          "additionalProperties": false,
           "properties": {
             "type": { "const": "Field" },
+            "className": { "type": "string" },
             "property": { "type": "string" }
           }
         },
         {
           "$comment": "custom layout element",
+          "additionalProperties": false,
           "properties": {
+            "className": { "type": "string" },
             "type": {
               "type": "string",
               "not": {
@@ -87,7 +92,7 @@
             "children": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/objectLayout"
+                "$ref": "#/$defs/objectLayout"
               }
             }
           }
@@ -121,7 +126,7 @@
           }
         },
         "ui:x-layout": {
-          "$ref": "#/definitions/objectLayout"
+          "$ref": "#/$defs/objectLayout"
         },
         "ui:x-appearance": {
           "type": "string",
@@ -132,12 +137,12 @@
           "$comment": "FieldTemplate or Array<FieldTemplate>",
           "oneOf": [
             {
-              "$ref": "#/definitions/fieldTemplate"
+              "$ref": "#/$defs/fieldTemplate"
             },
             {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/fieldTemplate"
+                "$ref": "#/$defs/fieldTemplate"
               }
             }
           ]
@@ -174,7 +179,7 @@
             "children": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/fieldTemplate"
+                "$ref": "#/$defs/fieldTemplate"
               }
             }
           }
@@ -183,71 +188,78 @@
     },
     "fieldUIOptions": {
       "type": "object",
-      "$ref": "#/definitions/basicUIOptions",
+      "$ref": "#/$defs/basicUIOptions",
       "oneOf": [
         {
-          "$ref": "#/definitions/builtInFieldUIOptions"
+          "$ref": "#/$defs/builtInFieldUIOptions"
         },
         {
-          "$comment": "custom widget's uiOptions",
-          "properties": {
-            "ui:widget": {
-              "type": "string",
-              "not": {
-                "enum": [
-                  "BelongsToWidget",
-                  "BooleanWidget",
-                  "CheckboxWidget",
-                  "DateWidget",
-                  "DateTimeWidget",
-                  "FileWidget",
-                  "HasManyWidget",
-                  "HasOneWidget",
-                  "NumericWidget",
-                  "RadioButtonWidget",
-                  "SignatureWidget",
-                  "SingleLineWidget",
-                  "TextareaWidget"
-                ]
-              }
-            }
-          }
+          "$ref": "#/$defs/customFieldUIOptions"
         }
-      ],
-      "patternProperties": {
-        "^(?!ui:).*": {
-          "$ref": "#/definitions/fieldUIOptions"
+      ]
+    },
+    "customFieldUIOptions": {
+      "$comment": "custom widget's uiOptions",
+      "required": ["ui:widget"],
+      "properties": {
+        "ui:widget": {
+          "type": "string",
+          "not": {
+            "enum": [
+              "BelongsToWidget",
+              "BooleanWidget",
+              "CheckboxWidget",
+              "DateWidget",
+              "DateTimeWidget",
+              "FileWidget",
+              "HasManyWidget",
+              "HasOneWidget",
+              "NumericWidget",
+              "RadioButtonWidget",
+              "SignatureWidget",
+              "SingleLineWidget",
+              "TextareaWidget"
+            ]
+          }
         }
       }
     },
     "builtInFieldUIOptions": {
-      "required": ["ui:widget"],
+      "$comment": "additional uiOptions not allowed for builtin fields",
+      "unevaluatedProperties": false,
       "oneOf": [
         {
-          "$ref": "#/definitions/simpleFieldUIOptions"
+          "$ref": "#/$defs/simpleFieldUIOptions"
         },
         {
-          "$ref": "#/definitions/associationFieldUIOptions"
+          "$ref": "#/$defs/associationFieldUIOptions"
         },
         {
-          "$ref": "#/definitions/booleanFieldUIOptions"
+          "$ref": "#/$defs/booleanFieldUIOptions"
         },
         {
-          "$ref": "#/definitions/checkboxFieldUIOptions"
+          "$ref": "#/$defs/checkboxFieldUIOptions"
         },
         {
-          "$ref": "#/definitions/dateFieldUIOptions"
+          "$ref": "#/$defs/dateFieldUIOptions"
         },
         {
-          "$ref": "#/definitions/fileFieldUIOptions"
+          "$ref": "#/$defs/fileFieldUIOptions"
         },
         {
-          "$ref": "#/definitions/radioButtonFieldUIOptions"
+          "$ref": "#/$defs/radioButtonFieldUIOptions"
         },
         {
-          "$ref": "#/definitions/signatureFieldUIOptions"
+          "$ref": "#/$defs/signatureFieldUIOptions"
         }
-      ]
+      ],
+      "$ref": "#/$defs/basicUIOptions",
+      "required": ["ui:widget"],
+      "patternProperties": {
+        "^(?!ui:).*": {
+          "$ref": "#/$defs/fieldUIOptions"
+        }
+      }
     },
     "simpleFieldUIOptions": {
       "properties": {

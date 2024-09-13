@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft/2019-09/schema#",
   "$id": "table-schema.json",
   "title": "table schema",
   "type": "object",
@@ -9,21 +9,22 @@
       "type": "object",
       "patternProperties": {
         ".*": {
-          "$ref": "#/definitions/columnDef"
+          "$ref": "#/$defs/columnDef"
         }
       }
     },
     "uiSchema": {
       "type": "object",
-      "$ref": "#/definitions/tableOptions",
+      "$ref": "#/$defs/tableOptions",
       "patternProperties": {
         "^(?!ui:).*": {
-          "$ref": "#/definitions/columnUIOptions"
+          "$ref": "#/$defs/columnUIOptions"
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
-  "definitions": {
+  "$defs": {
     "columnDef": {
       "type": "object",
       "required": ["label", "name", "fieldType"],
@@ -33,21 +34,22 @@
       },
       "oneOf": [
         {
-          "$ref": "#/definitions/simpleColumnDef"
+          "$ref": "#/$defs/simpleColumnDef"
         },
         {
-          "$ref": "#/definitions/associationColumnDef"
+          "$ref": "#/$defs/associationColumnDef"
         },
         {
-          "$ref": "#/definitions/enumColumnDef"
+          "$ref": "#/$defs/enumColumnDef"
         },
         {
-          "$ref": "#/definitions/fileColumnDef"
+          "$ref": "#/$defs/fileColumnDef"
         },
         {
-          "$ref": "#/definitions/signatureColumnDef"
+          "$ref": "#/$defs/signatureColumnDef"
         }
-      ]
+      ],
+      "unevaluatedProperties": false
     },
     "simpleColumnDef": {
       "properties": {
@@ -172,24 +174,10 @@
     "columnUIOptions": {
       "type": "object",
       "required": ["ui:widget"],
-      "properties": {
-        "ui:size": {
-          "type": ["number", "string"],
-          "$comment": "interpreted as pixel unit values with number type. otherwise, interpreted as css styles."
-        },
-        "ui:min-size": {
-          "type": ["number", "string"],
-          "$comment": "same to ui:size"
-        },
-        "ui:max-size": {
-          "type": ["number", "string"],
-          "$comment": "same to ui:size"
-        },
-        "ui:enable-resizing": { "type": "boolean" }
-      },
+      "$ref": "#/$defs/basicColumnUIOptions",
       "oneOf": [
         {
-          "$ref": "#/definitions/builtInColumnUIOptions"
+          "$ref": "#/$defs/builtInColumnUIOptions"
         },
         {
           "properties": {
@@ -217,34 +205,59 @@
         }
       ]
     },
-    "builtInColumnUIOptions": {
+    "basicColumnUIOptions": {
       "properties": {
-        "ui:x-appearance": {
-          "type": "string",
-          "enum": ["input", "presentation"]
+        "ui:size": {
+          "type": ["number", "string"],
+          "$comment": "interpreted as pixel unit values with number type. otherwise, interpreted as css styles."
         },
-        "ui:x-blankslate": {
-          "type": "string"
+        "ui:min-size": {
+          "type": ["number", "string"],
+          "$comment": "same to ui:size"
+        },
+        "ui:max-size": {
+          "type": ["number", "string"],
+          "$comment": "same to ui:size"
+        },
+        "ui:enable-resizing": { "type": "boolean" }
+      }
+    },
+    "builtInColumnUIOptions": {
+      "unevaluatedProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/$defs/basicColumnUIOptions"
+        },
+        {
+          "properties": {
+            "ui:x-appearance": {
+              "type": "string",
+              "enum": ["input", "presentation"]
+            },
+            "ui:x-blankslate": {
+              "type": "string"
+            }
+          }
         }
-      },
+      ],
       "oneOf": [
         {
-          "$ref": "#/definitions/simpleColumnUIOptions"
+          "$ref": "#/$defs/simpleColumnUIOptions"
         },
         {
-          "$ref": "#/definitions/associationColumnUIOptions"
+          "$ref": "#/$defs/associationColumnUIOptions"
         },
         {
-          "$ref": "#/definitions/dateColumnUIOptions"
+          "$ref": "#/$defs/dateColumnUIOptions"
         },
         {
-          "$ref": "#/definitions/enumColumnUIOptions"
+          "$ref": "#/$defs/enumColumnUIOptions"
         },
         {
-          "$ref": "#/definitions/fileColumnUIOptions"
+          "$ref": "#/$defs/fileColumnUIOptions"
         },
         {
-          "$ref": "#/definitions/booleanColumnUIOptions"
+          "$ref": "#/$defs/booleanColumnUIOptions"
         }
       ]
     },
