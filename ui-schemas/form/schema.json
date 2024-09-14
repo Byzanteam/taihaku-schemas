@@ -347,46 +347,29 @@
       "required": ["ui:widget"]
     },
     "objectUISchema": {
-      "oneOf": [
-        {
-          "$comment": "use as an iterable object",
-          "$ref": "#/$defs/objectFieldUIOptions",
-          "patternProperties": {
-            "^(?!ui:).*": {
-              "$ref": "#/$defs/fieldUISchema"
-            }
-          },
-          "unevaluatedProperties": false
-        },
-        {
-          "$comment": "use as a whole",
-          "$ref": "#/$defs/fieldUIOptions"
+      "$comment": "use as an iterable object. use as whole would match fieldUISchema/fieldUIOptions",
+      "$ref": "#/$defs/objectFieldUIOptions",
+      "patternProperties": {
+        "^(?!ui:).*": {
+          "$ref": "#/$defs/fieldUISchema"
         }
-      ],
+      },
       "unevaluatedProperties": false
     },
     "arrayUISchema": {
       "unevaluatedProperties": false,
-      "oneOf": [
-        {
-          "$comment": "use as a whole",
-          "$ref": "#/$defs/fieldUIOptions"
-        },
-        {
-          "$comment": "use as an iterable array",
-          "$ref": "#/$defs/arrayFieldUIOptions",
-          "properties": {
-            "items": {
-              "type": "object",
-              "patternProperties": {
-                "^(?!ui:).*": {
-                  "$ref": "#/$defs/fieldUISchema"
-                }
-              }
+      "$comment": "use as an iterable array. use as whole would match fieldUISchema/fieldUIOptions",
+      "$ref": "#/$defs/arrayFieldUIOptions",
+      "properties": {
+        "items": {
+          "type": "object",
+          "patternProperties": {
+            "^(?!ui:).*": {
+              "$ref": "#/$defs/fieldUISchema"
             }
           }
         }
-      ]
+      }
     },
     "simpleFieldUIOptions": {
       "properties": {
