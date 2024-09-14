@@ -46,35 +46,23 @@ const RegisterFormUISchema: FormUISchema<{
     'ui:widget': 'SingleLineWidget',
   },
   profile: {
-    // layout without Description
-    'ui:x-field-template': {
-      type: 'Vertical',
-      children: [
-        {
-          type: 'Label',
-        },
-        {
-          type: 'Control',
-        },
-        {
-          type: 'Error',
-        },
-      ],
-    },
-    'ui:x-layout': {
-      type: 'Horizontal',
-      children: [
-        {
-          type: 'Field',
-          property: 'email',
-        },
-        {
-          type: 'Field',
-          property: 'phone',
-        },
-      ],
-    },
+    'ui:order': ['phone', 'email'],
     email: {
+      // layout without Description
+      'ui:x-field-template': {
+        type: 'Vertical',
+        children: [
+          {
+            type: 'Label',
+          },
+          {
+            type: 'Control',
+          },
+          {
+            type: 'Error',
+          },
+        ],
+      },
       'ui:widget': 'SingleLineWidget',
     },
     phone: {

@@ -1,0 +1,369 @@
+{
+  "$schema": "http://json-schema.org/draft/2019-09/schema#",
+  "$id": "table-schema.json",
+  "title": "table schema",
+  "type": "object",
+  "required": ["columns"],
+  "properties": {
+    "columns": {
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "description": "The key should be equal to name property",
+          "$ref": "#/$defs/genericField"
+        }
+      }
+    },
+    "uiSchema": {
+      "type": "object",
+      "$ref": "#/$defs/tableOptions",
+      "patternProperties": {
+        "^(?!ui:).*": {
+          "$ref": "#/$defs/columnUIOptions"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "genericField": {
+      "type": "object",
+      "required": ["label", "name", "fieldType"],
+      "properties": {
+        "label": { "type": "string" },
+        "name": { "type": "string" }
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/simpleField"
+        },
+        {
+          "$ref": "#/$defs/associationField"
+        },
+        {
+          "$ref": "#/$defs/enumField"
+        },
+        {
+          "$ref": "#/$defs/fileField"
+        },
+        {
+          "$ref": "#/$defs/signatureField"
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "simpleField": {
+      "properties": {
+        "fieldType": {
+          "type": "string",
+          "enum": [
+            "BooleanField",
+            "DateField",
+            "DateTimeField",
+            "NumericField",
+            "SingleLineField",
+            "TextareaField"
+          ]
+        }
+      }
+    },
+    "associationField": {
+      "required": ["settings"],
+      "properties": {
+        "fieldType": {
+          "type": "string",
+          "enum": ["BelongsToField", "HasManyField", "HasOneField"]
+        },
+        "settings": {
+          "type": "object",
+          "required": ["associationResource"],
+          "properties": {
+            "associationResource": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "enumField": {
+      "required": ["settings"],
+      "properties": {
+        "fieldType": {
+          "type": "string",
+          "enum": ["CheckboxField", "RadioButtonField"]
+        },
+        "settings": {
+          "type": "object",
+          "required": ["options"],
+          "properties": {
+            "options": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["label", "value"],
+                "properties": {
+                  "label": { "type": "string" },
+                  "value": { "type": "string" }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "fileField": {
+      "required": ["settings"],
+      "properties": {
+        "fieldType": { "const": "FileField" },
+        "settings": {
+          "type": "object",
+          "properties": {
+            "maxFileItemSizeLimitInMB": {
+              "type": "number",
+              "description": "size limit of single file with MB unit"
+            },
+            "maxCount": {
+              "type": "integer",
+              "description": "max count of file"
+            },
+            "accept": {
+              "type": "string",
+              "description": "define allowed file type"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "signatureField": {
+      "required": ["settings"],
+      "properties": {
+        "fieldType": { "const": "SignatureField" },
+        "settings": {
+          "type": "object",
+          "properties": {
+            "contentMediaType": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "tableOptions": {
+      "properties": {
+        "ui:column-order": {
+          "type": "array",
+          "description": "The order of table columns, only affect to the unpinned columns",
+          "items": {
+            "type": "string",
+            "description": "keyof columns"
+          }
+        },
+        "ui:column-pinning": {
+          "type": "object",
+          "description": "The pinning settings",
+          "properties": {
+            "left": {
+              "type": "array",
+              "items": { "type": "string", "description": "keyof columns" }
+            },
+            "right": {
+              "type": "array",
+              "items": { "type": "string", "description": "keyof columns" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "ui:column-visibility": {
+          "type": "object",
+          "description": "The visibility settings, the key should be keyof columns",
+          "patternProperties": {
+            ".*": {
+              "type": "boolean",
+              "description": "set false to hide column, otherwise visibility"
+            }
+          },
+          "additionalProperties": false
+        },
+        "ui:x-appearance": {
+          "description": "global appearance setting of table cells",
+          "type": "string",
+          "enum": ["input", "presentation"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "columnUIOptions": {
+      "type": "object",
+      "required": ["ui:widget"],
+      "$ref": "#/$defs/basicUIOptions",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/builtInColumnUIOptions"
+        },
+        {
+          "$ref": "#/$defs/customColumnUIOptions"
+        }
+      ]
+    },
+    "basicUIOptions": {
+      "properties": {
+        "ui:size": {
+          "type": ["number", "string"],
+          "description": "interpreted as pixel unit values with number type. otherwise, interpreted as css styles."
+        },
+        "ui:min-size": {
+          "type": ["number", "string"],
+          "description": "same to ui:size"
+        },
+        "ui:max-size": {
+          "type": ["number", "string"],
+          "description": "same to ui:size"
+        },
+        "ui:enable-resizing": {
+          "type": "boolean",
+          "description": "allow user resize the column width"
+        }
+      }
+    },
+    "customColumnUIOptions": {
+      "properties": {
+        "ui:widget": {
+          "type": "string",
+          "not": {
+            "enum": [
+              "BelongsToWidget",
+              "BooleanWidget",
+              "CheckboxWidget",
+              "DateWidget",
+              "DateTimeWidget",
+              "FileWidget",
+              "HasManyWidget",
+              "HasOneWidget",
+              "NumericWidget",
+              "RadioButtonWidget",
+              "SignatureWidget",
+              "SingleLineWidget",
+              "TextareaWidget"
+            ]
+          }
+        }
+      }
+    },
+    "builtInColumnUIOptions": {
+      "unevaluatedProperties": false,
+      "allOf": [
+        {
+          "$comment": "unevaluatedProperties required all properties defined in current schema",
+          "$ref": "#/$defs/basicUIOptions"
+        },
+        {
+          "properties": {
+            "ui:x-appearance": {
+              "type": "string",
+              "enum": ["input", "presentation"]
+            },
+            "ui:x-blankslate": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "oneOf": [
+        {
+          "$ref": "#/$defs/simpleColumnUIOptions"
+        },
+        {
+          "$ref": "#/$defs/associationColumnUIOptions"
+        },
+        {
+          "$ref": "#/$defs/dateColumnUIOptions"
+        },
+        {
+          "$ref": "#/$defs/enumColumnUIOptions"
+        },
+        {
+          "$ref": "#/$defs/fileColumnUIOptions"
+        },
+        {
+          "$ref": "#/$defs/booleanColumnUIOptions"
+        }
+      ]
+    },
+    "simpleColumnUIOptions": {
+      "properties": {
+        "ui:widget": {
+          "type": "string",
+          "enum": [
+            "NumericWidget",
+            "SignatureWidget",
+            "SingleLineWidget",
+            "TextareaWidget"
+          ]
+        }
+      }
+    },
+    "associationColumnUIOptions": {
+      "required": ["ui:x-display-property"],
+      "properties": {
+        "ui:widget": {
+          "type": "string",
+          "enum": ["BelongsToWidget", "HasManyWidget", "HasOneWidget"]
+        },
+        "ui:x-display-property": {
+          "type": "string",
+          "description": "key of associationResourceRow"
+        }
+      }
+    },
+    "dateColumnUIOptions": {
+      "properties": {
+        "ui:widget": {
+          "type": "string",
+          "enum": ["DateWidget", "DateTimeWidget"]
+        },
+        "ui:x-format": { "type": "string" }
+      }
+    },
+    "enumColumnUIOptions": {
+      "properties": {
+        "ui:widget": {
+          "type": "string",
+          "enum": ["CheckboxWidget", "RadioButtonWidget"]
+        },
+        "ui:x-option-fallback-style": {
+          "type": "string",
+          "description": "fallback className of unstyle option by (x-options-style)"
+        },
+        "ui:x-options-style": {
+          "type": "object",
+          "patternProperties": {
+            ".*": {
+              "type": "string",
+              "description": "className of current option. The key is the option.value which defined in column"
+            }
+          }
+        }
+      }
+    },
+    "fileColumnUIOptions": {
+      "properties": {
+        "ui:widget": {
+          "const": "FileWidget"
+        },
+        "ui:x-capture": {
+          "type": "string",
+          "enum": ["user", "environment"],
+          "description": "https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/capture"
+        }
+      }
+    },
+    "booleanColumnUIOptions": {
+      "properties": {
+        "ui:widget": { "const": "BooleanWidget" },
+        "ui:x-truthy-label": { "type": "string" },
+        "ui:x-falsy-label": { "type": "string" }
+      }
+    }
+  }
+}

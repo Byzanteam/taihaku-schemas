@@ -1,6 +1,9 @@
 import type { FieldType, GenericField } from '../field.ts'
 import type { ObjectData } from '../types.ts'
-import type { CustomColumnUIOptionsMap, TableAppearance } from './ui_options.ts'
+import type {
+  CustomColumnUIOptionsMap as BuiltInColumnUIOptionsMap,
+  TableAppearance,
+} from './ui_options.ts'
 
 type BasicUIOptions = {
   /**
@@ -38,19 +41,13 @@ type ColumnUIOptions<
   T extends FieldType,
   TCustomUIOptionMap extends UIOptionMap,
   MT = T | keyof TCustomUIOptionMap,
-> = MT extends FieldType ?
-    & CustomColumnUIOptionsMap[MT]
-    & BasicUIOptions
-    & {
-      /** define how to render current column */
-      'ui:widget': `${MT}Widget`
+> = MT extends FieldType ? BuiltInColumnUIOptionsMap[MT] & {
+    /** define how to render current column */
+    'ui:widget': `${MT}Widget`
+  }
+  : MT extends keyof TCustomUIOptionMap ? TCustomUIOptionMap[MT] & {
+      'ui:widget': MT
     }
-  : MT extends keyof TCustomUIOptionMap ?
-      & TCustomUIOptionMap[MT]
-      & BasicUIOptions
-      & {
-        'ui:widget': MT
-      }
   : never
 
 interface TableOptions<TData extends ObjectData = ObjectData> {
@@ -85,7 +82,9 @@ export type TableUISchema<
 > =
   & Partial<TableOptions<TData>>
   & {
-    [K in keyof TData]?: ColumnUIOptions<FieldType, TCustomUIOptionMap>
+    [K in keyof TData]?:
+      & BasicUIOptions
+      & ColumnUIOptions<FieldType, TCustomUIOptionMap>
   }
 
 export type TableSchema<
