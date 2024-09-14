@@ -10,7 +10,7 @@
       "patternProperties": {
         ".*": {
           "description": "The key should be equal to name property",
-          "$ref": "#/$defs/columnDef"
+          "$ref": "#/$defs/genericField"
         }
       }
     },
@@ -26,7 +26,7 @@
     }
   },
   "$defs": {
-    "columnDef": {
+    "genericField": {
       "type": "object",
       "required": ["label", "name", "fieldType"],
       "properties": {
@@ -35,24 +35,24 @@
       },
       "oneOf": [
         {
-          "$ref": "#/$defs/simpleColumnDef"
+          "$ref": "#/$defs/simpleField"
         },
         {
-          "$ref": "#/$defs/associationColumnDef"
+          "$ref": "#/$defs/associationField"
         },
         {
-          "$ref": "#/$defs/enumColumnDef"
+          "$ref": "#/$defs/enumField"
         },
         {
-          "$ref": "#/$defs/fileColumnDef"
+          "$ref": "#/$defs/fileField"
         },
         {
-          "$ref": "#/$defs/signatureColumnDef"
+          "$ref": "#/$defs/signatureField"
         }
       ],
       "unevaluatedProperties": false
     },
-    "simpleColumnDef": {
+    "simpleField": {
       "properties": {
         "fieldType": {
           "type": "string",
@@ -67,7 +67,7 @@
         }
       }
     },
-    "associationColumnDef": {
+    "associationField": {
       "required": ["settings"],
       "properties": {
         "fieldType": {
@@ -79,11 +79,12 @@
           "required": ["associationResource"],
           "properties": {
             "associationResource": { "type": "string" }
-          }
+          },
+          "additionalProperties": false
         }
       }
     },
-    "enumColumnDef": {
+    "enumField": {
       "required": ["settings"],
       "properties": {
         "fieldType": {
@@ -102,14 +103,16 @@
                 "properties": {
                   "label": { "type": "string" },
                   "value": { "type": "string" }
-                }
+                },
+                "additionalProperties": false
               }
             }
-          }
+          },
+          "additionalProperties": false
         }
       }
     },
-    "fileColumnDef": {
+    "fileField": {
       "required": ["settings"],
       "properties": {
         "fieldType": { "const": "FileField" },
@@ -128,11 +131,12 @@
               "type": "string",
               "description": "define allowed file type"
             }
-          }
+          },
+          "additionalProperties": false
         }
       }
     },
-    "signatureColumnDef": {
+    "signatureField": {
       "required": ["settings"],
       "properties": {
         "fieldType": { "const": "SignatureField" },
@@ -140,7 +144,8 @@
           "type": "object",
           "properties": {
             "contentMediaType": { "type": "string" }
-          }
+          },
+          "additionalProperties": false
         }
       }
     },
@@ -166,7 +171,8 @@
               "type": "array",
               "items": { "type": "string", "description": "keyof columns" }
             }
-          }
+          },
+          "additionalProperties": false
         },
         "ui:column-visibility": {
           "type": "object",
@@ -176,50 +182,31 @@
               "type": "boolean",
               "description": "set false to hide column, otherwise visibility"
             }
-          }
+          },
+          "additionalProperties": false
         },
         "ui:x-appearance": {
           "description": "global appearance setting of table cells",
           "type": "string",
           "enum": ["input", "presentation"]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "columnUIOptions": {
       "type": "object",
       "required": ["ui:widget"],
-      "$ref": "#/$defs/basicColumnUIOptions",
+      "$ref": "#/$defs/basicUIOptions",
       "oneOf": [
         {
           "$ref": "#/$defs/builtInColumnUIOptions"
         },
         {
-          "properties": {
-            "ui:widget": {
-              "type": "string",
-              "not": {
-                "enum": [
-                  "BelongsToWidget",
-                  "BooleanWidget",
-                  "CheckboxWidget",
-                  "DateWidget",
-                  "DateTimeWidget",
-                  "FileWidget",
-                  "HasManyWidget",
-                  "HasOneWidget",
-                  "NumericWidget",
-                  "RadioButtonWidget",
-                  "SignatureWidget",
-                  "SingleLineWidget",
-                  "TextareaWidget"
-                ]
-              }
-            }
-          }
+          "$ref": "#/$defs/customColumnUIOptions"
         }
       ]
     },
-    "basicColumnUIOptions": {
+    "basicUIOptions": {
       "properties": {
         "ui:size": {
           "type": ["number", "string"],
@@ -239,12 +226,36 @@
         }
       }
     },
+    "customColumnUIOptions": {
+      "properties": {
+        "ui:widget": {
+          "type": "string",
+          "not": {
+            "enum": [
+              "BelongsToWidget",
+              "BooleanWidget",
+              "CheckboxWidget",
+              "DateWidget",
+              "DateTimeWidget",
+              "FileWidget",
+              "HasManyWidget",
+              "HasOneWidget",
+              "NumericWidget",
+              "RadioButtonWidget",
+              "SignatureWidget",
+              "SingleLineWidget",
+              "TextareaWidget"
+            ]
+          }
+        }
+      }
+    },
     "builtInColumnUIOptions": {
       "unevaluatedProperties": false,
       "allOf": [
         {
           "$comment": "unevaluatedProperties required all properties defined in current schema",
-          "$ref": "#/$defs/basicColumnUIOptions"
+          "$ref": "#/$defs/basicUIOptions"
         },
         {
           "properties": {
