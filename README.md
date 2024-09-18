@@ -324,3 +324,44 @@ params = {
 ```
 
 </details>
+
+# 类型使用
+
+## JSONSchema
+
+### FormSchema
+
+定义 FormSchema 的格式，用来约束 Form 类(创建表单，详情表单，更新用的表单)
+Schema 的格式
+
+#### Usage
+
+```json
+{
+  "$schema": "https://cdn.jsdelivr.net/gh/byzanteam/taihaku-schemas/ui-schemas/form/schema.json",
+  "schema": {...},
+  "uiSchema": {...}
+}
+```
+
+### TableSchema
+
+定义 TableSchema 的格式，用来约束 Table 类 Schema 的格式
+
+#### Usage
+
+```json
+{
+  "$schema": "https://cdn.jsdelivr.net/gh/byzanteam/taihaku-schemas/ui-schemas/table/schema.json",
+  "columns": {...},
+  "uiSchema": {...}
+}
+```
+
+## TS 类型
+
+通常在通过请求取得 Schema 的 json 实例后，通过断言成
+`FormSchema<TData, TCustomUIOptionMap>` 或
+`TableSchema<TData, TCustomUIOptionMap>` 类型来使用。 在 json -> ts
+的过程中无需校验，校验服务应由 schemas
+的伺服器解决，保证取得的数据一定符合对应的格式
