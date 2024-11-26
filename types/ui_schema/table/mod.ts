@@ -41,13 +41,19 @@ type ColumnUIOptions<
   T extends FieldType,
   TCustomUIOptionMap extends UIOptionMap,
   MT = T | keyof TCustomUIOptionMap,
-> = MT extends FieldType ? BuiltInColumnUIOptionsMap[MT] & {
-    /** define how to render current column */
-    'ui:widget': `${MT}Widget`
-  }
-  : MT extends keyof TCustomUIOptionMap ? TCustomUIOptionMap[MT] & {
-      'ui:widget': MT
+> = MT extends FieldType ?
+    & BasicUIOptions
+    & BuiltInColumnUIOptionsMap[MT]
+    & {
+      /** define how to render current column */
+      'ui:widget': `${MT}Widget`
     }
+  : MT extends keyof TCustomUIOptionMap ?
+      & BasicUIOptions
+      & TCustomUIOptionMap[MT]
+      & {
+        'ui:widget': MT
+      }
   : never
 
 interface TableOptions<TData extends ObjectData = ObjectData> {
@@ -82,9 +88,7 @@ export type TableUISchema<
 > =
   & Partial<TableOptions<TData>>
   & {
-    [K in keyof TData]?:
-      & BasicUIOptions
-      & ColumnUIOptions<FieldType, TCustomUIOptionMap>
+    [K in keyof TData]?: ColumnUIOptions<FieldType, TCustomUIOptionMap>
   }
 
 export type TableSchema<
