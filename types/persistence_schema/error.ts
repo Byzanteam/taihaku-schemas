@@ -27,5 +27,5 @@ export type FormatedJSONSchemaError<T extends keyof StrictJSONSchema> = {
   errorLocation: AbsoluteJSONPointer
   errorKeyword: T
   /** 同 ajv 的 ObjectError["params"] */
-  errorParams: Record<string, string | number>
+  errorParams: Record<string, unknown>
 }
