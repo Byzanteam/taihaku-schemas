@@ -23,9 +23,9 @@ export interface FormatedValidationError {
   dependencies: Array<AbsoluteJSONPointer>
 }
 
-export type FormatedJSONSchemaError<T extends keyof StrictJSONSchema> = {
+export type FormatedJSONSchemaError = {
   errorLocation: AbsoluteJSONPointer
-  errorKeyword: T
+  errorKeyword: string
   /** 同 ajv 的 ObjectError["params"] */
   errorParams: Record<string, unknown>
 }
