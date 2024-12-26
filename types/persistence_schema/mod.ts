@@ -102,11 +102,7 @@ export interface ListAction {
 export interface MultiAction {
   actions: Array<{
     name: string
-    action:
-      | InsertAction
-      | UpdateAction
-      | DeleteAction
-      | GetOneAction
+    action: InsertAction | UpdateAction | DeleteAction | GetOneAction
   }>
   returningSchema: Array<ObjectReturning>
 }
@@ -124,11 +120,6 @@ export interface NextjsResult {
 export type { InternalError, JSONSchemaError, ValidationError }
 export type { FormatedJSONSchemaError, FormatedValidationError }
 export type { Filter, Order, Sorters }
-export {
-  type ConditionalFilter,
-  ConditionalFilterOperator,
-  type LogicalFilter,
-  LogicalFilterOperator,
-} from './filter.ts'
 export { OrderDirection } from './sorting.ts'
+export * from './filter.ts'
 export * from './types.ts'
