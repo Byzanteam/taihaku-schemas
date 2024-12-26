@@ -15,7 +15,7 @@ export interface ArrayCoFilter {
 }
 
 export interface RefCoFilter {
-  operator: `${LogicalFilterOperatorType.ARRAY}_${LogicalFilterOperator.CO}`
+  operator: `${LogicalFilterOperatorType.REF}_${LogicalFilterOperator.CO}`
   operands: [Operand, SchemaPointer | DataPointer]
 }
 
