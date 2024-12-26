@@ -13,7 +13,7 @@ const updateMoviesAction: BulkUpdateAction = {
     operator: 'and',
     operands: [
       {
-        operator: 'eq',
+        operator: 'ref_eq',
         operands: [
           { type: 'schema', value: '/created_at' },
           { type: 'schema', value: '/updated_at' },

@@ -13,7 +13,7 @@ const updateMovieAction: UpdateAction = {
     required: ['id'],
   },
   filter: {
-    operator: 'eq',
+    operator: 'ref_eq',
     operands: [
       { type: 'schema', value: '/id' },
       { type: 'data', value: '/id' },

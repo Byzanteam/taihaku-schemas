@@ -1,5 +1,5 @@
 import type { JSONPointer } from '../primitive.ts'
-import type { EQFilter, IsNullFilter, Operand } from './filter.ts'
+import type { EQFilter, IsNullFilter, Operand } from '../filter/mod.ts'
 import type { SchemaPointer } from './types.ts'
 
 export interface BaseValidation {
@@ -14,7 +14,7 @@ export interface BaseValidation {
   errorMessage?: string
 }
 
-export interface EQValidation extends BaseValidation, EQFilter {}
+export type EQValidation = BaseValidation & EQFilter
 export interface IsNullValidation extends BaseValidation, IsNullFilter {}
 
 export interface UniqueValidation extends BaseValidation {

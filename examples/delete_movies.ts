@@ -13,7 +13,7 @@ const deleteMovieAction: BulkDeleteAction = {
     operator: 'and',
     operands: [
       {
-        operator: 'lt',
+        operator: 'ref_lt',
         operands: [
           { type: 'schema', value: '/release_date' },
           { type: 'data', value: '/release_date' },

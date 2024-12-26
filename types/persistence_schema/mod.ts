@@ -8,11 +8,11 @@ import type {
   ValidationError,
 } from './error.ts'
 import type { Fetching } from './fetching.ts'
-import type { Filter } from './filter.ts'
 import type { OffsetPagination } from './pagination.ts'
 import type { ObjectReturning } from './returning.ts'
 import type { Order, Sorters } from './sorting.ts'
 import type { ColumnType, DataPointer } from './types.ts'
+import type { Filter } from '../filter/mod.ts'
 
 export interface ColumnDef {
   name: string
@@ -119,7 +119,7 @@ export interface NextjsResult {
 
 export type { InternalError, JSONSchemaError, ValidationError }
 export type { FormatedJSONSchemaError, FormatedValidationError }
-export type { Filter, Order, Sorters }
+export type { Order, Sorters }
+
 export { OrderDirection } from './sorting.ts'
-export * from './filter.ts'
 export * from './types.ts'

@@ -44,7 +44,7 @@ export type SchemaPointer = {
 /**
  * Present a literal value
  */
-export type ValuePointer = {
+export type ValuePointer<T = JSONValue> = {
   type: 'value'
-  value: JSONValue
+  value: T
 }
