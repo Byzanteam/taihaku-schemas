@@ -143,7 +143,11 @@ export type {
   ObjectFieldUIOptions,
 }
 
-export { type OptionColumns } from './ui_options.ts'
+export type {
+  DateMatcherString,
+  DisabledDateMatcher,
+  OptionColumns,
+} from './ui_options.ts'
 
 export type FormSchema<
   TData extends ObjectData = ObjectData,
