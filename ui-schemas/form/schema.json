@@ -432,8 +432,76 @@
           "type": "string",
           "enum": ["DateWidget", "DateTimeWidget"]
         },
-        "ui:x-format": { "type": "string" }
+        "ui:x-format": { "type": "string" },
+        "ui:x-disabled-date-matcher": { "$ref": "#/$defs/dateMatcherSchema" }
       }
+    },
+    "dateMatcherStringSchema": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        {
+          "type": "string",
+          "enum": ["today", "yesterday", "tomorrow"]
+        }
+      ]
+    },
+    "dateMatcherSchema": {
+      "oneOf": [
+        { "type": "boolean" },
+        { "$ref": "#/$defs/dateMatcherStringSchema" },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dateMatcherStringSchema"
+          }
+        },
+        {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "form": { "$ref": "#/$defs/dateMatcherStringSchema" },
+                "to": { "$ref": "#/$defs/dateMatcherStringSchema" }
+              },
+              "required": ["form", "to"]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "after": { "$ref": "#/$defs/dateMatcherStringSchema" },
+                "before": { "$ref": "#/$defs/dateMatcherStringSchema" }
+              },
+              "required": ["before"]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "after": { "$ref": "#/$defs/dateMatcherStringSchema" },
+                "before": { "$ref": "#/$defs/dateMatcherStringSchema" }
+              },
+              "required": ["after"]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "dayOfWeek": {
+                  "oneOf": [
+                    { "type": "number" },
+                    {
+                      "type": "array",
+                      "items": { "type": "number" }
+                    }
+                  ]
+                }
+              },
+              "required": ["dayOfWeek"]
+            }
+          ]
+        }
+      ]
     },
     "fileFieldUIOptions": {
       "properties": {

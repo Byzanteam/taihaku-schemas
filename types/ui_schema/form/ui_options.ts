@@ -37,8 +37,27 @@ type RadioButtonFieldUIOptions =
   )
   & CommonCustomFieldUIOptions
 
+export type DateMatcherString =
+  | `${number}-${number}-${number}`
+  | 'today'
+  | 'yesterday'
+  | 'tomorrow'
+
+// 基于 dayPicker 的 disabled 进行扩展
+// https://daypicker.dev/api/type-aliases/Matcher
+export type DisabledDateMatcher =
+  | boolean
+  | DateMatcherString
+  | DateMatcherString[]
+  | /** date-range */ { from: DateMatcherString; to: DateMatcherString }
+  | /** date-before */ { before: DateMatcherString }
+  | /** date-after */ { after: DateMatcherString }
+  | /** date-interval */ { after: DateMatcherString; before: DateMatcherString }
+  | /** day-of-week */ { dayOfWeek: number | number[] }
+
 interface DateFieldUIOptions extends CommonCustomFieldUIOptions {
   'ui:x-format'?: string
+  'ui:x-disabled-date-matcher'?: DisabledDateMatcher
 }
 
 interface CheckBoxFieldUIOptions extends CommonCustomFieldUIOptions {

@@ -192,9 +192,12 @@
       "ui:x-falsy-label": "否"
     },
     "deadline": {
-      "ui:widget": "DateTimeWidget",
+      "ui:widget": "DateWidget",
       "ui:placeholder": "请选择",
-      "ui:x-format": "yyyy-MM-dd HH:mm"
+      "ui:x-format": "yyyy-MM-dd",
+      "ui:x-disabled-date-matcher": {
+        "before": "today"
+      }
     }
   }
 }
