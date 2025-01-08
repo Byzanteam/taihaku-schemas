@@ -466,23 +466,30 @@
                 "form": { "$ref": "#/$defs/dateMatcherStringSchema" },
                 "to": { "$ref": "#/$defs/dateMatcherStringSchema" }
               },
-              "required": ["form", "to"]
+              "required": ["form", "to"],
+              "unevaluatedProperties": false
             },
             {
-              "type": "object",
-              "properties": {
-                "after": { "$ref": "#/$defs/dateMatcherStringSchema" },
-                "before": { "$ref": "#/$defs/dateMatcherStringSchema" }
-              },
-              "required": ["before"]
-            },
-            {
-              "type": "object",
-              "properties": {
-                "after": { "$ref": "#/$defs/dateMatcherStringSchema" },
-                "before": { "$ref": "#/$defs/dateMatcherStringSchema" }
-              },
-              "required": ["after"]
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "after": { "$ref": "#/$defs/dateMatcherStringSchema" },
+                    "before": { "$ref": "#/$defs/dateMatcherStringSchema" }
+                  },
+                  "required": ["before"],
+                  "unevaluatedProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "after": { "$ref": "#/$defs/dateMatcherStringSchema" },
+                    "before": { "$ref": "#/$defs/dateMatcherStringSchema" }
+                  },
+                  "required": ["after"],
+                  "unevaluatedProperties": false
+                }
+              ]
             },
             {
               "type": "object",
@@ -497,7 +504,8 @@
                   ]
                 }
               },
-              "required": ["dayOfWeek"]
+              "required": ["dayOfWeek"],
+              "unevaluatedProperties": false
             }
           ]
         }
