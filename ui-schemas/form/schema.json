@@ -69,6 +69,12 @@
             "disabled": { "type": "boolean" },
             "readonly": { "type": "boolean" }
           }
+        },
+        "ui:fieldReplacesAnyOrOneOf": {
+          "type": "boolean"
+        },
+        "ui:field": {
+          "type": "string"
         }
       }
     },

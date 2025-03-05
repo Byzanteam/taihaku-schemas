@@ -57,6 +57,8 @@ type FormUIOptions = {
   'ui:rootFieldId'?: string
   'ui:submitButtonOptions'?: Partial<SubmitButtonOptions>
   'ui:globalOptions'?: GlobalUIOptions
+  'ui:fieldReplacesAnyOrOneOf'?: boolean
+  'ui:field'?: string
 }
 
 type UIOptionMap = {
