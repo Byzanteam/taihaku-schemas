@@ -119,7 +119,7 @@ type FieldUISchema<
   T extends FieldType,
   TCustomUIOptionMap extends UIOptionMap,
 > = O extends object
-  ? O extends Array<infer U>
+  ? O extends Array<infer U> | ReadonlyArray<infer U>
     ? U extends ObjectData ? ArrayUISchema<U, T, TCustomUIOptionMap> // For Array
     : FieldUIOptions<T, TCustomUIOptionMap> // Normal Array like checkbox
   : O extends ObjectData ? ObjectUISchema<O, T, TCustomUIOptionMap> // nested object, such as person.profile
