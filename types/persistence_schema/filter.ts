@@ -4,6 +4,7 @@ export type Filter = ConditionalFilter | LogicalFilter
 export enum ConditionalFilterOperator {
   AND = 'and',
   OR = 'or',
+  NOT = 'not',
 }
 
 export enum LogicalFilterOperator {
