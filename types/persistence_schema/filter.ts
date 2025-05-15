@@ -8,6 +8,9 @@ export enum ConditionalFilterOperator {
 }
 
 export enum LogicalFilterOperator {
+  // 数组包含
+  IN = 'in',
+  // 字符串包含
   CO = 'co',
   EQ = 'eq',
   LT = 'lt',
@@ -36,6 +39,7 @@ export type LogicalFilter =
   | OVFilter
   | SWFilter
   | EWFilter
+  | INFilter
 
 export interface COFilter {
   operator: `${LogicalFilterOperator.CO}`
@@ -84,6 +88,11 @@ export interface SWFilter {
 
 export interface EWFilter {
   operator: `${LogicalFilterOperator.EW}`
+  operands: [Operand, Operand]
+}
+
+export interface INFilter {
+  operator: `${LogicalFilterOperator.IN}`
   operands: [Operand, Operand]
 }
 
